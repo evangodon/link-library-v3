@@ -8,7 +8,8 @@ const SearchBar: React.FunctionComponent = () => {
 const Input = styled.input`
   border: 1px solid #cccccc;
   border-radius: 2px;
-  width: 60rem;
+  max-width: var(--link-max-width);
+  width: 100%;
   height: 5rem;
   margin: 0 auto;
   padding: 1rem 2rem;

@@ -5,6 +5,7 @@ import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
 import GlobalStyles from 'css/global.css';
+import Links from 'components/Links';
 
 const IndexPage: NextPage = () => {
   return (
@@ -13,8 +14,9 @@ const IndexPage: NextPage = () => {
       <Content>
         <SearchBar />
         <CategorySelect />
-        <GlobalStyles />
+        <Links />
       </Content>
+      <GlobalStyles />
     </>
   );
 };
@@ -28,6 +30,7 @@ const Content = styled.main`
   flex-direction: column;
   align-items: center;
 
+  --link-max-width: 70rem;
 `;
 
 export default IndexPage;

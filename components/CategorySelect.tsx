@@ -25,6 +25,7 @@ const Container = styled.div`
 
 const H3 = styled.h3`
   margin-bottom: 1.5rem;
+  font-size: 1.6rem;
 `;
 
 const CategoriesContainer = styled.ul``;
@@ -34,6 +35,7 @@ const CategoryItem = styled.li`
   align-items: center;
   cursor: pointer;
   margin-bottom: 1.2rem;
+  font-size: 1.2rem;
 `;
 
 export default CategorySelect;
