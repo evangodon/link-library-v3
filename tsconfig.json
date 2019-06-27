@@ -6,10 +6,13 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
+    "baseUrl": ".",
+    "paths": {
+      "components": ["./components/*"],
+      "css": ["./css"],
+      "constants": ["./constants"]
+    },
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -21,11 +24,6 @@
     "strict": true,
     "target": "esnext"
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx", "pages/_document.js"]
 }
