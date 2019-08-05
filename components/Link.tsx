@@ -43,6 +43,7 @@ const Container = styled.li`
 const Content = styled.a`
   display: grid;
   grid-template-columns: 1fr 20rem;
+  align-items: center;
 `;
 
 const TextContainer = styled.div`
@@ -50,13 +51,15 @@ const TextContainer = styled.div`
 `;
 
 const Title = styled.h5`
-  font-size: 1.4rem;
+  font-size: var(--fs-default);
   margin-bottom: 0.4rem;
+  color: var(--grey-500);
 `;
 
 const Description = styled.p`
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
+  color: rgba(55, 53, 47, 0.6);
 `;
 
 const Url = styled.span`
@@ -69,7 +72,7 @@ const Url = styled.span`
 const Image = styled.img`
   max-width: 100%;
   min-width: 100%;
-  height: 11rem;
+  height: 9rem;
   object-fit: cover;
 `;
 
