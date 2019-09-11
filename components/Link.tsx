@@ -59,7 +59,7 @@ const Title = styled.h5`
 const Description = styled.p`
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
-  color: rgba(55, 53, 47, 0.6);
+  color: rgba(55, 53, 47, 0.8);
 `;
 
 const Url = styled.span`

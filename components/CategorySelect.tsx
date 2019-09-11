@@ -20,7 +20,6 @@ const CategorySelect: React.FunctionComponent = () => {
 const Container = styled.div`
   position: absolute;
   left: 0;
-  top: 15rem;
 `;
 
 const H3 = styled.h3`
