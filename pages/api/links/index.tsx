@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import {db} from '../firebase'
 
 export default (_req: NextApiRequest, res: NextApiResponse) => {
-  console.log('hello');
   db.collection('links')
   .get()
   .then((snapshot) => {

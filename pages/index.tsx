@@ -17,7 +17,6 @@ const IndexPage: NextPage = () => {
     <>
       <ThemeProvider theme={theme}>
         <NavBar />
-
         <ModalProvider>
           <Content>
             <CategorySelect />
@@ -37,7 +36,7 @@ const IndexPage: NextPage = () => {
   );
 };
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
   typography: {
     htmlFontSize: 10,
   },
