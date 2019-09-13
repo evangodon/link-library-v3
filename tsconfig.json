@@ -9,10 +9,13 @@
     "lib": ["dom", "es2017"],
     "baseUrl": ".",
     "paths": {
+      "pages": ["./pages"],
       "components/*": ["./components/*"],
       "css": ["./css"],
       "constants": ["./constants"],
-      "context": ["./context"]
+      "context": ["./context"],
+      "hooks": ["./hooks"],
+      "api": ["./pages/api"]
     },
     "module": "esnext",
     "moduleResolution": "node",
