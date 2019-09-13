@@ -17,10 +17,7 @@ const CategorySelect: React.FunctionComponent = () => {
   );
 };
 
-const Container = styled.div`
-  position: absolute;
-  left: 0;
-`;
+const Container = styled.div``;
 
 const H3 = styled.h3`
   margin-bottom: 1.5rem;

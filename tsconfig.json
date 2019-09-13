@@ -11,7 +11,8 @@
     "paths": {
       "components/*": ["./components/*"],
       "css": ["./css"],
-      "constants": ["./constants"]
+      "constants": ["./constants"],
+      "context": ["./context"]
     },
     "module": "esnext",
     "moduleResolution": "node",

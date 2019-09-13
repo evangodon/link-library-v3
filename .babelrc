@@ -9,7 +9,8 @@
         "alias": {
           "components": "./components",
           "css": "./css",
-          "constants": "./constants"
+          "constants": "./constants",
+          "context": "./context"
         }
       }
     ]
