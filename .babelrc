@@ -13,7 +13,8 @@
           "constants": "./constants",
           "context": "./context",
           "hooks": "./hooks",
-          "api": "./pages/api"
+          "api": "./pages/api",
+          "interfaces": "./interfaces"
         }
       }
     ]

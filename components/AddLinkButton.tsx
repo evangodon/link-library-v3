@@ -1,14 +1,10 @@
 import * as React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import fetch from 'node-fetch';
 import styled from 'styled-components';
 import { useModalContext } from 'context';
-
-interface State {
-  url: string;
-  title: string;
-  description: string;
-}
+import { Link } from 'interfaces';
 
 const AddLinkButton: React.FC = () => {
   const { toggleModal } = useModalContext();
@@ -20,16 +16,21 @@ const AddLinkButton: React.FC = () => {
       description: '',
     };
 
-    const [values, setValues] = React.useState<State>(initialState);
+    const [values, setValues] = React.useState<Link>(initialState);
 
-    function handleChange(name: keyof State) {
+    function handleChange(name: keyof Link) {
       return (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [name]: event.target.value });
       };
     }
 
     function handleSubmit() {
+      fetch('api/links/add', {
+        method: 'POST',
+        body: JSON.stringify(values),
+      });
       setValues(initialState);
+      toggleModal();
     }
 
     return (
@@ -68,7 +69,11 @@ const AddLinkButton: React.FC = () => {
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={() => toggleModal(() => AddLinkModal)}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => toggleModal(() => AddLinkModal)}
+      >
         Add Link
       </Button>
     </>

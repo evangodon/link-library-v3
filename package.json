@@ -4,26 +4,30 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "test": "jest --watchAll",
     "start": "next start",
     "type-check": "tsc"
   },
   "dependencies": {
     "@material-ui/core": "^4.4.1",
+    "@types/jest": "^24.0.18",
     "@types/styled-components": "^4.1.16",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-styled-components": "^1.10.2",
     "firebase": "^6.6.1",
     "next": "^9.0.0",
     "node-fetch": "^2.6.0",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^9.1.4",
     "@types/next": "^7.0.6",
     "@types/node": "^11.13.9",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.0.11",
+    "jest": "^24.9.0",
     "typescript": "^3.6.3"
   },
   "license": "ISC"

@@ -18,7 +18,7 @@ const IndexPage: NextPage = () => {
       <ThemeProvider theme={theme}>
         <NavBar />
         <ModalProvider>
-          <Content>
+          <Content data-testid="application">
             <CategorySelect />
             <div>
               <SearchBar />

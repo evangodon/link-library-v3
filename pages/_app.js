@@ -23,7 +23,7 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <Component {...pageProps} data-testid="hello" />
         </ThemeProvider>
       </React.Fragment>
     );
