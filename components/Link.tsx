@@ -47,7 +47,7 @@ const Content = styled.a`
 `;
 
 const TextContainer = styled.div`
-  padding: 1rem 2.4rem;
+  padding: 1rem 2rem;
 `;
 
 const Title = styled.h5`
@@ -69,11 +69,13 @@ const Url = styled.span`
   text-overflow: ellipsis;
 `;
 
-const Image = styled.img`
+const Image = styled.div<{ src: string }>`
   max-width: 100%;
   min-width: 100%;
-  height: 9rem;
-  object-fit: cover;
+  height: 11rem;
+  background-image: url(${(p) => p.src});
+  background-size: cover;
+
 `;
 
 export default Link;
