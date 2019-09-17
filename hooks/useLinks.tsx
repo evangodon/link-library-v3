@@ -1,13 +1,6 @@
 import { useState, useEffect } from 'react';
 import fetch from 'node-fetch';
-
-interface Link {
-  id: string;
-  url: string;
-  title: string;
-  description: string;
-  image: string;
-}
+import { Link } from 'interfaces';
 
 export const useLinks = () => {
   const [links, setLinks] = useState<Link[]>([]);
