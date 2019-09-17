@@ -62,6 +62,7 @@ const AddLinkModal: React.FC = () => {
       <TextField
         id="standard-name"
         label="Url"
+        autoFocus
         value={values.url}
         onChange={handleChange('url')}
         margin="normal"
