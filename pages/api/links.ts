@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../firebase';
+import { db } from './firebase';
 
 export default (_req: NextApiRequest, res: NextApiResponse) => {
   db.collection('links')

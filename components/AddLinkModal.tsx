@@ -35,7 +35,7 @@ const AddLinkModal: React.FC = () => {
   }
 
   async function getMetaData(url: string) {
-    const response = await fetch('api/links/metadata', {
+    const response = await fetch('api/link/metadata', {
       method: 'POST',
       body: JSON.stringify({ url }),
     });
@@ -46,7 +46,7 @@ const AddLinkModal: React.FC = () => {
   }
 
   async function handleSubmit() {
-    const response = await fetch('api/links/add', {
+    const response = await fetch('api/link/add', {
       method: 'POST',
       body: JSON.stringify(values),
     });
