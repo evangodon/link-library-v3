@@ -5375,12 +5375,27 @@ merge-stream@^2.0.0:
   resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
+metascraper-description@^5.7.4:
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/metascraper-description/-/metascraper-description-5.7.4.tgz#f1fd88ee5b1c1fac5e7db3dcae8c69e342e6efd6"
+  integrity sha512-qncq4IjsFK+ZEdWjtjhokozoWu76qfVHG/RIRHjrDG19tTwWv+PXlgyvtFaetxezI4+lR3uQHssLVb7Nv9meJw==
+  dependencies:
+    "@metascraper/helpers" "^5.7.4"
+
 metascraper-image@^5.7.4:
   version "5.7.4"
   resolved "https://registry.yarnpkg.com/metascraper-image/-/metascraper-image-5.7.4.tgz#095aad47efa263c872d1762fdb3fdc1fcad62129"
   integrity sha512-AZRQR9Z6BMJ/EfPG2g5XlRVrkGwiHAPJiakJl1kASHAvfqdznkW6ZjOCta1Wx76x++jjwWRxF67K/elLg8AMdg==
   dependencies:
     "@metascraper/helpers" "^5.7.4"
+
+metascraper-title@^5.7.4:
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.7.4.tgz#1f9f05032c2abab2db9a6634b9f6abec5489c116"
+  integrity sha512-qrOw5uRmGVfqiaZxPF6dfXYM79RY13E+nITukPZsktiGMNIknRJmEVI/GSW+6Ek/+GxlW0gByvE+yqFOrgjCTw==
+  dependencies:
+    "@metascraper/helpers" "^5.7.4"
+    lodash "~4.17.15"
 
 metascraper@^5.7.4:
   version "5.7.4"

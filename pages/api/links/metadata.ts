@@ -1,9 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import metascraper from 'metascraper';
+import metascraperTitle from 'metascraper-title';
+import metascraperDesc from 'metascraper-description';
 import metascraperImage from 'metascraper-image';
 import fetch from 'node-fetch';
 
-const metascraperWithRules = metascraper([metascraperImage()]);
+const metascraperWithRules = metascraper([
+  metascraperImage(),
+  metascraperTitle(),
+  metascraperDesc(),
+]);
 
 // TODO: Fix the error capturing
 
@@ -23,7 +29,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.end(JSON.stringify(metadata));
   } catch (err) {
     res.statusCode = 406;
-    res.end(JSON.stringify({ error: 'Invalid URL' }));
+    res.end(JSON.stringify(err));
   }
 };
 

@@ -1,15 +1,9 @@
 import * as React from 'react';
 import styled from 'styled-components';
-
-type Link = {
-  url: string;
-  title: string;
-  description: string;
-  image: string;
-};
+import { Link as ILink } from 'interfaces';
 
 type Props = {
-  link: Link;
+  link: ILink;
 };
 
 const Link: React.FC<Props> = ({ link }) => {
@@ -69,13 +63,12 @@ const Url = styled.span`
   text-overflow: ellipsis;
 `;
 
-const Image = styled.div<{ src: string }>`
+const Image = styled.div<{ src: string | undefined }>`
   max-width: 100%;
   min-width: 100%;
   height: 11rem;
   background-image: url(${(p) => p.src});
   background-size: cover;
-
 `;
 
 export default Link;

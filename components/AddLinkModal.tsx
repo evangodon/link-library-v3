@@ -3,34 +3,41 @@ import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useModalContext } from 'context';
-import { Link } from 'interfaces';
+import { Link as ILink } from 'interfaces';
+import Link from './Link';
 
 const AddLinkModal: React.FC = () => {
   const { toggleModal } = useModalContext();
   const initialState = {
+    id: '',
     url: '',
     title: '',
     description: '',
+    image: '',
   };
 
-  const [values, setValues] = React.useState<Link>(initialState);
+  const [values, setValues] = React.useState<ILink>(initialState);
 
-  function handleChange(name: keyof Link) {
+  function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       if (name === 'url') {
-        getMetaData(event.target.value);
+        getMetaData(event.target.value).then((metadata) => {
+          setValues({ ...values, ...metadata });
+        });
       }
       setValues({ ...values, [name]: event.target.value });
     };
   }
 
   async function getMetaData(url: string) {
-    const metadata = await fetch('api/links/metadata', {
+    const response = await fetch('api/links/metadata', {
       method: 'POST',
       body: JSON.stringify({ url }),
     });
 
-    console.log({ metadata });
+    const metadata = await response.json();
+
+    return { ...metadata, url };
   }
 
   function handleSubmit() {
@@ -69,6 +76,8 @@ const AddLinkModal: React.FC = () => {
         margin="normal"
         variant="outlined"
       />
+
+      <Link link={values} />
       <Button variant="contained" color="primary" size="medium" onClick={handleSubmit}>
         Add
       </Button>
@@ -80,7 +89,7 @@ const ModalContainer = styled.form`
   background-color: #fff;
   height: auto;
   min-width: 40rem;
-  max-width: 60rem;
+  max-width: 65rem;
   padding: 3rem;
   display: flex;
   flex-direction: column;

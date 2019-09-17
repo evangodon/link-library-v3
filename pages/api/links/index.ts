@@ -10,6 +10,7 @@ export default (_req: NextApiRequest, res: NextApiResponse) => {
         id: link.id,
         ...link.data(),
       }));
+      res.statusCode = 200;
       res.end(JSON.stringify(data));
     });
 };
