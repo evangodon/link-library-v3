@@ -3,7 +3,7 @@ import { NextPage } from 'next';
 import styled from 'styled-components';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
-import { ModalProvider } from 'context';
+import { ModalProvider, LinksProvider } from 'context';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
@@ -17,19 +17,21 @@ const IndexPage: NextPage = () => {
     <>
       <ThemeProvider theme={theme}>
         <NavBar />
-        <ModalProvider>
-          <Content data-testid="application">
-            <CategorySelect />
-            <div>
-              <SearchBar />
-              <Links />
-            </div>
-            <ButtonContainer>
-              <AddLinkButton />
-            </ButtonContainer>
-          </Content>
-          <Modal />
-        </ModalProvider>
+        <LinksProvider>
+          <ModalProvider>
+            <Content data-testid="application">
+              <CategorySelect />
+              <div>
+                <SearchBar />
+                <Links />
+              </div>
+              <ButtonContainer>
+                <AddLinkButton />
+              </ButtonContainer>
+            </Content>
+            <Modal />
+          </ModalProvider>
+        </LinksProvider>
       </ThemeProvider>
       <GlobalStyles />
     </>

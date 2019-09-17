@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link as ILink } from 'interfaces';
 
 type Props = {
-  link: ILink;
+  link: Partial<ILink>;
 };
 
 const Link: React.FC<Props> = ({ link }) => {
@@ -42,12 +42,17 @@ const Content = styled.a`
 
 const TextContainer = styled.div`
   padding: 1rem 2rem;
+  max-width: 45rem;
 `;
 
 const Title = styled.h5`
   font-size: var(--fs-default);
   margin-bottom: 0.4rem;
   color: var(--grey-500);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Description = styled.p`

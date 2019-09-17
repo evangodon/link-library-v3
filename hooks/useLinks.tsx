@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import fetch from 'node-fetch';
-import { Link } from 'interfaces';
+import { useLinksContext } from 'context';
 
 export const useLinks = () => {
-  const [links, setLinks] = useState<Link[]>([]);
+  const { links, setLinks } = useLinksContext();
 
   useEffect(() => {
     fetch('/api/links')

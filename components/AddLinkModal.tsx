@@ -2,30 +2,35 @@ import React from 'react';
 import styled from 'styled-components';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { useModalContext } from 'context';
+import { useModalContext, useLinksContext } from 'context';
 import { Link as ILink } from 'interfaces';
 import Link from './Link';
 
+/**
+ * @todo: Fix formatting of text (sometimes too long, desc should be max 2 lines)
+ * @todo: handle invalid urls
+ */
 const AddLinkModal: React.FC = () => {
   const { toggleModal } = useModalContext();
+  const { links, setLinks } = useLinksContext();
   const initialState = {
-    id: '',
     url: '',
     title: '',
     description: '',
     image: '',
   };
 
-  const [values, setValues] = React.useState<ILink>(initialState);
+  const [values, setValues] = React.useState<Partial<ILink>>(initialState);
 
   function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (name === 'url') {
+      const { value } = event.target;
+      if (name === 'url' && !!value) {
         getMetaData(event.target.value).then((metadata) => {
           setValues({ ...values, ...metadata });
         });
       }
-      setValues({ ...values, [name]: event.target.value });
+      setValues({ ...values, [name]: value });
     };
   }
 
@@ -40,13 +45,15 @@ const AddLinkModal: React.FC = () => {
     return { ...metadata, url };
   }
 
-  function handleSubmit() {
-    fetch('api/links/add', {
+  async function handleSubmit() {
+    const response = await fetch('api/links/add', {
       method: 'POST',
       body: JSON.stringify(values),
     });
-    setValues(initialState);
+    const newLink = await response.json();
     toggleModal();
+    setLinks([newLink, ...links]);
+    setValues(initialState);
   }
 
   return (
@@ -89,7 +96,6 @@ const ModalContainer = styled.form`
   background-color: #fff;
   height: auto;
   min-width: 40rem;
-  max-width: 65rem;
   padding: 3rem;
   display: flex;
   flex-direction: column;
