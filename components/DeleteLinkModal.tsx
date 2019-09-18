@@ -23,6 +23,7 @@ const DeleteLinkModal: React.FC<Props> = ({ link }) => {
       method: 'DELETE',
       body: JSON.stringify(link.id),
     });
+    toggleModal();
   }
 
   return (

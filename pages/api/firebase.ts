@@ -11,9 +11,20 @@ const config = {
   appId: '1:1023688338875:web:267f028b27f9a8f493e89e',
 };
 
-const firebaseConfig =
-  !!firebase.apps[0] ? firebase.app() : firebase.initializeApp(config);
+const firebaseConfig = !!firebase.apps[0]
+  ? firebase.app()
+  : firebase.initializeApp(config);
 
 const db = firebaseConfig.firestore();
 
 export { db };
+
+/** For dev database
+    apiKey: "AIzaSyD0wbe8CQAMOcG6HbswSzXfjQsaoldxbS8",
+    authDomain: "linklib-dev-630e7.firebaseapp.com",
+    databaseURL: "https://linklib-dev-630e7.firebaseio.com",
+    projectId: "linklib-dev-630e7",
+    storageBucket: "linklib-dev-630e7.appspot.com",
+    messagingSenderId: "62798606673",
+    appId: "1:62798606673:web:649f5d051d13cdb5cfe370"
+ */

@@ -14,7 +14,7 @@ const AddLinkModal: React.FC = () => {
   const { toggleModal } = useModalContext();
   const { links, setLinks } = useLinksContext();
   const initialState = {
-    id: 0,
+    id: -1,
     url: '',
     title: '',
     description: '',
