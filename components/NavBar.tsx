@@ -1,14 +1,15 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { Book } from 'react-feather';
 
-const loggedIn = true;
-
-const NavBar: React.FunctionComponent = () => {
+const NavBar: React.FC = () => {
   return (
     <Container>
       <Content>
-        <span>LinkLib</span>
-        {loggedIn ? <span>Logged in</span> : <span>Logged out</span>}
+        <LogoContainer>
+          <Book color="var(--color-primary)" />
+          <h3>LinkLib</h3>
+        </LogoContainer>
       </Content>
     </Container>
   );
@@ -18,6 +19,12 @@ const Container = styled.div`
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.06);
   width: 100%;
   background-color: var(--white);
+`;
+
+const LogoContainer = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3rem 1fr;
 `;
 
 const Content = styled.div`
