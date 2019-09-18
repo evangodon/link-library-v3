@@ -22,6 +22,7 @@ export default class MyApp extends App {
       <React.Fragment>
         <Head>
           <title>LinkLib</title>
+          <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />

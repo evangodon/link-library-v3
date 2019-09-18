@@ -11,6 +11,7 @@ export default css`
   --grey-300: #bdbdbd;
   --grey-400: #424242;
   --grey-500: #121212;
+  --color-primary: #2196f3;
 
   /* Font-sizes */
   --fs-xsmall: 1rem;

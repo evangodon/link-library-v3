@@ -46,6 +46,7 @@ const H3 = styled.h3`
 `;
 
 const ButtonContainer = styled(ButtonGroup)`
+  margin-top: 2.4rem;
   margin-left: auto;
   max-width: 30rem;
 `;
