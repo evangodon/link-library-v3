@@ -7,7 +7,7 @@ export const [useLinksContext, Provider] = createCtx<{
   setLinks: (links: Link[]) => void;
 }>();
 
-export const LinksProvider: React.FC<{ children: JSX.Element[] | JSX.Element }> = ({
+export const LinksProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
   const [links, setLinks] = React.useState<Link[]>([]);

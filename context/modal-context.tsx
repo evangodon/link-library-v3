@@ -7,7 +7,7 @@ export const [useModalContext, Provider] = createCtx<{
   modalContent: React.FunctionComponent;
 }>();
 
-export const ModalProvider: React.FC<{ children: JSX.Element[] | JSX.Element }> = ({
+export const ModalProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
   const [modalOpen, setModalOpen] = React.useState(false);
