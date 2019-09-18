@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Trash2 } from 'react-feather';
+import Highlighter from 'react-highlight-words';
 import { Link as ILink } from 'interfaces';
-import { useModalContext } from 'context';
+import { useModalContext, useLinksContext } from 'context';
 import DeleteLinkModal from 'components/DeleteLinkModal';
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
 
 const Link: React.FC<Props> = ({ link, displayMode }) => {
   const { toggleModal } = useModalContext();
+  const { searchQuery } = useLinksContext();
 
   function handleDelete(event: React.MouseEvent<SVGElement>) {
     toggleModal(() => () => <DeleteLinkModal link={link} />);
@@ -22,7 +24,17 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
     <Container>
       <Content href={link.url} target="_blank">
         <TextContainer>
-          <Title>{link.title}</Title>
+          <Title>
+            {searchQuery ? (
+              <Highlighter
+                highlightClassName="highlight"
+                searchWords={[searchQuery]}
+                textToHighlight={link.title}
+              />
+            ) : (
+              link.title
+            )}
+          </Title>
           <Description>{link.description}</Description>
           <Url>{link.url}</Url>
         </TextContainer>

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../firebase';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  const id: string = JSON.parse(req.body);
+  const { id } = JSON.parse(req.body);
 
   db.collection('links')
     .doc(id)

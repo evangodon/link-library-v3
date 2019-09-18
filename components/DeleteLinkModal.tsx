@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link as ILink } from 'interfaces';
 import Link from './Link';
 import { ModalContainer } from 'components/Modal';
-import { useModalContext } from 'context';
+import { useModalContext, useLinksContext } from 'context';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from './ButtonGroup';
 
@@ -13,6 +13,7 @@ type Props = {
 
 const DeleteLinkModal: React.FC<Props> = ({ link }) => {
   const { toggleModal } = useModalContext();
+  const { links, setLinks } = useLinksContext();
 
   function handleCancel() {
     toggleModal();
@@ -21,15 +22,16 @@ const DeleteLinkModal: React.FC<Props> = ({ link }) => {
   function handleDelete() {
     fetch('api/link/delete', {
       method: 'DELETE',
-      body: JSON.stringify(link.id),
+      body: JSON.stringify({ id: link.id }),
     });
+    setLinks(links.filter((l) => l.id !== link.id));
     toggleModal();
   }
 
   return (
     <ModalContainer>
       <H3>Are you sure you want to delete this link?</H3>
-      <Link link={link} displayMode/>
+      <Link link={link} displayMode />
       <ButtonContainer>
         <Button variant="contained" onClick={handleCancel}>
           Cancel
