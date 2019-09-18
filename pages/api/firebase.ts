@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 
 const config = {
-  apiKey: 'AIzaSyBQwfks3T5e1XpQRR9MKMxQ-UUzJo75scU',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'linklib-bca03.firebaseapp.com',
   databaseURL: 'https://linklib-bca03.firebaseio.com',
   projectId: 'linklib-bca03',

@@ -19,7 +19,7 @@
     "metascraper-description": "^5.7.4",
     "metascraper-image": "^5.7.4",
     "metascraper-title": "^5.7.4",
-    "next": "^9.0.0",
+    "next": "^9.0.6",
     "node-fetch": "^2.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
