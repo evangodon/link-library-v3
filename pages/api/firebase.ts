@@ -12,7 +12,7 @@ const config = {
 };
 
 const firebaseConfig =
-  firebase.apps.length > 0 ? firebase.app() : firebase.initializeApp(config);
+  !!firebase.apps[0] ? firebase.app() : firebase.initializeApp(config);
 
 const db = firebaseConfig.firestore();
 
