@@ -11,7 +11,7 @@ export const useLinks = () => {
       .then((json) => {
         setLinks(json);
       });
-  }, []);
+  }, [setLinks]);
 
   return { links };
 };

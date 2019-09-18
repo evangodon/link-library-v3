@@ -11,7 +11,7 @@ const AddLinkButton: React.FC = () => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => toggleModal(() => AddLinkModal)}
+        onClick={() => toggleModal(() => () => <AddLinkModal />)}
       >
         Add Link
       </Button>

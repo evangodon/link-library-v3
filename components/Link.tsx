@@ -1,12 +1,23 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { Trash2 } from 'react-feather';
 import { Link as ILink } from 'interfaces';
+import { useModalContext } from 'context';
+import DeleteLinkModal from 'components/DeleteLinkModal';
 
 type Props = {
-  link: Partial<ILink>;
+  link: ILink;
+  displayMode?: boolean;
 };
 
-const Link: React.FC<Props> = ({ link }) => {
+const Link: React.FC<Props> = ({ link, displayMode }) => {
+  const { toggleModal } = useModalContext();
+
+  function handleDelete(event: React.MouseEvent<SVGElement>) {
+    toggleModal(() => () => <DeleteLinkModal link={link} />);
+    event.preventDefault();
+  }
+
   return (
     <Container>
       <Content href={link.url} target="_blank">
@@ -16,10 +27,36 @@ const Link: React.FC<Props> = ({ link }) => {
           <Url>{link.url}</Url>
         </TextContainer>
         <Image src={link.image} />
+        {!displayMode && (
+          <DeleteContainer>
+            <Trash2 className="Trash-icon" onClick={handleDelete} />
+          </DeleteContainer>
+        )}
       </Content>
     </Container>
   );
 };
+
+const DeleteContainer = styled.span`
+  position: absolute;
+  right: 1.2rem;
+  top: 1.2rem;
+  --size: 2.6rem;
+  width: var(--size);
+  height: var(--size);
+  text-align: center;
+  opacity: 0;
+  background-color: var(--white);
+  border-radius: 5px;
+  color: var(--grey-400);
+  border: 1px solid currentColor;
+  transition: opacity 0.1s ease;
+
+  .Trash-icon {
+    width: 1.6rem;
+    position: relative;
+  }
+`;
 
 const Container = styled.li`
   position: relative;
@@ -32,6 +69,10 @@ const Container = styled.li`
   margin-bottom: 1.8rem;
   background: #fafafa;
   cursor: pointer;
+
+  &:hover ${DeleteContainer} {
+    opacity: 1;
+  }
 `;
 
 const Content = styled.a`

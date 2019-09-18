@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { ModalContainer } from 'components/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useModalContext, useLinksContext } from 'context';
@@ -14,13 +14,14 @@ const AddLinkModal: React.FC = () => {
   const { toggleModal } = useModalContext();
   const { links, setLinks } = useLinksContext();
   const initialState = {
+    id: 0,
     url: '',
     title: '',
     description: '',
     image: '',
   };
 
-  const [values, setValues] = React.useState<Partial<ILink>>(initialState);
+  const [values, setValues] = React.useState<ILink>(initialState);
 
   function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,26 +86,12 @@ const AddLinkModal: React.FC = () => {
         variant="outlined"
       />
 
-      <Link link={values} />
+      <Link link={{ id: null, ...values }} />
       <Button variant="contained" color="primary" size="medium" onClick={handleSubmit}>
         Add
       </Button>
     </ModalContainer>
   );
 };
-
-const ModalContainer = styled.form`
-  background-color: #fff;
-  height: auto;
-  min-width: 40rem;
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  border-radius: 5px;
-
-  label {
-    font-size: 1.4rem;
-  }
-`;
 
 export default AddLinkModal;

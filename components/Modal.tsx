@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -49,5 +50,15 @@ const Modal: React.FC = () => {
     </>
   );
 };
+
+export const ModalContainer = styled.form`
+  background-color: #fff;
+  height: auto;
+  min-width: 40rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+`;
 
 export default Modal;

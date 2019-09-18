@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ModalProvider, LinksProvider } from 'context';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
@@ -15,39 +12,27 @@ import AddLinkButton from 'components/AddLinkButton';
 const IndexPage: NextPage = () => {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <NavBar />
-        <LinksProvider>
-          <ModalProvider>
-            <Content data-testid="application">
-              <CategorySelect />
-              <div>
-                <SearchBar />
-                <Links />
-              </div>
-              <ButtonContainer>
-                <AddLinkButton />
-              </ButtonContainer>
-            </Content>
-            <Modal />
-          </ModalProvider>
-        </LinksProvider>
-      </ThemeProvider>
+      <NavBar />
+      <Content data-testid="application">
+        <CategorySelect />
+        <div>
+          <SearchBar />
+          <Links />
+        </div>
+        <ButtonContainer>
+          <AddLinkButton />
+        </ButtonContainer>
+      </Content>
+      <Modal />
       <GlobalStyles />
     </>
   );
 };
 
-export const theme = createMuiTheme({
-  typography: {
-    htmlFontSize: 10,
-  },
-  palette: {
-    primary: {
-      main: '#00bcd4',
-    },
-  },
-});
+IndexPage.getInitialProps = async () => {
+  // todo: fetch links here
+  return { links: [] };
+};
 
 const Content = styled.main`
   position: relative;

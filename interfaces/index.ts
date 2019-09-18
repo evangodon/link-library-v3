@@ -1,6 +1,6 @@
 
 export interface Link {
-  id: string;
+  id: string | number;
   url: string;
   title: string;
   description: string;
