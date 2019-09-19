@@ -55,7 +55,7 @@ const Input = styled.input`
   height: 3.8rem;
   margin: 0 auto;
   padding: 1rem 2rem 1rem 4rem;
-  font-size: 2rem;
+  font-size: 1.6rem;
   margin-bottom: 4rem;
   transition: color 0.2s ease;
 

@@ -61,7 +61,7 @@ const AddLinkModal: React.FC = () => {
   }
 
   return (
-    <Container>
+    <Container data-testid="link-modal">
       <h3>Add Link</h3>
       <Form>
         <TextField

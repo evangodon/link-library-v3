@@ -51,7 +51,7 @@ const Modal: React.FC = () => {
   );
 };
 
-export const ModalContainer = styled.form`
+export const ModalContainer = styled.div`
   background-color: #fff;
   height: auto;
   min-width: 40rem;

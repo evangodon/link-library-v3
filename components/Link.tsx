@@ -21,7 +21,7 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
   }
 
   return (
-    <Container>
+    <Container data-testid="link">
       <Content href={link.url} target="_blank">
         <TextContainer>
           <Title>
