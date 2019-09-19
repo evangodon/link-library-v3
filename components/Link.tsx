@@ -95,7 +95,7 @@ const Content = styled.a`
 
 const TextContainer = styled.div`
   padding: 1rem 2rem;
-  max-width: 45rem;
+  max-width: 49.5rem;
 `;
 
 const Title = styled.h5`
