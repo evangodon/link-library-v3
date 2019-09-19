@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import App from '../pages/index';
+import Index from '../pages/index';
 import { links as mockLinks } from '../constants/mockData';
 
 jest.mock('hooks/useLinks', () => ({
@@ -9,9 +9,9 @@ jest.mock('hooks/useLinks', () => ({
   })),
 }));
 
-describe('App', () => {
+describe('<Index />', () => {
   it('renders the application', () => {
-    const { queryByTestId } = render(<App />);
+    const { queryByTestId } = render(<Index />);
 
     expect(queryByTestId('application')).toBeTruthy();
   });
