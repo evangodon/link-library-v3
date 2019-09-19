@@ -13,6 +13,15 @@ export default css`
   --grey-500: #121212;
   --color-primary: #2196f3;
 
+  /* Category colors */
+  --category-1: #f44336, #e57373;
+  --category-2: #03a9f4, #4fc3f7;
+  --category-3: #4caf50, #81c784;
+  --category-4: #673ab7, #9575cd;
+  --category-5: #e91e63, #f06292;
+  --category-6: #ffc107, #ffd54f;
+  --category-7: #3f51b5, #7986cb;
+
   /* Font-sizes */
   --fs-xsmall: 1rem;
   --fs-small: 1.2rem;
