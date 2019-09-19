@@ -12,5 +12,9 @@ export default (_req: NextApiRequest, res: NextApiResponse) => {
       }));
       res.statusCode = 200;
       res.end(JSON.stringify(data));
+    })
+    .catch((err) => {
+      res.statusCode = 500;
+      res.send(JSON.stringify(err));
     });
 };
