@@ -117,10 +117,7 @@ const AddLinkModal: React.FC = () => {
   );
 };
 
-const Container = styled(ModalContainer)`
-  width: 100%;
-  max-width: 61.5rem;
-`;
+const Container = styled(ModalContainer)``;
 
 const Form = styled.form`
   display: flex;

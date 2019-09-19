@@ -44,17 +44,23 @@ const Modal: React.FC = () => {
         }}
       >
         <Fade in={modalOpen}>
-          <ModalContent />
+          <ModalDiv>
+            <ModalContent />
+          </ModalDiv>
         </Fade>
       </MaterialModal>
     </>
   );
 };
 
+const ModalDiv = styled.div`
+  width: 100%;
+  max-width: 61rem;
+`;
+
 export const ModalContainer = styled.div`
   background-color: #fff;
   height: auto;
-  min-width: 40rem;
   padding: 3rem;
   display: flex;
   flex-direction: column;
