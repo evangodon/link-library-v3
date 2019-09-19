@@ -3,7 +3,7 @@ import { createCtx } from './createCtx';
 import { Link } from 'interfaces';
 
 export const [useLinksContext, Provider] = createCtx<{
-  links: Link[];
+  links: readonly Link[];
   setLinks: (links: Link[]) => void;
   searchQuery: string | null;
   setSearchQuery: (query: string | null) => void;
@@ -12,14 +12,14 @@ export const [useLinksContext, Provider] = createCtx<{
 export const LinksProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  const [links, setLinks] = useState<Link[]>([]);
+  const [links, setLinks] = useState<readonly Link[]>([]);
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
-  const filteredLinks = links.filter(
-    searchQuery
-      ? (link: Link) => link.title.toLowerCase().includes(searchQuery.toLowerCase())
-      : () => true
-  );
+  const filteredLinks = searchQuery
+    ? links.filter((link: Link) =>
+        link.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : links;
 
   return (
     <>
