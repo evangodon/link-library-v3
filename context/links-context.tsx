@@ -9,9 +9,9 @@ export const [useLinksContext, Provider] = createCtx<{
   setSearchQuery: (query: string | null) => void;
 }>();
 
-export const LinksProvider: React.FC<{ children: React.ReactElement }> = ({
-  children,
-}) => {
+export const LinksProvider: React.FC<{
+  children: React.ReactElement | React.ReactElement[];
+}> = ({ children }) => {
   const [links, setLinks] = useState<readonly Link[]>([]);
   const [searchQuery, setSearchQuery] = useState<string | null>(null);
 
