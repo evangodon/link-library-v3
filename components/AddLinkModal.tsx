@@ -1,14 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 import { ModalContainer } from 'components/Modal';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { useModalContext, useLinksContext } from 'context';
 import { Link as ILink } from 'interfaces';
-import Link from './Link';
+import Link from 'components/Link';
+import ButtonGroup from 'components/ButtonGroup';
 
 /**
- * @todo: Fix formatting of text (sometimes too long, desc should be max 2 lines)
- * @todo: handle invalid urls
+ * @todo: handle invalid urls (add event listener to )
  */
 const AddLinkModal: React.FC = () => {
   const { toggleModal } = useModalContext();
@@ -46,7 +47,9 @@ const AddLinkModal: React.FC = () => {
     return { ...metadata, url };
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
     const response = await fetch('api/link/add', {
       method: 'POST',
       body: JSON.stringify(values),
@@ -58,40 +61,79 @@ const AddLinkModal: React.FC = () => {
   }
 
   return (
-    <ModalContainer>
+    <Container>
       <h3>Add Link</h3>
-      <TextField
-        id="standard-name"
-        label="Url"
-        autoFocus
-        value={values.url}
-        onChange={handleChange('url')}
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        id="standard-name"
-        label="Title"
-        value={values.title}
-        onChange={handleChange('title')}
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        id="standard-name"
-        label="Description"
-        value={values.description}
-        onChange={handleChange('description')}
-        margin="normal"
-        variant="outlined"
-      />
+      <Form>
+        <TextField
+          id="standard-name"
+          label="Url"
+          type="url"
+          required
+          autoFocus
+          value={values.url}
+          onChange={handleChange('url')}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="standard-name"
+          label="Title"
+          value={values.title}
+          onChange={handleChange('title')}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="standard-name"
+          label="Description"
+          value={values.description}
+          onChange={handleChange('description')}
+          margin="normal"
+          variant="outlined"
+        />
 
-      <Link link={{ id: null, ...values }} />
-      <Button variant="contained" color="primary" size="medium" onClick={handleSubmit}>
-        Add
-      </Button>
-    </ModalContainer>
+        <Link link={{ id: null, ...values }} displayMode />
+        <ButtonContainer>
+          <SubmitButton
+            color="primary"
+            size="medium"
+            role="submit"
+            onClick={() => toggleModal()}
+          >
+            Cancel
+          </SubmitButton>
+          <SubmitButton
+            variant="contained"
+            color="primary"
+            size="medium"
+            type="submit"
+            onClick={handleSubmit}
+          >
+            Add
+          </SubmitButton>
+        </ButtonContainer>
+      </Form>
+    </Container>
   );
 };
+
+const Container = styled(ModalContainer)`
+  width: 100%;
+  max-width: 61.5rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ButtonContainer = styled(ButtonGroup)`
+  max-width: 50%;
+  margin-left: auto;
+`;
+
+const SubmitButton = styled(Button)`
+  min-width: 15rem;
+`;
 
 export default AddLinkModal;

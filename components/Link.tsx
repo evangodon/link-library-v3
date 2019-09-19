@@ -91,11 +91,12 @@ const Content = styled.a`
   display: grid;
   grid-template-columns: 1fr 20rem;
   align-items: center;
+  overflow: hidden;
 `;
 
 const TextContainer = styled.div`
   padding: 1rem 2rem;
-  max-width: 49.5rem;
+  max-width: 39.5rem;
 `;
 
 const Title = styled.h5`
@@ -112,6 +113,13 @@ const Description = styled.p`
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
   color: rgba(55, 53, 47, 0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-height: 1; /* fallback */
+  max-height: 2.6rem;
 `;
 
 const Url = styled.span`
