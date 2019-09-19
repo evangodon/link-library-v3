@@ -11,7 +11,6 @@ const config = {
   appId: process.env.APP_ID,
 };
 
-console.log(config);
 const firebaseConfig = !!firebase.apps[0]
   ? firebase.app()
   : firebase.initializeApp(config);
