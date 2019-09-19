@@ -11,7 +11,10 @@ const metascraperWithRules = metascraper([
   metascraperDesc(),
 ]);
 
-// TODO: Fix the error capturing
+/**
+ * @todo: Fix the error capturing
+ * @todo: Scrape for favicon
+*/
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = JSON.parse(req.body);
