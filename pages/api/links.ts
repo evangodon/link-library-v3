@@ -10,11 +10,10 @@ export default (_req: NextApiRequest, res: NextApiResponse) => {
         id: link.id,
         ...link.data(),
       }));
-      res.statusCode = 200;
-      res.end(JSON.stringify(data));
+
+      res.status(200).json(data);
     })
-    .catch((err) => {
-      res.statusCode = 500;
-      res.send(JSON.stringify(err));
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
     });
 };

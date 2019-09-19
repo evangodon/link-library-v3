@@ -17,8 +17,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
       docRef.get().then((doc) => {
         const newLink = { id: doc.id, ...doc.data() };
 
-        res.statusCode = 200;
-        res.send(JSON.stringify(newLink));
+        res.status(200).json(newLink);
       });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: error.message });
     });
 };

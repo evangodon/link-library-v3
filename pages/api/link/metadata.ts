@@ -14,7 +14,7 @@ const metascraperWithRules = metascraper([
 /**
  * @todo: Fix the error capturing
  * @todo: Scrape for favicon
-*/
+ */
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = JSON.parse(req.body);
@@ -28,11 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     const metadata = await metascraperWithRules({ html, url });
 
-    res.statusCode = 200;
-    res.end(JSON.stringify(metadata));
-  } catch (err) {
-    res.statusCode = 406;
-    res.end(JSON.stringify(err));
+    res.status(200).json(metadata);
+  } catch (error) {
+    res.status(406).json({ error: error.message });
   }
 };
 

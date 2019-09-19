@@ -8,10 +8,10 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     .doc(id)
     .delete()
     .then(() => {
-      res.statusCode = 200;
-      res.send(JSON.stringify({ message: 'Link successfully deleted' }));
+      res.status(200).json({ message: 'Link successfully deleted' });
     })
     .catch((error) => {
       console.error(error);
+      res.status(500).json({ error: error.message });
     });
 };
