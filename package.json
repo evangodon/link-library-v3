@@ -15,6 +15,7 @@
     "@types/styled-components": "^4.1.16",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-styled-components": "^1.10.2",
+    "dotenv": "^8.1.0",
     "firebase": "^6.6.1",
     "metascraper": "^5.7.4",
     "metascraper-description": "^5.7.4",

@@ -1,5 +1,10 @@
 {
   "env": {
-    "FIREBASE_API_KEY": "firebase_api_key"
+    "FIREBASE_API_KEY": "firebase_api_key",
+    "AUTH_DOMAIN": "auth_domain",
+    "DATABASE_URL": "database_url",
+    "PROJECT_ID": "projectid",
+    "MESSASING_SENDER_ID": "messaging_sender_id",
+    "APP_ID": "app_id"
   }
 }
