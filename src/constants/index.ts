@@ -1,8 +1,10 @@
-export const CATEGORIES = {
-  video: 'video',
-  article: 'article',
-  stackoverflow: 'stackoverflow',
-  github: 'github',
-  reddit: 'reddit',
-  other: 'other',
-};
+import { Category } from 'interfaces';
+
+export const CATEGORIES: Category[] = [
+  'video',
+  'article',
+  'stackoverflow',
+  'github',
+  'reddit',
+  'other',
+];

@@ -1,12 +1,22 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { CATEGORIES } from '../constants/index';
-import { Video, BookOpen, GitHub, Box } from 'react-feather';
+import { Category } from 'interfaces';
+import { Video, BookOpen, GitHub, Box, Database } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
+import { useLinksContext } from 'context';
 
 interface Icon {
   [key: string]: React.ReactElement;
 }
+
+export const categories: Category[] = [
+  'video',
+  'article',
+  'stackoverflow',
+  'github',
+  'reddit',
+  'other',
+];
 
 const icon: Icon = {
   video: <Video />,
@@ -18,16 +28,26 @@ const icon: Icon = {
 };
 
 const CategorySelect: React.FC = () => {
+  const { selectedCategory, setSelectedCategory } = useLinksContext();
+
   return (
     <Container>
       <H3>Categories</H3>
       <CategoriesContainer>
-        {Object.keys(CATEGORIES).map((category, index) => (
-          <CategoryItem key={index} className={category}>
-            {icon[category]}
-            {category[0].toUpperCase() + category.slice(1)}
-          </CategoryItem>
-        ))}
+        <>
+          {categories.map((category, index) => (
+            <CategoryItem key={index} onClick={() => setSelectedCategory(category)}>
+              {icon[category]}
+              {category[0].toUpperCase() + category.slice(1)}
+            </CategoryItem>
+          ))}
+          {selectedCategory && (
+            <CategoryItem>
+              <Database />
+              <ClearCategory onClick={() => setSelectedCategory(null)}>All</ClearCategory>
+            </CategoryItem>
+          )}
+        </>
       </CategoriesContainer>
     </Container>
   );
@@ -56,6 +76,12 @@ const CategoryItem = styled.li`
     position: relative;
     bottom: 2px;
   }
+`;
+
+const ClearCategory = styled.span`
+  color: var(--grey-400);
+  font-weight: bold;
+  font-size: var(--fs-small);
 `;
 
 export default CategorySelect;

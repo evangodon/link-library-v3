@@ -1,4 +1,3 @@
-
 export interface Link {
   id: string | number;
   url: string;
@@ -6,3 +5,11 @@ export interface Link {
   description: string;
   image?: string | undefined;
 }
+
+export type Category =
+  | 'video'
+  | 'article'
+  | 'stackoverflow'
+  | 'github'
+  | 'reddit'
+  | 'other';
