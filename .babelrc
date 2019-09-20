@@ -14,7 +14,8 @@
           "constants": "./src/constants",
           "context": "./src/context",
           "hooks": "./src/hooks",
-          "interfaces": "./src/interfaces"
+          "interfaces": "./src/interfaces",
+          "utils": "./src/utils"
         }
       }
     ]

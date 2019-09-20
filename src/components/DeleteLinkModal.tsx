@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import fetch from 'node-fetch'
 import { Link as ILink } from 'interfaces';
 import Link from './Link';
 import { ModalContainer } from 'components/Modal';
@@ -29,14 +30,19 @@ const DeleteLinkModal: React.FC<Props> = ({ link }) => {
   }
 
   return (
-    <ModalContainer>
+    <ModalContainer data-testid="delete-link-modal">
       <H3>Are you sure you want to delete this link?</H3>
       <Link link={link} displayMode />
       <ButtonContainer>
         <Button variant="contained" onClick={handleCancel}>
           Cancel
         </Button>
-        <Button variant="contained" color="secondary" onClick={handleDelete}>
+        <Button
+          variant="contained"
+          color="secondary"
+          data-testid="delete-link-action"
+          onClick={handleDelete}
+        >
           Delete
         </Button>
       </ButtonContainer>
