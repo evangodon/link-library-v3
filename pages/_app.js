@@ -6,6 +6,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ModalProvider, LinksProvider } from 'context';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from 'css/theme';
+import GlobalStyles from 'css/global';
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -26,6 +27,7 @@ export default class MyApp extends App {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <GlobalStyles />
           <ModalProvider>
             <LinksProvider>
               <Component {...pageProps} data-testid="hello" />

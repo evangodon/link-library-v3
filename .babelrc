@@ -7,14 +7,14 @@
       {
         "root": ["./"],
         "alias": {
-          "page": "./pages",
-          "components": "./components",
-          "css": "./css",
-          "constants": "./constants",
-          "context": "./context",
-          "hooks": "./hooks",
-          "api": "./pages/api",
-          "interfaces": "./interfaces"
+          "pages": "./pages",
+          "api": "./src/pages/api",
+          "components": "./src/components",
+          "css": "./src/css",
+          "constants": "./src/constants",
+          "context": "./src/context",
+          "hooks": "./src/hooks",
+          "interfaces": "./src/interfaces"
         }
       }
     ]

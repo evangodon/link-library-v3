@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { CATEGORIES } from 'constants/index';
+import { CATEGORIES } from '../constants/index';
 import { Video, BookOpen, GitHub, Box } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
 
@@ -36,7 +36,7 @@ const CategorySelect: React.FC = () => {
 const Container = styled.div``;
 
 const H3 = styled.h3`
-  margin-bottom: .8rem;
+  margin-bottom: 0.8rem;
   font-size: 1.6rem;
 `;
 
@@ -48,7 +48,7 @@ const CategoryItem = styled.li`
   grid-column-gap: 0.4rem;
   align-items: center;
   cursor: pointer;
-  margin-bottom: .6rem;
+  margin-bottom: 0.6rem;
   font-size: 1.2rem;
 
   svg {

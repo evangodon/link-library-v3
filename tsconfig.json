@@ -10,14 +10,14 @@
     "baseUrl": ".",
     "paths": {
       "pages": ["./pages"],
-      "components/*": ["./components/*"],
-      "css": ["./css"],
-      "constants": ["./constants"],
-      "context": ["./context"],
-      "hooks": ["./hooks"],
-      "api": ["./pages/api"],
-      "interfaces": ["./interfaces"],
-      "utils": ["./utils"]
+      "components/*": ["./src/components/*"],
+      "css/*": ["./src/css/*"],
+      "constants/*": ["./src/constants/*"],
+      "context": ["./src/context"],
+      "hooks/*": ["./src/hooks/*"],
+      "api/*": ["./src/pages/api/*"],
+      "interfaces": ["./src/interfaces"],
+      "utils/*": ["./src/utils/*"]
     },
     "module": "esnext",
     "moduleResolution": "node",

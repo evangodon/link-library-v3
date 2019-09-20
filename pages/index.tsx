@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
-import GlobalStyles from 'css/global.css';
 import Links from 'components/Links';
 import Modal from 'components/Modal';
 import AddLinkButton from 'components/AddLinkButton';
@@ -24,7 +23,6 @@ const IndexPage: NextPage = () => {
         </ButtonContainer>
       </Content>
       <Modal />
-      <GlobalStyles />
     </>
   );
 };
