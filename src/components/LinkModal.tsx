@@ -57,7 +57,6 @@ const AddLinkModal: React.FC = () => {
     const newLink = await response.json();
     toggleModal();
     setLinks([newLink, ...links]);
-    setValues(initialState);
   }
 
   return (
