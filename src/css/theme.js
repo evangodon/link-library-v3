@@ -8,6 +8,7 @@ const theme = createMuiTheme({
     primary: {
       main: '#2196f3',
     },
+    category_1: '#fff',
   },
 });
 

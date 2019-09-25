@@ -2,6 +2,17 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { ModalProvider, LinksProvider } from 'context';
 
+jest.mock('next/router', () => {
+  return {
+    useRouter: jest.fn(() => ({
+      query: {
+        search: '',
+      },
+      replace: jest.fn(),
+    })),
+  };
+});
+
 const AllProviders = ({ children }) => {
   return (
     <ModalProvider>

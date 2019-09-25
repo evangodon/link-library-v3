@@ -8,7 +8,7 @@ const SearchBar: React.FC = () => {
   const { searchQuery, setSearchQuery } = useLinksContext();
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const value = e.target.value.trim();
+    const value = e.target.value;
     if (value.length > 0) {
       setSearchQuery(value);
     } else {
@@ -17,9 +17,15 @@ const SearchBar: React.FC = () => {
   }
 
   return (
-    <Container active={Boolean(searchQuery) || inFocus} onClick={() => setInFocus(true)}>
+    <Container
+      data-testid="search-bar"
+      active={Boolean(searchQuery) || inFocus}
+      onClick={() => setInFocus(true)}
+      onFocus={() => setInFocus(true)}
+    >
       <Search className="Search-icon" />
       <Input
+        aria-label="search"
         placeholder="Search..."
         onChange={handleChange}
         value={searchQuery || ''}

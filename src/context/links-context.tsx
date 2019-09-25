@@ -46,11 +46,15 @@ export const LinksProvider: React.FC<{
     router.replace(newParams ? `/?${newParams}` : '/');
   }, [searchQuery, selectedCategory]);
 
+  const withCategoryFilter = selectedCategory
+    ? links.filter((link: Link) => link.category === selectedCategory)
+    : links;
+
   const filteredLinks = searchQuery
-    ? links.filter((link: Link) =>
+    ? withCategoryFilter.filter((link: Link) =>
         link.title.toLowerCase().includes(searchQuery.toLowerCase())
       )
-    : links;
+    : withCategoryFilter;
 
   return (
     <>

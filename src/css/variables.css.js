@@ -1,32 +1,40 @@
 import { css } from 'styled-components';
 
-export default css`
-  --app-max-width: 1024px;
+const variables = {
+  __app_max_width: '1024px',
 
   /* Colors */
-  --white: #fff;
-  --black: #000;
-  --grey-100: #fafafa;
-  --grey-200: #eeeeee;
-  --grey-300: #bdbdbd;
-  --grey-400: #424242;
-  --grey-500: #121212;
-  --color-primary: #2196f3;
+  __white: '#ffffff',
+  __black: '#000000',
+  __grey_100: '#fafafa',
+  __grey_200: '#eeeeee',
+  __grey_300: '#bdbdbd',
+  __grey_400: '#424242',
+  __grey_500: '#121212',
+  __color_primary: '#2196f3',
 
   /* Category colors */
-  --category-1: #f44336, #e57373;
-  --category-2: #03a9f4, #4fc3f7;
-  --category-3: #4caf50, #81c784;
-  --category-4: #673ab7, #9575cd;
-  --category-5: #e91e63, #f06292;
-  --category-6: #ffc107, #ffd54f;
-  --category-7: #3f51b5, #7986cb;
+  __category_1: '#f44336',
+  __category_2: '#03a9f4',
+  __category_3: '#4caf50',
+  __category_4: '#673ab7',
+  __category_5: '#e91e63',
+  __category_6: '#ffc107',
+  __category_7: '#3f51b5',
 
   /* Font-sizes */
-  --fs-xsmall: 1rem;
-  --fs-small: 1.2rem;
-  --fs-medium: 1.4rem;
-  --fs-default: 1.6rem;
-  --fs-large: 2.8rem;
-  --fs-xlarge: 3.6rem;
-`;
+  __fs_xsmall: '1rem',
+  __fs_small: '1.2rem',
+  __fs_medium: '1.4rem',
+  __fs_default: '1.6rem',
+  __fs_large: '2.4rem',
+  __fs_xlarge: '3.6rem',
+};
+
+/* Turn variables into valid css custom properties */
+const customProperties = Object.keys(variables).map(
+  (key) => `${[key.replace(/_/g, '-')]}: ${variables[key]};`
+);
+
+export { variables };
+export default customProperties;

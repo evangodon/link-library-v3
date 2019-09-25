@@ -17,7 +17,7 @@ describe('<Links />', () => {
     expect(getByTestId('links-container')).toBeTruthy();
   });
 
-  it('renders an array of List components when useLinks returns link objects', () => {
+  it('renders an array of List components', () => {
     const { getAllByTestId } = renderWithProviders(<Links />);
 
     expect(getAllByTestId('link').length).toBe(mockData.length);

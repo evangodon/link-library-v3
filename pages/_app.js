@@ -2,10 +2,9 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ModalProvider, LinksProvider } from 'context';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import theme from 'css/theme';
+import muiTheme from 'css/theme';
 import GlobalStyles from 'css/global';
 
 export default class MyApp extends App {
@@ -25,7 +24,7 @@ export default class MyApp extends App {
           <title>LinkLib</title>
           <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
         </Head>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={muiTheme}>
           <CssBaseline />
           <GlobalStyles />
           <ModalProvider>

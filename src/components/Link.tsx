@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Trash2 } from 'react-feather';
+import { Trash2, ExternalLink } from 'react-feather';
 import Highlighter from 'react-highlight-words';
 import { Link as ILink } from 'interfaces';
 import { useModalContext, useLinksContext } from 'context';
 import DeleteLinkModal from 'components/DeleteLinkModal';
+import CategoryPill from './CategoryPill';
+import { CATEGORIES } from '../constants/index';
+import { lighten } from 'polished';
 
 type Props = {
   link: ILink;
@@ -20,11 +23,13 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
     event.preventDefault();
   }
 
+  const categoryData = CATEGORIES[link.category] || {};
+
   return (
     <Container data-testid="link">
-      <Content href={link.url} target="_blank">
+      <Content>
         <TextContainer>
-          <Title>
+          <Title bgColor={categoryData.color}>
             {searchQuery ? (
               <Highlighter
                 highlightClassName="highlight"
@@ -35,8 +40,12 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
               link.title
             )}
           </Title>
+          <CategoryPill category={link.category} />
           <Description>{link.description}</Description>
-          <Url>{link.url}</Url>
+          <Url href={link.url} target="_blank" rel="nooponer">
+            <span>{link.url}</span>
+            <ExternalLink size={16} />
+          </Url>
         </TextContainer>
         <Image src={link.image} />
         {!displayMode && (
@@ -63,6 +72,7 @@ const DeleteContainer = styled.span`
   color: var(--grey-400);
   border: 1px solid currentColor;
   transition: opacity 0.1s ease;
+  cursor: pointer;
 
   .Trash-icon {
     width: 1.6rem;
@@ -80,18 +90,18 @@ const Container = styled.li`
   justify-content: center;
   margin-bottom: 1.8rem;
   background: #fafafa;
-  cursor: pointer;
 
   &:hover ${DeleteContainer} {
     opacity: 1;
   }
 `;
 
-const Content = styled.a`
+const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 20rem;
   align-items: center;
   overflow: hidden;
+  color: var(--grey-400);
 `;
 
 const TextContainer = styled.div`
@@ -99,7 +109,7 @@ const TextContainer = styled.div`
   max-width: 39.5rem;
 `;
 
-const Title = styled.h5`
+const Title = styled.h5<{ bgColor: string }>`
   font-size: var(--fs-default);
   margin-bottom: 0.4rem;
   color: var(--grey-500);
@@ -107,6 +117,12 @@ const Title = styled.h5`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  .highlight {
+    background-color: ${({ bgColor }) => (bgColor ? lighten(0.35, bgColor) : 'none')};
+    padding: 2px;
+    border-radius: 2px;
+  }
 `;
 
 const Description = styled.p`
@@ -117,16 +133,34 @@ const Description = styled.p`
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* number of lines to show */
-  line-height: 1; /* fallback */
+  -webkit-line-clamp: 2;
+  line-height: 1;
   max-height: 2.6rem;
 `;
 
-const Url = styled.span`
+const Url = styled.a`
   font-size: 1.2rem;
-  max-width: 100%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  color: var(--grey-400);
+
+  span {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  svg {
+    position: relative;
+    bottom: 2px;
+    margin-left: 0.4rem;
+    opacity: 0;
+  }
+
+  &:hover svg {
+    opacity: 1;
+  }
 `;
 
 const Image = styled.div<{ src: string | undefined }>`
