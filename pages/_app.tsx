@@ -2,7 +2,6 @@ import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/styles';
-import { ModalProvider, LinksProvider } from 'context';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from 'css/theme';
 import GlobalStyles from 'css/global';
@@ -10,7 +9,7 @@ import GlobalStyles from 'css/global';
 export default class MyApp extends App {
   componentDidMount() {
     const jssStyles = document.querySelector('#jss-server-side');
-    if (jssStyles) {
+    if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
@@ -27,11 +26,7 @@ export default class MyApp extends App {
         <ThemeProvider theme={muiTheme}>
           <CssBaseline />
           <GlobalStyles />
-          <ModalProvider>
-            <LinksProvider>
-              <Component {...pageProps} data-testid="hello" />
-            </LinksProvider>
-          </ModalProvider>
+          <Component {...pageProps} />
         </ThemeProvider>
       </React.Fragment>
     );

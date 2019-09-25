@@ -1,5 +1,5 @@
 import React from 'react';
-import { Category } from 'interfaces';
+import { Category } from 'src/types';
 import { Video, BookOpen, GitHub, Box } from 'react-feather';
 import { variables } from 'css/variables.css';
 
@@ -33,3 +33,5 @@ export const CATEGORIES: CategoryData = {
     color: variables.__category_4,
   },
 };
+
+export const isSSR = !process.browser;

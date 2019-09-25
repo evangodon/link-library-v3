@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import { Category } from 'interfaces';
 import { icons } from './CategorySelect';
+import { Category } from 'interfaces';
 import { CATEGORIES } from 'constants/index';
 import { useLinksContext } from 'context';
 

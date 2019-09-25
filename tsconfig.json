@@ -12,11 +12,11 @@
       "pages": ["./pages"],
       "components/*": ["./src/components/*"],
       "css/*": ["./src/css/*"],
-      "constants/*": ["./src/constants/*"],
       "context": ["./src/context"],
       "hooks/*": ["./src/hooks/*"],
       "api/*": ["./src/pages/api/*"],
-      "interfaces": ["./src/interfaces"],
+      "interfaces": ["src/interfaces"],
+      "constants/*": ["./src/constants/*"],
       "utils/*": ["./src/utils/*"]
     },
     "module": "esnext",

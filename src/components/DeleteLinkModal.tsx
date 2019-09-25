@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 import { Link as ILink } from 'interfaces';
 import Link from './Link';
 import { ModalContainer } from 'components/Modal';

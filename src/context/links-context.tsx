@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { createCtx } from './createCtx';
-import { Link, Category } from 'interfaces';
+import { Link, Category } from 'src/types';
 
 export const [useLinksContext, Provider] = createCtx<{
   links: readonly Link[];
@@ -14,7 +14,8 @@ export const [useLinksContext, Provider] = createCtx<{
 
 export const LinksProvider: React.FC<{
   children: React.ReactElement | React.ReactElement[];
-}> = ({ children }) => {
+  ssrLinks: Link[] | [];
+}> = ({ children, ssrLinks }) => {
   const router = useRouter();
   const { query } = router;
 
@@ -24,7 +25,7 @@ export const LinksProvider: React.FC<{
       : query.search
     : null;
 
-  const [links, setLinks] = useState<readonly Link[]>([]);
+  const [links, setLinks] = useState<readonly Link[]>(ssrLinks);
   const [searchQuery, setSearchQuery] = useState<string | null>(initialValue);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 

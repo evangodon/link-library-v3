@@ -1,11 +1,11 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { lighten } from 'polished';
 import { Category } from 'interfaces';
 import { Video, BookOpen, GitHub, Box, Database } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
 import { useLinksContext } from 'context';
-import { CATEGORIES } from '../constants/index';
-import { lighten } from 'polished';
+import { CATEGORIES } from 'constants/index';
 
 interface Icon {
   [key: string]: React.ReactElement;
