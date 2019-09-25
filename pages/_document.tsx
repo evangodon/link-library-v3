@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: any) {
     const styledComponentsSheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
     const materialSheets = new ServerStyleSheets();
@@ -14,7 +14,7 @@ class MyDocument extends Document {
     try {
       ctx.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
+          enhanceApp: (App: React.FunctionComponent) => (props: any) =>
             styledComponentsSheet.collectStyles(
               materialSheets.collect(<App {...props} />)
             ),
