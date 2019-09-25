@@ -38,8 +38,8 @@ const IndexPage: NextPage<Props> = ({ links }) => (
 
 IndexPage.getInitialProps = async ({ req }) => {
   let protocol = 'https:';
-  let host = req ? req.headers.host : window.location.host;
-  if (host && host.indexOf('localhost') > -1) {
+  const host = req ? req.headers.host : window.location.host;
+  if (String(host).includes('localhost')) {
     protocol = 'http:';
   }
 
