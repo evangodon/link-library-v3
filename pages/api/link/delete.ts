@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '../firebase';
+import { db } from '@api/firebase';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = JSON.parse(req.body);

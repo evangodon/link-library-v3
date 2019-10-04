@@ -8,7 +8,7 @@
         "root": ["./"],
         "alias": {
           "pages": "./pages",
-          "api": "./src/pages/api",
+          "@api": "./src/api",
           "components": "./src/components",
           "css": "./src/css",
           "constants": "./src/constants",

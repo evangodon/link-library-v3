@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
-import { db } from '../firebase';
+import { db } from '@api/firebase';
 import { Link } from 'interfaces';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {

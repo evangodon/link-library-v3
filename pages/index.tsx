@@ -2,14 +2,15 @@ import * as React from 'react';
 import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import fetch from 'node-fetch';
 import { ModalProvider, LinksProvider, SnackbarProvider } from 'context';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
 import Links from 'components/Links';
 import AddLinkButton from 'components/AddLinkButton';
-import fetch from 'node-fetch';
 import { Link } from 'interfaces';
+import { dev } from 'constants/index';
 
 type Props = {
   links: Link[] | [];
@@ -29,18 +30,16 @@ const IndexPage: NextPage<Props> = ({ links }) => (
       <SnackbarProvider>
         <LinksProvider ssrLinks={links}>
           <NavBar />
-          <ScrollContainer>
-            <Content data-testid="application">
-              <CategorySelect />
-              <div>
-                <SearchBar />
-                <Links />
-              </div>
-              <ButtonContainer>
-                <AddLinkButton />
-              </ButtonContainer>
-            </Content>
-          </ScrollContainer>
+          <Content data-testid="application">
+            <CategorySelect />
+            <div>
+              <SearchBar />
+              <Links />
+            </div>
+            <ButtonContainer>
+              <AddLinkButton />
+            </ButtonContainer>
+          </Content>
           <Modal />
           <Snackbar />
         </LinksProvider>
@@ -57,11 +56,13 @@ IndexPage.getInitialProps = async ({ req }) => {
   }
 
   let links = [];
-  try {
-    const res = await fetch(`${protocol}//${host}/api/links`);
-    links = await res.json();
-  } catch (error) {
-    console.error(error);
+  if (req || dev) {
+    try {
+      const res = await fetch(`${protocol}//${host}/api/links`);
+      links = await res.json();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return { links };
@@ -77,11 +78,6 @@ const Content = styled.main`
   width: 100%;
 
   --link-max-width: 70rem;
-`;
-
-const ScrollContainer = styled.div`
-  overflow-y: auto;
-  max-height: 100vh;
 `;
 
 const ButtonContainer = styled.div`
