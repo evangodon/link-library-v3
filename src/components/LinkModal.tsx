@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import debounce from 'lodash/debounce';
-import { useModalContext, useLinksContext } from 'context';
+import { useModalContext, useLinksContext, useSnackbarContext } from 'context';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
 import Link from 'components/Link';
 import ButtonGroup from 'components/ButtonGroup';
@@ -36,6 +36,7 @@ const useStyles = makeStyles(() =>
 const AddLinkModal: React.FC = () => {
   const classes = useStyles();
   const { toggleModal } = useModalContext();
+  const { openSnackbar } = useSnackbarContext();
   const { links, setLinks } = useLinksContext();
   const inputLabel = React.useRef<HTMLLabelElement>(null);
   const initialState: ILink = {
@@ -116,6 +117,7 @@ const AddLinkModal: React.FC = () => {
     const newLink = await response.json();
     toggleModal();
     setLinks([newLink, ...links]);
+    openSnackbar({ variant: 'success', message: 'Link Added' });
   }
 
   return (

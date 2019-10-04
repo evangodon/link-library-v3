@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { ModalProvider, LinksProvider } from 'context';
+import { ModalProvider, LinksProvider, SnackbarProvider } from 'context';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
 import Links from 'components/Links';
 import Modal from 'components/Modal';
+import Snackbar from 'components/Snackbar';
 import AddLinkButton from 'components/AddLinkButton';
 import fetch from 'node-fetch';
 import { Link } from 'interfaces';
@@ -18,20 +19,23 @@ type Props = {
 const IndexPage: NextPage<Props> = ({ links }) => (
   <>
     <ModalProvider>
-      <LinksProvider ssrLinks={links}>
-        <NavBar />
-        <Content data-testid="application">
-          <CategorySelect />
-          <div>
-            <SearchBar />
-            <Links />
-          </div>
-          <ButtonContainer>
-            <AddLinkButton />
-          </ButtonContainer>
-        </Content>
-        <Modal />
-      </LinksProvider>
+      <SnackbarProvider>
+        <LinksProvider ssrLinks={links}>
+          <NavBar />
+          <Content data-testid="application">
+            <CategorySelect />
+            <div>
+              <SearchBar />
+              <Links />
+            </div>
+            <ButtonContainer>
+              <AddLinkButton />
+            </ButtonContainer>
+          </Content>
+          <Modal />
+          <Snackbar />
+        </LinksProvider>
+      </SnackbarProvider>
     </ModalProvider>
   </>
 );
