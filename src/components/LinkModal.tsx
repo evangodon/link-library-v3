@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ModalContainer } from 'components/Modal';
@@ -8,11 +8,13 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import debounce from 'lodash/debounce';
 import { useModalContext, useLinksContext } from 'context';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
 import Link from 'components/Link';
 import ButtonGroup from 'components/ButtonGroup';
 import { categories, icons } from 'components/CategorySelect';
+import { isValidURL } from 'utils/isValidUrl';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -45,16 +47,18 @@ const AddLinkModal: React.FC = () => {
     category: 'other',
   };
 
-  const [values, setValues] = React.useState<ILink>(initialState);
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
+  const [values, setValues] = useState<ILink>(initialState);
+  const [labelWidth, setLabelWidth] = useState(0);
+  const [invalidURL, setInvalidURL] = useState(false);
+
+  useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
   }, []);
 
   function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
-      if (name === 'url' && !!value) {
+      if (name === 'url' && isValidURL(value)) {
         getMetaData(event.target.value).then((metadata) => {
           setValues({ ...values, ...metadata });
         });
@@ -62,6 +66,27 @@ const AddLinkModal: React.FC = () => {
       setValues({ ...values, [name]: value });
     };
   }
+
+  function handleUrlChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { value } = event.target;
+    setValues({ ...values, url: value });
+    if (value.length === 0) {
+      setInvalidURL(false);
+    } else {
+      checkURL(value);
+    }
+  }
+
+  const checkURL = debounce((url: string) => {
+    if (isValidURL(url)) {
+      setInvalidURL(false);
+      getMetaData(url).then((metaData) => {
+        setValues({ ...values, ...metaData, url });
+      });
+    } else {
+      setInvalidURL(true);
+    }
+  }, 500);
 
   function handleCategoryChange(
     event: React.ChangeEvent<{ name?: string; value: unknown }>
@@ -99,12 +124,13 @@ const AddLinkModal: React.FC = () => {
       <Form>
         <TextField
           id="standard-name"
-          label="Url"
+          label={invalidURL ? 'Invalid Link' : 'Link'}
+          error={invalidURL}
           type="url"
           required
           autoFocus
           value={values.url}
-          onChange={handleChange('url')}
+          onChange={handleUrlChange}
           margin="normal"
           variant="outlined"
         />

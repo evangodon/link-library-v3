@@ -4,6 +4,7 @@ import metascraperTitle from 'metascraper-title';
 import metascraperDesc from 'metascraper-description';
 import metascraperImage from 'metascraper-image';
 import fetch from 'node-fetch';
+import { isValidURL } from 'utils/isValidUrl';
 
 const metascraperWithRules = metascraper([
   metascraperImage(),
@@ -19,7 +20,7 @@ const metascraperWithRules = metascraper([
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = JSON.parse(req.body);
   try {
-    if (!validURL(url)) {
+    if (!isValidURL(url)) {
       throw new Error('Invalid URL');
     }
 
@@ -33,17 +34,3 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(406).json({ error: error.message });
   }
 };
-
-function validURL(url: string): boolean {
-  const pattern = new RegExp(
-    '^(https?:\\/\\/)?' + // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-    'i'
-  );
-
-  return !!pattern.test(url);
-}
