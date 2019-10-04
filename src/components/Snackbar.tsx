@@ -36,9 +36,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   warning: {
     backgroundColor: amber[700],
   },
-  position: {
-    top: 100,
-  },
   icon: {
     fontSize: 20,
   },
@@ -89,7 +86,6 @@ function GrowTransition(props: TransitionProps) {
 }
 
 const Snackbar: React.FC = () => {
-  const classes = useStyles();
   const { snackbarOpen, config, closeSnackbar } = useSnackbarContext();
 
   const handleClose = (_event?: React.SyntheticEvent, reason?: string) => {
@@ -103,10 +99,9 @@ const Snackbar: React.FC = () => {
   return (
     <SnackbarMUI
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
+        vertical: 'bottom',
+        horizontal: 'left',
       }}
-      className={classes.position}
       open={snackbarOpen}
       autoHideDuration={6000}
       onClose={handleClose}

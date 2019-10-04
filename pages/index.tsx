@@ -22,16 +22,18 @@ const IndexPage: NextPage<Props> = ({ links }) => (
       <SnackbarProvider>
         <LinksProvider ssrLinks={links}>
           <NavBar />
-          <Content data-testid="application">
-            <CategorySelect />
-            <div>
-              <SearchBar />
-              <Links />
-            </div>
-            <ButtonContainer>
-              <AddLinkButton />
-            </ButtonContainer>
-          </Content>
+          <ScrollContainer>
+            <Content data-testid="application">
+              <CategorySelect />
+              <div>
+                <SearchBar />
+                <Links />
+              </div>
+              <ButtonContainer>
+                <AddLinkButton />
+              </ButtonContainer>
+            </Content>
+          </ScrollContainer>
           <Modal />
           <Snackbar />
         </LinksProvider>
@@ -65,8 +67,14 @@ const Content = styled.main`
   max-width: var(--app-max-width);
   display: grid;
   grid-template-columns: 16rem 1fr 15rem;
+  width: 100%;
 
   --link-max-width: 70rem;
+`;
+
+const ScrollContainer = styled.div`
+  overflow-y: auto;
+  max-height: 100vh;
 `;
 
 const ButtonContainer = styled.div`

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { lighten } from 'polished';
 import { Category } from 'interfaces';
 import { Video, BookOpen, GitHub, Box, Database } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
@@ -41,7 +40,9 @@ const CategorySelect: React.FC = () => {
             <CategoryItem
               key={index}
               active={category === selectedCategory}
-              activeColor={selectedCategory ? CATEGORIES[selectedCategory].color : null}
+              activeColor={
+                selectedCategory ? CATEGORIES[selectedCategory].color : null
+              }
               onClick={() => setSelectedCategory(category)}
             >
               {icons[category]}
@@ -76,13 +77,12 @@ const CategoryItem = styled.li<CategoryItemProps>`
   grid-column-gap: 0.4rem;
   align-items: center;
   cursor: pointer;
-  padding: 3px 8px;
-  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5px;
   font-size: 1.2rem;
-  color: ${({ active, activeColor }) => (active ? activeColor : 'var(--grey-400)')};
+  box-shadow: ${({ active }) => (active ? '0 2px 4px rgba(0,0,0,0.18)' : 'none')};
+  background: ${({ active }) => (active ? '#fff' : 'none')};
   font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
-  background-color: ${({ active, activeColor }) =>
-    active && activeColor ? lighten(0.35, activeColor) : 'normal'};
   transition: color, background-color 0.1s ease;
 
   svg {
