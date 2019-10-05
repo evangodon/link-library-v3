@@ -15,6 +15,7 @@ import Link from 'components/Link';
 import ButtonGroup from 'components/ButtonGroup';
 import { categories, icons } from 'components/CategorySelect';
 import { isValidURL } from 'utils/isValidUrl';
+import { request } from '@api/request';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -97,27 +98,29 @@ const AddLinkModal: React.FC = () => {
   }
 
   async function getMetaData(url: string) {
-    const response = await fetch('api/link/metadata', {
+    const { res: metadata } = await request('api/link/metadata', {
       method: 'POST',
       body: JSON.stringify({ url }),
     });
 
-    const metadata = await response.json();
-
-    return { ...metadata, url };
+    if (metadata) {
+      return { ...metadata, url };
+    }
   }
 
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
-    const response = await fetch('api/link/add', {
+    const { res: newLink } = await request('api/link/add', {
       method: 'POST',
       body: JSON.stringify(values),
     });
-    const newLink = await response.json();
-    toggleModal();
-    setLinks([newLink, ...links]);
-    openSnackbar({ variant: 'success', message: 'Link Added' });
+
+    if (newLink) {
+      toggleModal();
+      setLinks([newLink, ...links]);
+      openSnackbar({ variant: 'success', message: 'Link Added' });
+    }
   }
 
   return (
