@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Trash2, ExternalLink, Edit } from 'react-feather';
+import { Trash2, ExternalLink, Edit, Copy } from 'react-feather';
 import Highlighter from 'react-highlight-words';
 import { Link as ILink } from 'interfaces';
-import { useModalContext, useLinksContext } from 'context';
+import { useModalContext, useLinksContext, useSnackbarContext } from 'context';
 import DeleteLinkModal from 'components/DeleteLinkModal';
 import CategoryPill from './CategoryPill';
 import { CATEGORIES } from 'constants/index';
@@ -18,16 +18,21 @@ type Props = {
 const Link: React.FC<Props> = ({ link, displayMode }) => {
   const { toggleModal } = useModalContext();
   const { searchQuery } = useLinksContext();
+  const { openSnackbar } = useSnackbarContext();
 
-  function handleDelete() {
-    toggleModal(() => () => <DeleteLinkModal link={link} />);
-    // event.preventDefault();
+  function handleCopy() {
+    navigator.clipboard.writeText(link.url);
+    openSnackbar({ variant: 'success', message: 'Link copied to clipboard' });
   }
 
   function handleUpdate() {
-    console.log('hello');
     toggleModal(() => () => <LinkModal hydratedState={link} />);
   }
+
+  function handleDelete() {
+    toggleModal(() => () => <DeleteLinkModal link={link} />);
+  }
+
   const categoryData = CATEGORIES[link.category] || {};
 
   return (
@@ -55,6 +60,9 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
         <Image src={link.image} />
         {!displayMode && (
           <OptionsContainer>
+            <CopyLink onClick={handleCopy}>
+              <Copy />
+            </CopyLink>
             <UpdateLink onClick={handleUpdate}>
               <Edit />
             </UpdateLink>
@@ -121,9 +129,15 @@ const Option = styled.span`
   }
 `;
 
-const DeleteLink = styled(Option)``;
+const CopyLink = styled(Option)``;
 
 const UpdateLink = styled(Option)``;
+
+const DeleteLink = styled(Option)`
+  &:hover {
+    color: var(--danger-red);
+  }
+`;
 
 const Content = styled.div`
   display: grid;

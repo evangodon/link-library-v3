@@ -13,6 +13,7 @@ const variables = {
   __grey_500: '#4A5568',
   __grey_600: '#1A202CA',
   __color_primary: '#2196f3',
+  __danger_red: '#F56565',
 
   /* Category colors */
   __category_1: '#f44336',
