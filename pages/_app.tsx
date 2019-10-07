@@ -1,10 +1,12 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/styles';
+import { ThemeProvider as ThemeProviderMUI } from '@material-ui/styles';
+import { ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from 'css/theme';
 import GlobalStyles from 'css/global';
+import { variables as theme } from 'css/variables.css';
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -23,10 +25,12 @@ export default class MyApp extends App {
           <title>LinkLib</title>
           <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
         </Head>
-        <ThemeProvider theme={muiTheme}>
-          <CssBaseline />
-          <GlobalStyles />
-          <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <ThemeProviderMUI theme={muiTheme}>
+            <CssBaseline />
+            <GlobalStyles />
+            <Component {...pageProps} />
+          </ThemeProviderMUI>
         </ThemeProvider>
       </React.Fragment>
     );

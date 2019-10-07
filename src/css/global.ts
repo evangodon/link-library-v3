@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
 
   ::-webkit-scrollbar-thumb {
     background-color: var(--color-primary);
+    position: absolute;
   }
 
   ::-webkit-scrollbar-track {
