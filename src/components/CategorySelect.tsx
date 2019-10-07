@@ -91,6 +91,7 @@ const CategoryItem = styled.li<CategoryItemProps>`
   background: ${({ active }) => (active ? '#fff' : 'none')};
   font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
   transition: color, background-color 0.1s ease;
+  color: ${({ active, theme }) => (active ? theme.__grey_600 : theme.__grey_500)};
 
   svg {
     position: relative;
@@ -101,7 +102,6 @@ const CategoryItem = styled.li<CategoryItemProps>`
 `;
 
 const ClearCategory = styled.span`
-  color: var(--grey-400);
   font-size: var(--fs-small);
 `;
 
