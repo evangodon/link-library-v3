@@ -72,7 +72,7 @@ const OptionsContainer = styled.div`
   position: absolute;
   right: 0;
   top: 0;
-  opacity: 1;
+  opacity: 0;
   background-color: var(--white);
   color: var(--grey-200);
   border-left: 1px solid currentColor;
