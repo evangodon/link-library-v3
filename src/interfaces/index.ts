@@ -9,7 +9,7 @@ export interface Link {
   category: Category;
 }
 
-export type Category = 'video' | 'article' | 'github' | 'other';
+export type Category = 'video' | 'article' | 'github' | 'website' | 'other';
 
 export const checkIfCategory = (str: unknown): Category => {
   return categories.find((category) => str === category) || categories[3];

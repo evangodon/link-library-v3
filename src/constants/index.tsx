@@ -1,6 +1,6 @@
 import React from 'react';
-import { Category } from 'src/types';
-import { Video, BookOpen, GitHub, Box } from 'react-feather';
+import { Category } from 'interfaces';
+import { Video, BookOpen, GitHub, Box, Globe } from 'react-feather';
 import { variables } from 'css/variables.css';
 
 type CategoryData = {
@@ -26,6 +26,11 @@ export const CATEGORIES: CategoryData = {
     name: 'Github',
     icon: <GitHub size="1.6rem" />,
     color: variables.__category_3,
+  },
+  website: {
+    name: 'Website',
+    icon: <Globe size="1.6rem" />,
+    color: variables.__category_5,
   },
   other: {
     name: 'Other',

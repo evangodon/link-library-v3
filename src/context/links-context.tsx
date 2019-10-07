@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { createCtx } from './createCtx';
-import { Link, Category } from 'src/types';
+import { Link, Category } from 'interfaces';
 
 export const [useLinksContext, Provider] = createCtx<{
   links: readonly Link[];

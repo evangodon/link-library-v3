@@ -87,7 +87,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     if (isValidURL(url)) {
       setInvalidURL(false);
       getMetaData(url).then((metaData) => {
-        setValues({ ...values, ...metaData, url: values.url });
+        setValues({ ...values, ...metaData });
       });
     } else {
       setInvalidURL(true);
@@ -161,7 +161,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
         <TextField
           id="standard-name"
           label="Title"
-          value={values.title}
+          value={values.title || ''}
           onChange={handleChange('title')}
           margin="normal"
           variant="outlined"
@@ -169,7 +169,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
         <TextField
           id="standard-name"
           label="Description"
-          value={values.description}
+          value={values.description || ''}
           onChange={handleChange('description')}
           margin="normal"
           variant="outlined"

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Category } from 'interfaces';
-import { Video, BookOpen, GitHub, Box, Database } from 'react-feather';
+import { Video, BookOpen, GitHub, Box, Database, Globe } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
 import { useLinksContext } from 'context';
 import { CATEGORIES } from 'constants/index';
@@ -10,7 +10,13 @@ interface Icon {
   [key: string]: React.ReactElement;
 }
 
-export const categories: Category[] = ['video', 'article', 'github', 'other'];
+export const categories: Category[] = [
+  'video',
+  'article',
+  'github',
+  'website',
+  'other',
+];
 
 export const icons: Icon = {
   video: <Video size="1.6rem" />,
@@ -18,6 +24,7 @@ export const icons: Icon = {
   stackoverflow: <StackOverflow size="1.6rem" />,
   github: <GitHub size="1.6rem" />,
   reddit: <Reddit size="1.6rem" />,
+  website: <Globe size="1.6rem" />,
   other: <Box size="1.6rem" />,
 };
 
