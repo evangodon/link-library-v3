@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Trash2, ExternalLink } from 'react-feather';
+import { Trash2, ExternalLink, Edit } from 'react-feather';
 import Highlighter from 'react-highlight-words';
 import { Link as ILink } from 'interfaces';
 import { useModalContext, useLinksContext } from 'context';
 import DeleteLinkModal from 'components/DeleteLinkModal';
 import CategoryPill from './CategoryPill';
-import { CATEGORIES } from '../constants/index';
+import { CATEGORIES } from 'constants/index';
 import { lighten } from 'polished';
+import LinkModal from 'components/LinkModal';
 
 type Props = {
   link: ILink;
@@ -18,11 +19,15 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
   const { toggleModal } = useModalContext();
   const { searchQuery } = useLinksContext();
 
-  function handleDelete(event: React.MouseEvent<SVGElement>) {
+  function handleDelete() {
     toggleModal(() => () => <DeleteLinkModal link={link} />);
-    event.preventDefault();
+    // event.preventDefault();
   }
 
+  function handleUpdate() {
+    console.log('hello');
+    toggleModal(() => () => <LinkModal hydratedState={link} />);
+  }
   const categoryData = CATEGORIES[link.category] || {};
 
   return (
@@ -49,34 +54,42 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
         </TextContainer>
         <Image src={link.image} />
         {!displayMode && (
-          <DeleteContainer>
-            <Trash2 className="Trash-icon" onClick={handleDelete} />
-          </DeleteContainer>
+          <OptionsContainer>
+            <UpdateLink onClick={handleUpdate}>
+              <Edit />
+            </UpdateLink>
+            <DeleteLink onClick={handleDelete}>
+              <Trash2 className="Trash-icon" />
+            </DeleteLink>
+          </OptionsContainer>
         )}
       </Content>
     </Container>
   );
 };
 
-const DeleteContainer = styled.span`
+const OptionsContainer = styled.div`
   position: absolute;
-  right: 1.2rem;
-  top: 1.2rem;
-  --size: 2.6rem;
-  width: var(--size);
-  height: var(--size);
-  text-align: center;
-  opacity: 0;
+  right: 0;
+  top: 0;
+  opacity: 1;
   background-color: var(--white);
-  border-radius: 5px;
-  color: var(--grey-400);
-  border: 1px solid currentColor;
+  color: var(--grey-200);
+  border-left: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
   transition: opacity 0.1s ease;
-  cursor: pointer;
+  border-bottom-left-radius: 3px;
+  display: flex;
+  align-items: center;
 
-  .Trash-icon {
+  svg {
     width: 1.6rem;
+    height: 1.6rem;
     position: relative;
+  }
+
+  span + span {
+    border-left: 1px solid var(--grey-200);
   }
 `;
 
@@ -91,10 +104,26 @@ const Container = styled.li`
   margin-bottom: 1.8rem;
   background: #fafafa;
 
-  &:hover ${DeleteContainer} {
+  &:hover ${OptionsContainer} {
     opacity: 1;
   }
 `;
+
+const Option = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem;
+  cursor: pointer;
+  color: var(--grey-400);
+
+  &:hover {
+    color: var(--grey-500);
+  }
+`;
+
+const DeleteLink = styled(Option)``;
+
+const UpdateLink = styled(Option)``;
 
 const Content = styled.div`
   display: grid;
@@ -119,7 +148,8 @@ const Title = styled.h5<{ bgColor: string }>`
   text-overflow: ellipsis;
 
   .highlight {
-    background-color: ${({ bgColor }) => (bgColor ? lighten(0.35, bgColor) : 'none')};
+    background-color: ${({ bgColor }) =>
+      bgColor ? lighten(0.35, bgColor) : 'none'};
     padding: 2px;
     border-radius: 2px;
   }

@@ -31,10 +31,14 @@ const useStyles = makeStyles(() =>
   })
 );
 
+type Props = {
+  hydratedState?: ILink;
+};
+
 /**
  * @todo: handle invalid urls (add event listener to )
  */
-const AddLinkModal: React.FC = () => {
+const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   const classes = useStyles();
   const { toggleModal } = useModalContext();
   const { openSnackbar } = useSnackbarContext();
@@ -49,7 +53,7 @@ const AddLinkModal: React.FC = () => {
     category: 'other',
   };
 
-  const [values, setValues] = useState<ILink>(initialState);
+  const [values, setValues] = useState<ILink>(hydratedState || initialState);
   const [labelWidth, setLabelWidth] = useState(0);
   const [invalidURL, setInvalidURL] = useState(false);
 
@@ -83,7 +87,7 @@ const AddLinkModal: React.FC = () => {
     if (isValidURL(url)) {
       setInvalidURL(false);
       getMetaData(url).then((metaData) => {
-        setValues({ ...values, ...metaData, url });
+        setValues({ ...values, ...metaData, url: values.url });
       });
     } else {
       setInvalidURL(true);
@@ -108,6 +112,21 @@ const AddLinkModal: React.FC = () => {
     }
   }
 
+  async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>) {
+    e.preventDefault();
+
+    const { res: updatedLink } = await request('api/link/update', {
+      method: 'PUT',
+      body: JSON.stringify(values),
+    });
+
+    if (updatedLink) {
+      toggleModal();
+      setLinks([...links, updatedLink]);
+      openSnackbar({ variant: 'success', message: 'Link Updated' });
+    }
+  }
+
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
 
@@ -125,7 +144,7 @@ const AddLinkModal: React.FC = () => {
 
   return (
     <Container data-testid="link-modal">
-      <Header>Add Link</Header>
+      <Header>{`${hydratedState ? 'Update' : 'Add'} Link`}</Header>
       <Form>
         <TextField
           id="standard-name"
@@ -200,9 +219,9 @@ const AddLinkModal: React.FC = () => {
             color="primary"
             size="medium"
             type="submit"
-            onClick={handleSubmit}
+            onClick={hydratedState ? handleUpdate : handleSubmit}
           >
-            Add
+            {hydratedState ? 'Update' : 'Create'}
           </SubmitButton>
         </ButtonContainer>
       </Form>

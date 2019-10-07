@@ -6,11 +6,12 @@ const variables = {
   /* Colors */
   __white: '#ffffff',
   __black: '#000000',
-  __grey_100: '#fafafa',
-  __grey_200: '#eeeeee',
-  __grey_300: '#bdbdbd',
-  __grey_400: '#424242',
-  __grey_500: '#121212',
+  __grey_100: '#F7FAFC',
+  __grey_200: '#EDF2F7',
+  __grey_300: '#A0AEC0',
+  __grey_400: '#718096',
+  __grey_500: '#4A5568',
+  __grey_600: '#1A202CA',
   __color_primary: '#2196f3',
 
   /* Category colors */
