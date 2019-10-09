@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { ModalProvider, LinksProvider } from 'context';
+import { ModalProvider, LinksProvider, SnackbarProvider } from 'context/providers';
 
 jest.mock('next/router', () => {
   return {
@@ -16,7 +16,9 @@ jest.mock('next/router', () => {
 const AllProviders = ({ children }) => {
   return (
     <ModalProvider>
-      <LinksProvider>{children}</LinksProvider>
+      <SnackbarProvider>
+        <LinksProvider ssrLinks={[]}>{children}</LinksProvider>
+      </SnackbarProvider>
     </ModalProvider>
   );
 };

@@ -1,4 +1,6 @@
-export const links = [
+import { Link } from 'interfaces';
+
+export const links: Link[] = [
   {
     id: 1,
     url:
@@ -7,6 +9,7 @@ export const links = [
     description:
       'What are best practices for building a large React app? What libraries are useful for managing your app? Read this article to learn more.',
     image: 'https://cdn.buttercms.com/hJZuOnWWRPWxLI01itdt',
+    category: 'other',
   },
   {
     id: 2,
@@ -15,6 +18,7 @@ export const links = [
     description:
       'The largest Node.js best practices list (May 2019) - i0natan/nodebestpractices',
     image: 'https://avatars2.githubusercontent.com/u/8571500?s=400&v=4',
+    category: 'video',
   },
   {
     id: 3,
@@ -22,5 +26,6 @@ export const links = [
     title: 'Servers for Hackers',
     description: 'What programmers need to know about servers.',
     image: 'https://serversforhackers.com/img/sfh-social.png',
+    category: 'article',
   },
 ];
