@@ -1,20 +1,24 @@
-import { useEffect, useRef } from 'react';
-import fetch from 'node-fetch';
+import { useEffect } from 'react';
 import { useLinksContext } from 'context';
+import { db } from '@api/firebase';
 
 export const useLinks = () => {
   const { links, setLinks } = useLinksContext();
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (!isFirstRender.current) {
-      fetch('/api/links')
-        .then((res) => res.json())
-        .then((json) => {
-          setLinks(json);
-        });
-    }
-    isFirstRender.current = false;
+    const unsubscribe = db
+      .collection('links')
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snapshot) => {
+        const newLinks: any[] = snapshot.docs.map((link) => ({
+          id: link.id,
+          ...link.data(),
+        }));
+
+        setLinks(newLinks);
+      });
+
+    return () => unsubscribe();
   }, []);
 
   return { links };

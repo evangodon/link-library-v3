@@ -7,7 +7,25 @@ export interface Link {
   description: string;
   image?: string | undefined;
   category: Category;
+  createdAt?: string | null;
+  updatedAt?: string | null;
 }
+
+const linkObj: Link = {
+  id: '',
+  url: '',
+  title: '',
+  description: '',
+  image: '',
+  category: 'other',
+  createdAt: '',
+};
+
+const linkKeys = Object.keys(linkObj);
+
+export const isLink = (link: any) => {
+  return linkKeys.every((key) => link.hasOwnProperty(key));
+};
 
 export type Category = 'video' | 'article' | 'github' | 'website' | 'other';
 

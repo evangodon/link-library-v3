@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 import { Link as ILink } from 'interfaces';
 import Link from './Link';
 import { ModalContainer } from 'components/Modal';
-import { useModalContext, useLinksContext, useSnackbarContext } from 'context';
+import { useModalContext, useSnackbarContext } from 'context';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from './ButtonGroup';
 
@@ -14,7 +14,6 @@ type Props = {
 
 const DeleteLinkModal: React.FC<Props> = ({ link }) => {
   const { toggleModal } = useModalContext();
-  const { links, setLinks } = useLinksContext();
   const { openSnackbar } = useSnackbarContext();
 
   function handleCancel() {
@@ -26,7 +25,6 @@ const DeleteLinkModal: React.FC<Props> = ({ link }) => {
       method: 'DELETE',
       body: JSON.stringify({ id: link.id }),
     });
-    setLinks(links.filter((l) => l.id !== link.id));
     toggleModal();
     openSnackbar({
       variant: 'success',
