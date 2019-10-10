@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import debounce from 'lodash/debounce';
+import { useDebounce } from 'use-lodash-debounce';
 import { useModalContext, useSnackbarContext } from 'context';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
 import Link from 'components/Link';
@@ -59,10 +59,17 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   const [labelWidth, setLabelWidth] = useState(0);
   const [invalidURL, setInvalidURL] = useState(false);
   const [loading, setLoading] = useState<LoadingType>(false);
+  const debouncedUrlQuery = useDebounce(values.url, 500, { trailing: true });
 
   useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
   }, []);
+
+  useEffect(() => {
+    if (values.url.length > 0) {
+      getUrlMetadata(values.url);
+    }
+  }, [debouncedUrlQuery]);
 
   function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,33 +83,27 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     setValues({ ...values, url: value });
     if (value.length === 0) {
       setInvalidURL(false);
-    } else {
-      getUrlMetadata(value);
     }
   }
 
-  const getUrlMetadata = debounce(
-    async (url: string) => {
-      if (isValidURL(url)) {
-        setInvalidURL(false);
-        setLoading('URL-METADATA');
-        console.log('REQUESTING', url);
-        const { res: metadata } = await request('api/link/metadata', {
-          method: 'POST',
-          body: JSON.stringify({ url }),
-        });
+  const getUrlMetadata = async (url: string) => {
+    if (isValidURL(url)) {
+      setInvalidURL(false);
+      setLoading('URL-METADATA');
+      console.log('REQUESTING', url);
+      const { res: metadata } = await request('api/link/metadata', {
+        method: 'POST',
+        body: JSON.stringify({ url }),
+      });
 
-        if (metadata) {
-          setValues({ ...values, url, ...metadata });
-          setLoading(false);
-        }
-      } else {
-        setInvalidURL(true);
+      if (metadata) {
+        setValues({ ...values, url, ...metadata });
+        setLoading(false);
       }
-    },
-    3000,
-    { trailing: false }
-  );
+    } else {
+      setInvalidURL(true);
+    }
+  };
 
   function handleCategoryChange(
     event: React.ChangeEvent<{ name?: string; value: unknown }>

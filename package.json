@@ -21,7 +21,7 @@
     "dotenv": "^8.1.0",
     "dotenv-webpack": "^1.7.0",
     "firebase": "^6.6.1",
-    "lodash": "^4.17.15",
+    "lodash.debounce": "^4.0.8",
     "metascraper": "^5.7.4",
     "metascraper-description": "^5.7.4",
     "metascraper-image": "^5.7.4",
@@ -33,7 +33,8 @@
     "react-dom": "^16.9.0",
     "react-feather": "^2.0.3",
     "react-highlight-words": "^0.16.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "use-lodash-debounce": "^1.1.0"
   },
   "devDependencies": {
     "@babel/preset-react": "^7.0.0",
