@@ -41,7 +41,6 @@ describe('<DeleteLinkModal />', () => {
     fireEvent.click(getByTestId('delete-link-action'));
     expect(mockCallApi).toHaveBeenCalled();
     expect(mockToggleModal).toHaveBeenCalled();
-    expect(mockSetLinks).toHaveBeenCalled();
     expect(mockLinks.length).toBe(mockData.length - 1);
   });
 });

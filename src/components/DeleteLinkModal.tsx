@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import fetch from 'node-fetch';
 import { Link as ILink } from 'interfaces';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Link from './Link';
 import { ModalContainer } from 'components/Modal';
 import { useModalContext, useSnackbarContext } from 'context';
-import Button from '@material-ui/core/Button';
 import ButtonGroup from './ButtonGroup';
+import { request } from '@api/request';
 
 type Props = {
   link: ILink;
@@ -15,21 +16,26 @@ type Props = {
 const DeleteLinkModal: React.FC<Props> = ({ link }) => {
   const { toggleModal } = useModalContext();
   const { openSnackbar } = useSnackbarContext();
+  const [loading, setLoading] = useState(false);
 
   function handleCancel() {
     toggleModal();
   }
 
-  function handleDelete() {
-    fetch('api/link/delete', {
+  async function handleDelete() {
+    setLoading(true);
+    const res = await request('api/link/delete', {
       method: 'DELETE',
       body: JSON.stringify({ id: link.id }),
     });
+    setLoading(false);
+    if (res) {
+      openSnackbar({
+        variant: 'success',
+        message: 'Link Deleted',
+      });
+    }
     toggleModal();
-    openSnackbar({
-      variant: 'success',
-      message: 'Link Deleted',
-    });
   }
 
   return (
@@ -45,6 +51,8 @@ const DeleteLinkModal: React.FC<Props> = ({ link }) => {
           color="secondary"
           data-testid="delete-link-action"
           onClick={handleDelete}
+          startIcon={loading && <CircularProgress size={20} />}
+          disabled={loading}
         >
           Delete
         </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { ModalContainer } from 'components/Modal';
@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import debounce from 'lodash/debounce';
 import { useModalContext, useSnackbarContext } from 'context';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
@@ -31,6 +32,8 @@ const useStyles = makeStyles(() =>
   })
 );
 
+type LoadingType = 'URL-METADATA' | 'SUBMISSION' | false;
+
 type Props = {
   hydratedState?: ILink;
 };
@@ -42,19 +45,20 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   const classes = useStyles();
   const { toggleModal } = useModalContext();
   const { openSnackbar } = useSnackbarContext();
-  const inputLabel = React.useRef<HTMLLabelElement>(null);
+  const inputLabel = useRef<HTMLLabelElement>(null);
   const initialState: ILink = {
     id: -1,
     url: '',
     title: '',
     description: '',
     image: '',
-    category: 'other',
+    category: 'article',
   };
 
   const [values, setValues] = useState<ILink>(hydratedState || initialState);
   const [labelWidth, setLabelWidth] = useState(0);
   const [invalidURL, setInvalidURL] = useState(false);
+  const [loading, setLoading] = useState<LoadingType>(false);
 
   useEffect(() => {
     setLabelWidth(inputLabel.current!.offsetWidth);
@@ -63,11 +67,6 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   function handleChange(name: keyof ILink) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
-      if (name === 'url' && isValidURL(value)) {
-        getMetaData(event.target.value).then((metadata) => {
-          setValues({ ...values, ...metadata });
-        });
-      }
       setValues({ ...values, [name]: value });
     };
   }
@@ -78,20 +77,32 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     if (value.length === 0) {
       setInvalidURL(false);
     } else {
-      checkURL(value);
+      getUrlMetadata(value);
     }
   }
 
-  const checkURL = debounce((url: string) => {
-    if (isValidURL(url)) {
-      setInvalidURL(false);
-      getMetaData(url).then((metaData) => {
-        setValues({ ...values, ...metaData });
-      });
-    } else {
-      setInvalidURL(true);
-    }
-  }, 500);
+  const getUrlMetadata = debounce(
+    async (url: string) => {
+      if (isValidURL(url)) {
+        setInvalidURL(false);
+        setLoading('URL-METADATA');
+        console.log('REQUESTING', url);
+        const { res: metadata } = await request('api/link/metadata', {
+          method: 'POST',
+          body: JSON.stringify({ url }),
+        });
+
+        if (metadata) {
+          setValues({ ...values, url, ...metadata });
+          setLoading(false);
+        }
+      } else {
+        setInvalidURL(true);
+      }
+    },
+    3000,
+    { trailing: false }
+  );
 
   function handleCategoryChange(
     event: React.ChangeEvent<{ name?: string; value: unknown }>
@@ -100,24 +111,16 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     setValues({ ...values, category: checkIfCategory(value) });
   }
 
-  async function getMetaData(url: string) {
-    const { res: metadata } = await request('api/link/metadata', {
-      method: 'POST',
-      body: JSON.stringify({ url }),
-    });
-
-    if (metadata) {
-      return { ...metadata, url };
-    }
-  }
-
   async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setLoading('SUBMISSION');
 
     const { res: updatedLink } = await request('api/link/update', {
       method: 'PUT',
       body: JSON.stringify(values),
     });
+
+    setLoading(false);
 
     if (updatedLink) {
       toggleModal();
@@ -127,11 +130,14 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
 
   async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
+    setLoading('SUBMISSION');
 
     const { res: newLink } = await request('api/link/add', {
       method: 'POST',
       body: JSON.stringify(values),
     });
+
+    setLoading(false);
 
     if (newLink) {
       toggleModal();
@@ -145,7 +151,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
       <Form>
         <TextField
           id="standard-name"
-          label={invalidURL ? 'Invalid Link' : 'Link'}
+          label={invalidURL ? 'Invalid Url' : 'Url'}
           error={invalidURL}
           type="url"
           required
@@ -200,8 +206,13 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
             ))}
           </Select>
         </FormControl>
-
-        <Link link={{ id: null, ...values }} displayMode />
+        {values.url && !invalidURL && (
+          <Link
+            link={{ id: null, ...values }}
+            displayMode
+            loading={loading === 'URL-METADATA'}
+          />
+        )}
         <ButtonContainer>
           <SubmitButton
             color="primary"
@@ -217,6 +228,8 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
             size="medium"
             type="submit"
             onClick={hydratedState ? handleUpdate : handleSubmit}
+            startIcon={loading === 'SUBMISSION' && <CircularProgress size={20} />}
+            disabled={loading === 'SUBMISSION'}
           >
             {hydratedState ? 'Update' : 'Create'}
           </SubmitButton>

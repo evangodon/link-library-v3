@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Trash2, ExternalLink, Edit, Copy } from 'react-feather';
 import Highlighter from 'react-highlight-words';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { Link as ILink } from 'interfaces';
 import { useModalContext, useLinksContext, useSnackbarContext } from 'context';
 import DeleteLinkModal from 'components/DeleteLinkModal';
@@ -13,9 +14,10 @@ import LinkModal from 'components/LinkModal';
 type Props = {
   link: ILink;
   displayMode?: boolean;
+  loading?: boolean;
 };
 
-const Link: React.FC<Props> = ({ link, displayMode }) => {
+const Link: React.FC<Props> = ({ link, displayMode, loading }) => {
   const { toggleModal } = useModalContext();
   const { searchQuery } = useLinksContext();
   const { openSnackbar } = useSnackbarContext();
@@ -34,6 +36,21 @@ const Link: React.FC<Props> = ({ link, displayMode }) => {
   }
 
   const categoryData = CATEGORIES[link.category] || {};
+
+  if (loading) {
+    return (
+      <Container data-testid="link">
+        <Content>
+          <TextContainer>
+            <Skeleton variant="text" height={14} />
+            <Skeleton variant="text" height={11} width="21rem" />
+            <Skeleton variant="text" height={9} width="18rem" />
+          </TextContainer>
+          <Skeleton variant="rect" height="11rem" />
+        </Content>
+      </Container>
+    );
+  }
 
   return (
     <Container data-testid="link">
@@ -152,7 +169,7 @@ const TextContainer = styled.div`
   max-width: 39.5rem;
 `;
 
-const Title = styled.h5<{ bgColor: string }>`
+const Title = styled.h5<{ bgColor?: string }>`
   font-size: var(--fs-default);
   margin-bottom: 0.4rem;
   color: var(--grey-500);
