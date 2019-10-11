@@ -2,8 +2,11 @@ import Document from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import { ServerStyleSheets } from '@material-ui/styles';
 import dotenv from 'dotenv';
+import { dev } from 'constants/index';
 
-dotenv.config();
+if (dev) {
+  dotenv.config();
+}
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
