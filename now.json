@@ -1,10 +1,13 @@
 {
-  "env": {
-    "FIREBASE_API_KEY": "firebase_api_key",
-    "AUTH_DOMAIN": "auth_domain",
-    "DATABASE_URL": "database_url",
-    "PROJECT_ID": "linklib-bca03",
-    "MESSASING_SENDER_ID": "messaging_sender_id",
-    "APP_ID": "app_id"
+  "version": 2,
+  "build": {
+    "env": {
+      "FIREBASE_API_KEY": "@firebase_api_key",
+      "AUTH_DOMAIN": "@auth_domain",
+      "DATABASE_URL": "@database_url",
+      "FIREBASE_PROJECT_ID": "@firebase_project_id",
+      "MESSASING_SENDER_ID": "@messaging_sender_id",
+      "APP_ID": "@app_id"
+    }
   }
 }
