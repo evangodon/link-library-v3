@@ -7,8 +7,6 @@ if (!config) {
   throw new Error('Firebase config missing.');
 }
 
-console.log({ config });
-
 const firebaseConfig = !!firebase.apps[0]
   ? firebase.app()
   : firebase.initializeApp(config);
