@@ -4,7 +4,7 @@ import { lighten } from 'polished';
 import { icons } from './CategorySelect';
 import { Category } from 'interfaces';
 import { CATEGORIES } from 'constants/index';
-import { useLinksContext } from 'context';
+import { useLinksContext } from 'context/index';
 
 type Props = {
   category: Category;

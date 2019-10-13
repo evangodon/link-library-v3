@@ -3,7 +3,12 @@ import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import fetch from 'node-fetch';
-import { ModalProvider, LinksProvider, SnackbarProvider } from 'context';
+import {
+  ModalProvider,
+  LinksProvider,
+  SnackbarProvider,
+  AuthProvider,
+} from 'context/providers';
 import NavBar from 'components/NavBar';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
@@ -20,31 +25,33 @@ const Snackbar = dynamic(() => import('components/Snackbar'), {
   ssr: false,
 });
 
-const Modal = dynamic(() => import('components/Modal'), {
+const Modal = dynamic(() => import('components/modals/Modal'), {
   ssr: false,
 });
 
 const IndexPage: NextPage<Props> = ({ links }) => (
   <>
-    <ModalProvider>
-      <SnackbarProvider>
-        <LinksProvider ssrLinks={links}>
-          <NavBar />
-          <Content data-testid="application">
-            <CategorySelect />
-            <div>
-              <SearchBar />
-              <Links />
-            </div>
-            <ButtonContainer>
-              <AddLinkButton />
-            </ButtonContainer>
-          </Content>
-          <Modal />
-          <Snackbar />
-        </LinksProvider>
-      </SnackbarProvider>
-    </ModalProvider>
+    <AuthProvider>
+      <ModalProvider>
+        <SnackbarProvider>
+          <LinksProvider ssrLinks={links}>
+            <NavBar />
+            <Content data-testid="application">
+              <CategorySelect />
+              <MiddleContainer>
+                <SearchBar />
+                <Links />
+              </MiddleContainer>
+              <ButtonContainer>
+                <AddLinkButton />
+              </ButtonContainer>
+            </Content>
+            <Modal />
+            <Snackbar />
+          </LinksProvider>
+        </SnackbarProvider>
+      </ModalProvider>
+    </AuthProvider>
   </>
 );
 
@@ -85,5 +92,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
 `;
+
+const MiddleContainer = styled.div``;
 
 export default IndexPage;

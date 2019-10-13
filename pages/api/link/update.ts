@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
-import { db } from '@api/firebase';
+import { firestore } from '@api/firebase';
 import { Link } from 'interfaces';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const link: Link = JSON.parse(req.body);
 
-  db.collection('links')
+  firestore
+    .collection('links')
     .doc(String(link.id))
     .set(
       { ...link, updatedAt: firebase.firestore.FieldValue.serverTimestamp() },

@@ -4,12 +4,12 @@ import { Trash2, ExternalLink, Edit, Copy } from 'react-feather';
 import Highlighter from 'react-highlight-words';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link as ILink } from 'interfaces';
-import { useModalContext, useLinksContext, useSnackbarContext } from 'context';
-import DeleteLinkModal from 'components/DeleteLinkModal';
+import { useModalContext, useLinksContext, useSnackbarContext } from 'context/index';
+import DeleteLinkModal from 'components/modals/DeleteLinkModal';
 import CategoryPill from './CategoryPill';
 import { CATEGORIES } from 'constants/index';
 import { lighten } from 'polished';
-import LinkModal from 'components/LinkModal';
+import LinkModal from 'components/modals/LinkModal';
 
 type Props = {
   link: ILink;

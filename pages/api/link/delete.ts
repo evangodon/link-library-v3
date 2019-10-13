@@ -1,10 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '@api/firebase';
+import { firestore } from '@api/firebase';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const { id } = JSON.parse(req.body);
 
-  db.collection('links')
+  firestore
+    .collection('links')
     .doc(id)
     .delete()
     .then(() => {

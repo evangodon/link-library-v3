@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { ModalContainer } from 'components/Modal';
+import { ModalContainer } from 'components/modals/Modal';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDebounce } from 'use-lodash-debounce';
-import { useModalContext, useSnackbarContext } from 'context';
+import { useModalContext, useSnackbarContext } from 'context/index';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
 import Link from 'components/Link';
 import ButtonGroup from 'components/ButtonGroup';
@@ -39,7 +39,7 @@ type Props = {
 };
 
 /**
- * @todo: handle invalid urls (add event listener to )
+ * @todo: improve invalid url state => 'valid' | 'invalid' | 'unknown'
  */
 const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   const classes = useStyles();
@@ -90,7 +90,6 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     if (isValidURL(url)) {
       setInvalidURL(false);
       setLoading('URL-METADATA');
-      console.log('REQUESTING', url);
       const { res: metadata } = await request('api/link/metadata', {
         method: 'POST',
         body: JSON.stringify({ url }),

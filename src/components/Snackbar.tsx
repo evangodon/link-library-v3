@@ -14,7 +14,7 @@ import {
   XOctagon,
   X as CloseIcon,
 } from 'react-feather';
-import { useSnackbarContext } from 'context';
+import { useSnackbarContext } from 'context/index';
 
 const variantIcon = {
   success: CheckCircle,

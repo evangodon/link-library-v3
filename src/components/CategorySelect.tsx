@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Category } from 'interfaces';
 import { Video, BookOpen, GitHub, Box, Database, Globe } from 'react-feather';
 import { StackOverflow, Reddit } from './icons';
-import { useLinksContext } from 'context';
+import { useLinksContext } from 'context/index';
 import { CATEGORIES } from 'constants/index';
 
 interface Icon {

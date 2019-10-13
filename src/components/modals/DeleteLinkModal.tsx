@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Link as ILink } from 'interfaces';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Link from './Link';
-import { ModalContainer } from 'components/Modal';
-import { useModalContext, useSnackbarContext } from 'context';
-import ButtonGroup from './ButtonGroup';
+import Link from '../Link';
+import { ModalContainer } from 'components/modals/Modal';
+import { useModalContext, useSnackbarContext } from 'context/index';
+import ButtonGroup from 'components/ButtonGroup';
 import { request } from '@api/request';
 
 type Props = {

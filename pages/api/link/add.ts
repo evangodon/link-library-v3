@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
-import { db } from '@api/firebase';
+import { firestore } from '@api/firebase';
 import { Link } from 'interfaces';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
@@ -8,7 +8,8 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
 
   const { id, ...values } = data;
 
-  db.collection('links')
+  firestore
+    .collection('links')
     .add({
       ...values,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),

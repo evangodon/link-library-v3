@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Search } from 'react-feather';
-import { useLinksContext } from 'context';
+import { useLinksContext } from 'context/index';
 
 const SearchBar: React.FC = () => {
   const [inFocus, setInFocus] = useState(false);

@@ -11,7 +11,7 @@ const variables = {
   __grey_300: '#A0AEC0',
   __grey_400: '#718096',
   __grey_500: '#4A5568',
-  __grey_600: '#1A202CA',
+  __grey_600: '#1A202C',
   __color_primary: '#2196f3',
   __danger_red: '#F56565',
 

@@ -23,11 +23,17 @@ const linkObj: Link = {
 
 const linkKeys = Object.keys(linkObj);
 
-export const isLink = (link: any) => {
+export const isLink = (link: any): link is Link => {
   return linkKeys.every((key) => link.hasOwnProperty(key));
 };
 
 export type Category = 'video' | 'article' | 'github' | 'website' | 'other';
+
+export type User = {
+  email: string;
+  photoURL: string;
+  username: string;
+};
 
 export const checkIfCategory = (str: unknown): Category => {
   return categories.find((category) => str === category) || categories[3];

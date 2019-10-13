@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { renderWithProviders } from 'utils/test-utils';
-import LinkModal from 'components/LinkModal';
+import LinkModal from 'components/modals/LinkModal';
 
 describe('<LinkModal />', () => {
   it('renders', () => {

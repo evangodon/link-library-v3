@@ -4,7 +4,7 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import MaterialModal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { useModalContext } from 'context';
+import { useModalContext } from 'context/index';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,6 +28,10 @@ const Modal: React.FC = () => {
   const handleClose = () => {
     toggleModal();
   };
+
+  if (!ModalContent) {
+    return null;
+  }
 
   return (
     <>
@@ -65,6 +69,12 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 5px;
+`;
+
+export const ModalHeader = styled.h3`
+  text-align: center;
+  font-weight: 400;
+  font-size: var(--fs-large);
 `;
 
 export default Modal;

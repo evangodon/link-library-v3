@@ -1,6 +1,7 @@
 import { ModalProvider, useModalContext } from './modal-context';
 import { LinksProvider, useLinksContext } from './links-context';
 import { SnackbarProvider, useSnackbarContext } from './snackbar-context';
+import { AuthProvider, useAuthContext } from './auth-context';
 
 export {
   ModalProvider,
@@ -9,4 +10,6 @@ export {
   useLinksContext,
   SnackbarProvider,
   useSnackbarContext,
+  AuthProvider,
+  useAuthContext,
 };

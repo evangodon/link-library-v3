@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { fireEvent, cleanup, renderWithProviders } from 'utils/test-utils';
-import DeleteLinkModal from 'components/DeleteLinkModal';
+import DeleteLinkModal from 'components/modals/DeleteLinkModal';
 import { links as mockData } from 'constants/mockData';
 
 beforeEach(cleanup);

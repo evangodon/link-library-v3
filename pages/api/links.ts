@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '@api/firebase';
+import { firestore } from '@api/firebase';
 
 export default (_req: NextApiRequest, res: NextApiResponse) => {
-  db.collection('links')
+  firestore
+    .collection('links')
     .orderBy('createdAt', 'desc')
     .get()
     .then((snapshot) => {

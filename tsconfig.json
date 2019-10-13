@@ -12,7 +12,7 @@
       "pages": ["./pages"],
       "components/*": ["./src/components/*"],
       "css/*": ["./src/css/*"],
-      "context": ["./src/context"],
+      "context/*": ["./src/context/*"],
       "hooks/*": ["./src/hooks/*"],
       "@api/*": ["./src/api/*"],
       "interfaces": ["src/interfaces"],
