@@ -18,7 +18,7 @@ export const useLinks = () => {
         setLinks(newLinks);
       });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, []);
 
   return { links };

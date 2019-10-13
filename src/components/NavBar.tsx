@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import Skeleton from '@material-ui/lab/Skeleton';
 import { Book, GitHub } from 'react-feather';
 import { useAuthContext } from 'context/index';
 
@@ -10,6 +11,24 @@ const NavBar: React.FC = () => {
     loginWithGitHub();
   }
 
+  const ProfileSection = () => {
+    if (user === 'loading') {
+      return (
+        <Skeleton variant="circle" width={profilePicSize} height={profilePicSize} />
+      );
+    }
+
+    if (!user) {
+      return (
+        <GitHubButton onClick={handleLogin}>
+          <GitHub /> Login with GitHub
+        </GitHubButton>
+      );
+    }
+
+    return <ProfilePic url={user.photoURL} />;
+  };
+
   return (
     <Container>
       <Content>
@@ -17,13 +36,7 @@ const NavBar: React.FC = () => {
           <Book color="var(--color-primary)" />
           <h3>LinkLib</h3>
         </LogoContainer>
-        {user ? (
-          <ProfilePic url={user.photoURL} />
-        ) : (
-          <GitHubButton onClick={handleLogin}>
-            <GitHub /> Login with GitHub
-          </GitHubButton>
-        )}
+        <ProfileSection />
       </Content>
     </Container>
   );
@@ -52,10 +65,11 @@ const Content = styled.div`
   justify-content: space-between;
 `;
 
+const profilePicSize = '4rem';
+
 const ProfilePic = styled.div<{ url: string }>`
-  --size: 4rem;
-  height: var(--size);
-  width: var(--size);
+  height: ${profilePicSize};
+  width: ${profilePicSize};
   border-radius: 50%;
   background-image: url(${(props) => props.url});
   background-position: center;

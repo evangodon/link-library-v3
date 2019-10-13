@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createCtx } from './createCtx';
 import { firebase, firebaseAuth } from '@api/firebase';
-import { User } from 'interfaces';
+import { User, verifyUser } from 'interfaces';
+import { getUserInfo } from '../utils/getUserInfo';
+
+type UserState = User | null | 'loading';
 
 export const [useAuthContext, Provider] = createCtx<{
-  user: User | null;
+  user: UserState;
   login: () => void;
   loginWithGitHub: () => void;
 }>();
@@ -12,7 +15,19 @@ export const [useAuthContext, Provider] = createCtx<{
 export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserState>('loading');
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user && verifyUser(user)) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+
+    return unsubscribe;
+  }, [user]);
 
   function login() {
     setUser(null);
@@ -23,18 +38,15 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
 
     firebaseAuth
       .signInWithPopup(provider)
-      .then(({ user }) => {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        // var token = result.credential.accessToken;
-        // The signed-in user info.
-        // var user = result.user;
+      .then(({ user: firebaseUser }) => {
+        const user = getUserInfo(firebaseUser);
         if (!user) {
           throw new Error('Failed to authenticate with GitHub');
         }
-        // ...
+
         setUser({
           email: user.email || '',
-          username: user.displayName || '',
+          displayName: user.displayName || '',
           photoURL: user.photoURL || '',
         });
       })

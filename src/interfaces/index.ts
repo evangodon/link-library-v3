@@ -11,7 +11,7 @@ export interface Link {
   updatedAt?: string | null;
 }
 
-const linkObj: Link = {
+const link: Link = {
   id: '',
   url: '',
   title: '',
@@ -21,7 +21,7 @@ const linkObj: Link = {
   createdAt: '',
 };
 
-const linkKeys = Object.keys(linkObj);
+const linkKeys = Object.keys(link);
 
 export const isLink = (link: any): link is Link => {
   return linkKeys.every((key) => link.hasOwnProperty(key));
@@ -29,10 +29,22 @@ export const isLink = (link: any): link is Link => {
 
 export type Category = 'video' | 'article' | 'github' | 'website' | 'other';
 
-export type User = {
+export interface User {
   email: string;
   photoURL: string;
-  username: string;
+  displayName: string;
+}
+
+const user = {
+  email: '',
+  photoURL: '',
+  displayName: '',
+};
+
+const userKeys = Object.keys(user);
+
+export const verifyUser = (user: any): user is User => {
+  return userKeys.every((key) => user.hasOwnProperty(key));
 };
 
 export const checkIfCategory = (str: unknown): Category => {
