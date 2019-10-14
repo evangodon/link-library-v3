@@ -3,12 +3,14 @@ import { createCtx } from './createCtx';
 import { firebase, firebaseAuth } from '@api/firebase';
 import { User, verifyUser } from 'interfaces';
 import { getUserInfo } from '../utils/getUserInfo';
+import { useSnackbarContext } from 'context/index';
 
 type UserState = User | null | 'loading';
 
 export const [useAuthContext, Provider] = createCtx<{
   user: UserState;
   login: () => void;
+  logout: () => void;
   loginWithGitHub: () => void;
 }>();
 
@@ -16,6 +18,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
   const [user, setUser] = useState<UserState>('loading');
+  const { openSnackbar } = useSnackbarContext();
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
@@ -31,6 +34,26 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
 
   function login() {
     setUser(null);
+  }
+
+  function logout() {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(null);
+        openSnackbar({
+          message: 'You successfully logged out.',
+          variant: 'success',
+        });
+      })
+      .catch(function(error) {
+        openSnackbar({
+          message: 'An error occured while signing you out',
+          variant: 'error',
+        });
+        console.error(error);
+      });
   }
 
   function loginWithGitHub() {
@@ -55,7 +78,9 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
 
   return (
     <>
-      <Provider value={{ user, login, loginWithGitHub }}>{children}</Provider>
+      <Provider value={{ user, login, logout, loginWithGitHub }}>
+        {children}
+      </Provider>
     </>
   );
 };

@@ -9,17 +9,13 @@ import {
   SnackbarProvider,
   AuthProvider,
 } from 'context/providers';
-import NavBar from 'components/NavBar';
+import Header from 'components/Header';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
 import Links from 'components/Links';
 import AddLinkButton from 'components/AddLinkButton';
 import { Link } from 'interfaces';
 import { dev } from 'constants/index';
-
-type Props = {
-  links: Link[] | [];
-};
 
 const Snackbar = dynamic(() => import('components/Snackbar'), {
   ssr: false,
@@ -29,13 +25,17 @@ const Modal = dynamic(() => import('components/modals/Modal'), {
   ssr: false,
 });
 
+type Props = {
+  links: Link[] | [];
+};
+
 const IndexPage: NextPage<Props> = ({ links }) => (
   <>
-    <AuthProvider>
-      <ModalProvider>
-        <SnackbarProvider>
+    <SnackbarProvider>
+      <AuthProvider>
+        <ModalProvider>
           <LinksProvider ssrLinks={links}>
-            <NavBar />
+            <Header />
             <Content data-testid="application">
               <CategorySelect />
               <MiddleContainer>
@@ -49,9 +49,9 @@ const IndexPage: NextPage<Props> = ({ links }) => (
             <Modal />
             <Snackbar />
           </LinksProvider>
-        </SnackbarProvider>
-      </ModalProvider>
-    </AuthProvider>
+        </ModalProvider>
+      </AuthProvider>
+    </SnackbarProvider>
   </>
 );
 

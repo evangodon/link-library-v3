@@ -36,6 +36,12 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
   ::-webkit-scrollbar-thumb {
     background-color: var(--color-primary);
     position: absolute;
