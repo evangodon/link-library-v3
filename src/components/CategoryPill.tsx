@@ -43,8 +43,6 @@ const Container = styled.span<{ categoryColor: string }>`
 
   span {
     line-height: 1;
-    position: relative;
-    top: 1px;
   }
 `;
 
