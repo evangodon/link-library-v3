@@ -65,7 +65,9 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     }
   );
   const [labelWidth, setLabelWidth] = useState(0);
-  const [invalidURL, setInvalidURL] = useState<InvalidUrlType>('UNKNOWN');
+  const [invalidURL, setInvalidURL] = useState<InvalidUrlType>(
+    hydratedState ? false : 'UNKNOWN'
+  );
   const [loading, setLoading] = useState<LoadingType>(false);
   const debouncedUrlQuery = useDebounce(values.url, 500, { trailing: true });
 
@@ -74,7 +76,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   }, []);
 
   useEffect(() => {
-    if (values.url.length > 0) {
+    if (values.url.length > 0 && !hydratedState) {
       getUrlMetadata(values.url);
     }
   }, [debouncedUrlQuery]);
@@ -118,6 +120,8 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     const { value } = event.target;
     setValues({ ...values, category: checkIfCategory(value) });
   }
+
+  console.log({ values });
 
   async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();

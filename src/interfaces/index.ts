@@ -8,7 +8,7 @@ export interface Link {
   description: string;
   image?: string | undefined;
   category: Category;
-  createdAt?: string | null;
+  createdAt?: { seconds: number; nanoseconds: number } | null;
   updatedAt?: string | null;
 }
 
@@ -20,7 +20,7 @@ const link: Link = {
   description: '',
   image: '',
   category: 'other',
-  createdAt: '',
+  createdAt: { seconds: 0, nanoseconds: 0 },
 };
 
 const linkKeys = Object.keys(link);

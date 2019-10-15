@@ -6,11 +6,22 @@ import { Link } from 'interfaces';
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const link: Link = JSON.parse(req.body);
 
+  const createdAt = link.createdAt
+    ? new firebase.firestore.Timestamp(
+        link.createdAt.seconds,
+        link.createdAt.nanoseconds
+      )
+    : firebase.firestore.FieldValue.serverTimestamp();
+
   firestore
     .collection('links')
     .doc(String(link.id))
     .set(
-      { ...link, updatedAt: firebase.firestore.FieldValue.serverTimestamp() },
+      {
+        ...link,
+        createdAt,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      },
       { merge: true }
     )
     .then(() => {
