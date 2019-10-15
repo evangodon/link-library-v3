@@ -127,12 +127,16 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     e.preventDefault();
     setLoading('SUBMISSION');
 
-    const { res: updatedLink } = await request('api/link/update', {
+    const { res: updatedLink, error } = await request('api/link/update', {
       method: 'PUT',
       body: JSON.stringify(values),
     });
 
     setLoading(false);
+
+    if (error) {
+      openSnackbar({ variant: 'error', message: 'Something went wrong' });
+    }
 
     if (updatedLink) {
       toggleModal();
@@ -144,12 +148,16 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     e.preventDefault();
     setLoading('SUBMISSION');
 
-    const { res: newLink } = await request('api/link/add', {
+    const { res: newLink, error } = await request('api/link/add', {
       method: 'POST',
       body: JSON.stringify(values),
     });
 
     setLoading(false);
+
+    if (error) {
+      openSnackbar({ variant: 'error', message: 'Something went wrong' });
+    }
 
     if (newLink) {
       toggleModal();
