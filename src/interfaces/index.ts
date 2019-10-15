@@ -2,6 +2,7 @@ import { categories } from 'components/CategorySelect';
 
 export interface Link {
   id: string | number;
+  userId: string | number;
   url: string;
   title: string;
   description: string;
@@ -13,6 +14,7 @@ export interface Link {
 
 const link: Link = {
   id: '',
+  userId: '',
   url: '',
   title: '',
   description: '',
@@ -30,12 +32,14 @@ export const isLink = (link: any): link is Link => {
 export type Category = 'video' | 'article' | 'github' | 'website' | 'other';
 
 export interface User {
+  uid: string;
   email: string;
   photoURL: string;
   displayName: string;
 }
 
-const user = {
+const user: User = {
+  uid: '',
   email: '',
   photoURL: '',
   displayName: '',

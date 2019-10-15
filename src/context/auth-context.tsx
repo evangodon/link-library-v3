@@ -4,8 +4,9 @@ import { firebase, firebaseAuth } from '@api/firebase';
 import { User, verifyUser } from 'interfaces';
 import { getUserInfo } from '../utils/getUserInfo';
 import { useSnackbarContext } from 'context/index';
+import { cookie } from '../utils/cookies';
 
-type UserState = User | null | 'loading';
+type UserState = User | null | 'LOADING';
 
 export const [useAuthContext, Provider] = createCtx<{
   user: UserState;
@@ -14,23 +15,33 @@ export const [useAuthContext, Provider] = createCtx<{
   loginWithGitHub: () => void;
 }>();
 
+/**
+ *
+ * @todo: Set up firebase admin on server-side
+ */
 export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<UserState>('loading');
+  const [user, setUser] = useState<UserState>('LOADING');
   const { openSnackbar } = useSnackbarContext();
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      if (user && verifyUser(user)) {
+    const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser && verifyUser(firebaseUser)) {
+        const user = getUserInfo(firebaseUser);
         setUser(user);
+
+        firebaseUser.getIdToken(false).then((token) => {
+          cookie.set({ name: 'token', value: token });
+        });
       } else {
         setUser(null);
+        cookie.delete('token');
       }
     });
 
     return unsubscribe;
-  }, [user]);
+  }, []);
 
   function login() {
     setUser(null);
@@ -47,7 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
           variant: 'success',
         });
       })
-      .catch(function(error) {
+      .catch((error) => {
         openSnackbar({
           message: 'An error occured while signing you out',
           variant: 'error',
@@ -67,11 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
           throw new Error('Failed to authenticate with GitHub');
         }
 
-        setUser({
-          email: user.email || '',
-          displayName: user.displayName || '',
-          photoURL: user.photoURL || '',
-        });
+        setUser(user);
       })
       .catch((error) => console.error(error));
   }

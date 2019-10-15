@@ -2,8 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
 import { firestore } from '@api/firebase';
 import { Link } from 'interfaces';
+import { withAuth } from '@api/middleware/withAuth';
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
+export default withAuth((req: NextApiRequest, res: NextApiResponse) => {
   const data: Link = JSON.parse(req.body);
 
   const { id, ...values } = data;
@@ -24,4 +25,4 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
     .catch((error) => {
       res.status(500).json({ error: error.message });
     });
-};
+});

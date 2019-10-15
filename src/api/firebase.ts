@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
-const config = process.env.firebaseConfig;
+const config = process.env.FIREBASE_CONFIG;
 
 if (!config) {
   throw new Error('Firebase config missing.');

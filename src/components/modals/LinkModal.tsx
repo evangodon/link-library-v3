@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDebounce } from 'use-lodash-debounce';
-import { useModalContext, useSnackbarContext } from 'context/index';
+import { useModalContext, useSnackbarContext, useAuthContext } from 'context/index';
 import { Link as ILink, Category, checkIfCategory } from 'interfaces';
 import Link from 'components/Link';
 import ButtonGroup from 'components/ButtonGroup';
@@ -33,6 +33,7 @@ const useStyles = makeStyles(() =>
 );
 
 type LoadingType = 'URL-METADATA' | 'SUBMISSION' | false;
+type InvalidUrlType = true | false | 'UNKNOWN';
 
 type Props = {
   hydratedState?: ILink;
@@ -48,16 +49,23 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
   const inputLabel = useRef<HTMLLabelElement>(null);
   const initialState: ILink = {
     id: -1,
+    userId: -1,
     url: '',
     title: '',
     description: '',
     image: '',
     category: 'article',
   };
+  const { user } = useAuthContext();
 
-  const [values, setValues] = useState<ILink>(hydratedState || initialState);
+  const [values, setValues] = useState<ILink>(
+    hydratedState || {
+      ...initialState,
+      userId: user && user !== 'LOADING' ? user.uid : -1,
+    }
+  );
   const [labelWidth, setLabelWidth] = useState(0);
-  const [invalidURL, setInvalidURL] = useState(false);
+  const [invalidURL, setInvalidURL] = useState<InvalidUrlType>('UNKNOWN');
   const [loading, setLoading] = useState<LoadingType>(false);
   const debouncedUrlQuery = useDebounce(values.url, 500, { trailing: true });
 
@@ -82,7 +90,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     const { value } = event.target;
     setValues({ ...values, url: value });
     if (value.length === 0) {
-      setInvalidURL(false);
+      setInvalidURL('UNKNOWN');
     }
   }
 
@@ -152,7 +160,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
         <TextField
           id="standard-name"
           label={invalidURL ? 'Invalid Url' : 'Url'}
-          error={invalidURL}
+          error={invalidURL !== 'UNKNOWN' && Boolean(invalidURL)}
           type="url"
           required
           autoFocus
@@ -229,7 +237,12 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
             type="submit"
             onClick={hydratedState ? handleUpdate : handleSubmit}
             startIcon={loading === 'SUBMISSION' && <CircularProgress size={20} />}
-            disabled={loading === 'SUBMISSION'}
+            disabled={
+              invalidURL === 'UNKNOWN' ||
+              Boolean(invalidURL) ||
+              loading === 'SUBMISSION' ||
+              loading === 'URL-METADATA'
+            }
           >
             {hydratedState ? 'Update' : 'Create'}
           </SubmitButton>

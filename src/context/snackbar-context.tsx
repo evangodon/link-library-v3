@@ -31,7 +31,6 @@ export const SnackbarProvider: React.FC<{ children: React.ReactElement }> = ({
 
   const closeSnackbar = () => {
     setSnackbarOpen(false);
-    setConfig({ variant: 'success', message: '' });
   };
 
   return (

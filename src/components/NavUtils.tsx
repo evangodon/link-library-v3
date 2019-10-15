@@ -17,7 +17,12 @@ const NavUtils = () => {
     setAnchorEl(null);
   }
 
-  if (user === 'loading') {
+  function handleLogout() {
+    setAnchorEl(null);
+    logout();
+  }
+
+  if (user === 'LOADING') {
     return (
       <Skeleton variant="circle" width={profilePicSize} height={profilePicSize} />
     );
@@ -48,7 +53,7 @@ const NavUtils = () => {
         }}
       >
         <Options>
-          <button onClick={logout}>Logout</button>
+          <button onClick={handleLogout}>Logout</button>
         </Options>
       </Popover>
     </>
