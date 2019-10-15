@@ -2,6 +2,7 @@ import { Link } from 'interfaces';
 
 export const links: Link[] = [
   {
+    userId: 'dsakdjhsakjdhA',
     id: 1,
     url:
       'https://buttercms.com/blog/best-practices-for-building-a-large-scale-react-application',
@@ -12,6 +13,7 @@ export const links: Link[] = [
     category: 'other',
   },
   {
+    userId: 'dsakdjhsakjdhA',
     id: 2,
     url: 'https://github.com/i0natan/nodebestpractices',
     title: 'i0natan/nodebestpractices',
@@ -21,6 +23,7 @@ export const links: Link[] = [
     category: 'video',
   },
   {
+    userId: 'dsakdjhsakjdhA',
     id: 3,
     url: 'https://serversforhackers.com/',
     title: 'Servers for Hackers',
