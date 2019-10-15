@@ -159,7 +159,9 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
       <Form>
         <TextField
           id="standard-name"
-          label={invalidURL ? 'Invalid Url' : 'Url'}
+          label={
+            invalidURL !== 'UNKNOWN' && Boolean(invalidURL) ? 'Invalid Url' : 'Url'
+          }
           error={invalidURL !== 'UNKNOWN' && Boolean(invalidURL)}
           type="url"
           required
