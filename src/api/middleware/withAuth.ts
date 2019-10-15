@@ -15,7 +15,7 @@ export const withAuth = (
 
   admin
     .auth()
-    .verifyIdToken('akjhsfd')
+    .verifyIdToken(token)
     .then(() => {
       return route(req, res);
     })
