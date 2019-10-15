@@ -11,10 +11,9 @@ const AddLinkButton: React.FC = () => {
     toggleModal(() => () => <LinkModal />);
   }
 
-  // if (!user) {
-  //   return null;
-  // }
-  console.log({ user });
+  if (!user || user === 'LOADING') {
+    return null;
+  }
 
   return (
     <Button
