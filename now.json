@@ -7,7 +7,9 @@
       "DATABASE_URL": "@database_url",
       "FIREBASE_PROJECT_ID": "@firebase_project_id",
       "MESSAGING_SENDER_ID": "@messaging_sender_id",
-      "APP_ID": "@app_id"
+      "APP_ID": "@app_id",
+      "LOGROCKET_APP_ID": "@logrocket_app_id",
+      "MY_IP_ADDRESS": "@my_ip_address"
     }
   },
   "env": {

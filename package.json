@@ -23,6 +23,7 @@
     "firebase": "^6.6.1",
     "firebase-admin": "^8.6.0",
     "lodash.debounce": "^4.0.8",
+    "logrocket": "^1.0.3",
     "metascraper": "^5.7.4",
     "metascraper-description": "^5.7.4",
     "metascraper-image": "^5.7.4",

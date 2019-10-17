@@ -7,12 +7,18 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from 'css/theme';
 import GlobalStyles from 'css/global';
 import { variables as theme } from 'css/variables.css';
+import { prod } from 'constants/index';
+import { initLogRocket } from 'utils/initLogRocket';
 
 export default class MyApp extends App {
   componentDidMount() {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
+    }
+
+    if (prod) {
+      initLogRocket();
     }
   }
 

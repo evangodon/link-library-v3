@@ -13,6 +13,8 @@ module.exports = {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
     },
+    LOGROCKET_APP_ID: process.env.LOGROCKET_APP_ID,
+    MY_IP_ADDRESS: process.env.MY_IP_ADDRESS,
     GOOGLE_CLOUD_PROJECT: process.env.FIREBASE_PROJECT_ID,
   },
 };
