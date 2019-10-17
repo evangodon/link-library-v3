@@ -3,6 +3,7 @@ import metascraper from 'metascraper';
 import metascraperTitle from 'metascraper-title';
 import metascraperDesc from 'metascraper-description';
 import metascraperImage from 'metascraper-image';
+import metascraperLogoFavicon from 'metascraper-logo-favicon';
 import fetch from 'node-fetch';
 import { isValidURL } from 'utils/isValidUrl';
 
@@ -10,6 +11,7 @@ const metascraperWithRules = metascraper([
   metascraperImage(),
   metascraperTitle(),
   metascraperDesc(),
+  metascraperLogoFavicon(),
 ]);
 
 /**

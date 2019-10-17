@@ -54,6 +54,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     title: '',
     description: '',
     image: '',
+    favicon: '',
     category: 'article',
   };
   const { user } = useAuthContext();
@@ -106,7 +107,7 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
       });
 
       if (metadata) {
-        setValues({ ...values, url, ...metadata });
+        setValues({ ...values, url, ...metadata, favicon: metadata.logo });
         setLoading(false);
       }
     } else {
@@ -120,8 +121,6 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     const { value } = event.target;
     setValues({ ...values, category: checkIfCategory(value) });
   }
-
-  console.log({ values });
 
   async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();

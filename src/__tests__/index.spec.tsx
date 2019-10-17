@@ -11,7 +11,7 @@ jest.mock('hooks/useLinks', () => ({
 
 describe('<Index />', () => {
   it('renders the application', () => {
-    const { queryByTestId } = renderWithProviders(<Index />);
+    const { queryByTestId } = renderWithProviders(<Index links={[]} />);
 
     expect(queryByTestId('application')).toBeTruthy();
   });

@@ -10,6 +10,7 @@ export const links: Link[] = [
     description:
       'What are best practices for building a large React app? What libraries are useful for managing your app? Read this article to learn more.',
     image: 'https://cdn.buttercms.com/hJZuOnWWRPWxLI01itdt',
+    favicon: '',
     category: 'other',
   },
   {
@@ -20,6 +21,7 @@ export const links: Link[] = [
     description:
       'The largest Node.js best practices list (May 2019) - i0natan/nodebestpractices',
     image: 'https://avatars2.githubusercontent.com/u/8571500?s=400&v=4',
+    favicon: '',
     category: 'video',
   },
   {
@@ -29,6 +31,7 @@ export const links: Link[] = [
     title: 'Servers for Hackers',
     description: 'What programmers need to know about servers.',
     image: 'https://serversforhackers.com/img/sfh-social.png',
+    favicon: '',
     category: 'article',
   },
 ];

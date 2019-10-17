@@ -26,6 +26,7 @@
     "metascraper": "^5.7.4",
     "metascraper-description": "^5.7.4",
     "metascraper-image": "^5.7.4",
+    "metascraper-logo-favicon": "^5.7.6",
     "metascraper-title": "^5.7.4",
     "next": "^9.1.0",
     "node-fetch": "^2.6.0",

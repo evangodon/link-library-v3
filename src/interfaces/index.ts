@@ -6,7 +6,8 @@ export interface Link {
   url: string;
   title: string;
   description: string;
-  image?: string | undefined;
+  image: string | undefined;
+  favicon: string | null;
   category: Category;
   createdAt?: { seconds: number; nanoseconds: number } | null;
   updatedAt?: string | null;
@@ -19,6 +20,7 @@ const link: Link = {
   title: '',
   description: '',
   image: '',
+  favicon: '',
   category: 'other',
   createdAt: { seconds: 0, nanoseconds: 0 },
 };

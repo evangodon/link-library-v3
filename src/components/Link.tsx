@@ -70,6 +70,7 @@ const Link: React.FC<Props> = ({ link, displayMode, loading }) => {
           <CategoryPill category={link.category} />
           <Description>{link.description}</Description>
           <Url href={link.url} target="_blank" rel="nooponer">
+            {link.favicon && <Favicon src={link.favicon} />}
             <span>{link.url}</span>
             <ExternalLink size={16} />
           </Url>
@@ -157,8 +158,9 @@ const DeleteLink = styled(Option)`
 `;
 
 const Content = styled.div`
+  max-width: 100%;
   display: grid;
-  grid-template-columns: 1fr 20rem;
+  grid-template-columns: minmax(39rem, 1fr) 20rem;
   align-items: center;
   overflow: hidden;
   color: var(--grey-400);
@@ -166,7 +168,7 @@ const Content = styled.div`
 
 const TextContainer = styled.div`
   padding: 1rem 2rem;
-  max-width: 39.5rem;
+  max-width: 100%;
 `;
 
 const Title = styled.h5<{ bgColor?: string }>`
@@ -197,6 +199,13 @@ const Description = styled.p`
   -webkit-line-clamp: 2;
   line-height: 1;
   max-height: 2.6rem;
+`;
+
+const Favicon = styled.img<{ src: string }>`
+  --size: 14px;
+  height: var(--size);
+  width: var(--size);
+  margin-right: 0.8rem;
 `;
 
 const Url = styled.a`

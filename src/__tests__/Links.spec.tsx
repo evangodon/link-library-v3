@@ -2,7 +2,7 @@ import * as React from 'react';
 import { renderWithProviders, cleanup } from 'utils/test-utils';
 import Links from 'components/Links';
 import { links as mockData } from 'constants/mockData';
-import { Link as ILink } from 'types';
+import { Link as ILink } from 'interfaces';
 
 beforeEach(cleanup);
 
