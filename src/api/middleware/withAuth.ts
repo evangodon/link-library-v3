@@ -6,21 +6,18 @@ const unauthorized = (res: NextApiResponse) =>
 
 export const withAuth = (
   route: (req: NextApiRequest, res: NextApiResponse) => void
-) => (req: NextApiRequest, res: NextApiResponse) => {
+) => async (req: NextApiRequest, res: NextApiResponse) => {
   const { token } = req.cookies;
 
   if (!token) {
     return unauthorized(res);
   }
 
-  admin
-    .auth()
-    .verifyIdToken(token)
-    .then(() => {
-      return route(req, res);
-    })
-    .catch((error) => {
-      console.error(error);
-      return unauthorized(res);
-    });
+  try {
+    await admin.auth().verifyIdToken(token);
+    return route(req, res);
+  } catch (error) {
+    console.error(error);
+    return unauthorized(res);
+  }
 };

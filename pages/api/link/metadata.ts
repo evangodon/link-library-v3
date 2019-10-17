@@ -13,12 +13,12 @@ const metascraperWithRules = metascraper([
 ]);
 
 /**
- * @todo: Fix the error capturing
  * @todo: Scrape for favicon
  */
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { url } = JSON.parse(req.body);
+
   try {
     if (!isValidURL(url)) {
       throw new Error('Invalid URL');

@@ -19,7 +19,6 @@
     "babel-plugin-styled-components": "^1.10.2",
     "clsx": "^1.0.4",
     "dotenv": "^8.1.0",
-    "dotenv-webpack": "^1.7.0",
     "firebase": "^6.6.1",
     "firebase-admin": "^8.6.0",
     "lodash.debounce": "^4.0.8",

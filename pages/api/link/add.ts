@@ -4,25 +4,22 @@ import { firestore } from '@api/firebase';
 import { Link } from 'interfaces';
 import { withAuth } from '@api/middleware/withAuth';
 
-export default withAuth((req: NextApiRequest, res: NextApiResponse) => {
+export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   const data: Link = JSON.parse(req.body);
 
   const { id, ...values } = data;
 
-  firestore
-    .collection('links')
-    .add({
+  try {
+    const docRef = await firestore.collection('links').add({
       ...values,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-    })
-    .then((docRef) => {
-      docRef.get().then((doc) => {
-        const newLink = { id: doc.id, ...doc.data() };
-
-        res.status(200).json(newLink);
-      });
-    })
-    .catch((error) => {
-      res.status(500).json({ error: error.message });
     });
+
+    const doc = await docRef.get();
+    const newLink = { id: doc.id, ...doc.data() };
+
+    res.status(200).json(newLink);
+  } catch (error) {
+    res.json({ error: error.message });
+  }
 });
