@@ -4,7 +4,7 @@ import { Trash2, ExternalLink, Edit, Copy } from 'react-feather';
 import Highlighter from 'react-highlight-words';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Link as ILink } from 'interfaces';
-import { useModalContext, useLinksContext, useSnackbarContext } from 'context/index';
+import { useModalContext, useLinksContext, useSnackbarContext, useAuthContext } from 'context/index';
 import DeleteLinkModal from 'components/modals/DeleteLinkModal';
 import CategoryPill from './CategoryPill';
 import { CATEGORIES } from 'constants/index';
@@ -21,6 +21,7 @@ const Link: React.FC<Props> = ({ link, displayMode, loading }) => {
   const { toggleModal } = useModalContext();
   const { searchQuery } = useLinksContext();
   const { openSnackbar } = useSnackbarContext();
+  const {user}  = useAuthContext()
 
   function handleCopy() {
     navigator.clipboard.writeText(link.url);
@@ -76,7 +77,7 @@ const Link: React.FC<Props> = ({ link, displayMode, loading }) => {
           </Url>
         </TextContainer>
         <Image src={link.image} />
-        {!displayMode && (
+        {!displayMode && user &&  (
           <OptionsContainer>
             <CopyLink onClick={handleCopy}>
               <Copy />

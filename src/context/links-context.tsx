@@ -19,14 +19,14 @@ export const LinksProvider: React.FC<{
   const router = useRouter();
   const { query } = router;
 
-  const initialValue = query.search
+  const initialSearchValue = query.search
     ? Array.isArray(query.search)
       ? query.search[0]
       : query.search
     : null;
 
   const [links, setLinks] = useState<readonly Link[]>(ssrLinks);
-  const [searchQuery, setSearchQuery] = useState<string | null>(initialValue);
+  const [searchQuery, setSearchQuery] = useState<string | null>(initialSearchValue);
   const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
   useEffect(() => {
