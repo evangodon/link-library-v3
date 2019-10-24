@@ -11,7 +11,7 @@ import { onlyDisplayOn } from 'css/utils';
 const useStyles = makeStyles(() =>
   createStyles({
     fab: {
-      position: 'absolute',
+      position: 'fixed',
       bottom: '30px',
       right: '30px',
     },
