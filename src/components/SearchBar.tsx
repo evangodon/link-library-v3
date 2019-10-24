@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Search } from 'react-feather';
 import { useLinksContext } from 'context/index';
+import { media } from 'css/variables';
 
+/**
+ * @todo: Fix icon issue when resizing
+ */
 const SearchBar: React.FC = () => {
   const [inFocus, setInFocus] = useState(false);
   const { searchQuery, setSearchQuery } = useLinksContext();
@@ -37,18 +41,23 @@ const SearchBar: React.FC = () => {
 
 const Container = styled.div<{ active: boolean }>`
   position: relative;
-  color: #cccccc;
   color: ${(props) => (props.active ? '#4a4646' : '#ccc')};
   display: inline-block;
   width: 100%;
 
   .Search-icon {
     position: absolute;
-    top: 6px;
+    top: 0.5rem;
     left: 10px;
     color: currentColor;
     width: 2rem;
   }
+
+  ${media.mobile`
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+  `}
 `;
 
 const Input = styled.input`

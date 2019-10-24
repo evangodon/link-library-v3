@@ -1,7 +1,7 @@
 import React from 'react';
 import { Category } from 'interfaces';
 import { Video, BookOpen, GitHub, Box, Globe } from 'react-feather';
-import { variables } from 'css/variables.css';
+import { variables } from 'css/variables';
 
 type CategoryData = {
   [key in Category]: {

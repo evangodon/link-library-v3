@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const variables = {
+const variables: { [index: string]: string } = {
   __app_max_width: '1024px',
 
   /* Colors */
@@ -36,6 +36,26 @@ const variables = {
 /* Turn variables into valid css custom properties */
 const customProperties = Object.keys(variables).map(
   (key) => `${[key.replace(/_/g, '-')]}: ${variables[key]};`
+);
+
+const sizes = {
+  desktop: 1080,
+  tablet: 950,
+  mobile: 740,
+};
+
+// Iterate through the sizes and create a media template
+export const media = (Object.keys(sizes) as (keyof typeof sizes)[]).reduce(
+  (acc, label) => {
+    acc[label] = (first: any, ...interpolations: any[]) => css`
+      @media (max-width: ${sizes[label] / 16}em) {
+        ${css(first, ...interpolations)}
+      }
+    `;
+
+    return acc;
+  },
+  {} as { [key in keyof typeof sizes]: any }
 );
 
 export { variables };

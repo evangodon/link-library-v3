@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import muiTheme from 'css/theme';
 import GlobalStyles from 'css/global';
-import { variables as theme } from 'css/variables.css';
+import { variables as theme } from 'css/variables';
 import { prod } from 'constants/index';
 import { initLogRocket } from 'utils/initLogRocket';
 

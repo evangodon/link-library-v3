@@ -16,6 +16,8 @@ import Links from 'components/Links';
 import AddLinkButton from 'components/AddLinkButton';
 import { Link } from 'interfaces';
 import { dev } from 'constants/index';
+import { media } from 'css/variables';
+import DesktopOnly from 'components/layout/DesktopOnly';
 
 const Snackbar = dynamic(() => import('components/Snackbar'), {
   ssr: false,
@@ -37,14 +39,14 @@ const IndexPage: NextPage<Props> = ({ links }) => (
           <LinksProvider ssrLinks={links}>
             <Header />
             <Content data-testid="application">
-              <CategorySelect />
+              <DesktopOnly>
+                <CategorySelect />
+              </DesktopOnly>
               <MiddleContainer>
                 <SearchBar />
                 <Links />
               </MiddleContainer>
-              <ButtonContainer>
-                <AddLinkButton />
-              </ButtonContainer>
+              <AddLinkButton />
             </Content>
             <Modal />
             <Snackbar />
@@ -76,7 +78,6 @@ IndexPage.getInitialProps = async ({ req }) => {
 };
 
 const Content = styled.main`
-  position: relative;
   padding-top: 5rem;
   margin: 0 auto;
   max-width: var(--app-max-width);
@@ -85,14 +86,20 @@ const Content = styled.main`
   width: 100%;
 
   --link-max-width: 70rem;
+
+  ${media.tablet`
+    padding: 0 2.4rem;
+    padding-top: 5rem;
+    display: block;
+  `}
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+const MiddleContainer = styled.div`
+  ${media.mobile`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  `}
 `;
-
-const MiddleContainer = styled.div``;
 
 export default IndexPage;

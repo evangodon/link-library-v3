@@ -1,10 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
-import customProperties from './variables.css';
+import customProperties, { media } from './variables';
 
 const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
   }
+
   :root {
     ${customProperties}
   } 
@@ -53,6 +54,26 @@ const GlobalStyle = createGlobalStyle`
 
   ::-webkit-scrollbar {
     width: 5px;
+  }
+
+  .desktop-only {
+    opacity: 1;
+    pointer-events: auto;
+
+    ${media.tablet`
+      opacity: 0;
+      pointer-events: none;
+    `}
+  }
+
+  .mobile-only {
+    opacity: 0;
+    pointer-events: none;
+
+    ${media.tablet`
+      opacity: 1;
+      pointer-events: auto;
+    `} 
   }
 `;
 

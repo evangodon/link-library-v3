@@ -15,6 +15,8 @@ const Links: React.FC = () => {
   );
 };
 
-const Container = styled.ul``;
+const Container = styled.ul`
+  width: 100%;
+`;
 
 export default Links;

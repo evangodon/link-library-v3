@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Book } from 'react-feather';
 import NavUtils from './NavUtils';
+import { media } from 'css/variables';
 
 const Header: React.FC = () => {
   return (
@@ -38,6 +39,10 @@ const Content = styled.div`
   color: var(--black);
   display: flex;
   justify-content: space-between;
+
+  ${media.tablet`
+    padding: 0 2.4rem;
+  `}
 `;
 
 export default Header;

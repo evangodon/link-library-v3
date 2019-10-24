@@ -20,24 +20,27 @@ const CategoryPill: React.FC<Props> = ({ category }) => {
       onClick={() => setSelectedCategory(category)}
     >
       {icons[category]}
-      <span>{categoryData.name}</span>
     </Container>
   );
 };
 
 const Container = styled.span<{ categoryColor: string }>`
   display: inline-flex;
+  justify-content: center;
   align-items: center;
-  padding: 1px 6px;
+  --size: 2.1rem;
+  height: var(--size);
+  width: var(--size);
+  min-width: var(--size);
+  margin: 0 0.6rem;
   margin-bottom: 0.8rem;
-  border-radius: 10px;
+  border-radius: 50%;
   background-color: ${({ categoryColor }) =>
     categoryColor ? lighten(0.35, categoryColor) : 'none'};
   color: ${({ categoryColor }) => categoryColor};
   font-size: var(--fs-small);
 
   svg {
-    margin-right: 0.4rem;
     width: 1.2rem;
   }
 
