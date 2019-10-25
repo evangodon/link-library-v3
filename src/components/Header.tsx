@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Book } from 'react-feather';
-import NavUtils from './NavUtils';
+import NavUtils from './NavItems';
 import { media } from 'css/variables';
 
 const Header: React.FC = () => {

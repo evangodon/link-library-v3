@@ -5,7 +5,7 @@ import Popover from '@material-ui/core/Popover';
 import { GitHub } from 'react-feather';
 import { useAuthContext } from 'context/index';
 
-const NavUtils = () => {
+const NavItems = () => {
   const { user, loginWithGitHub, logout } = useAuthContext();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -77,7 +77,7 @@ const ProfilePic = styled.button<{ url: string }>`
 const GitHubButton = styled.button`
   display: flex;
   align-items: center;
-  background-color: var(--grey-500);
+  background-color: var(--color-primary);
   border: 0;
   color: #fff;
   border-radius: 4px;
@@ -105,4 +105,4 @@ const Options = styled.div`
   }
 `;
 
-export default NavUtils;
+export default NavItems;
