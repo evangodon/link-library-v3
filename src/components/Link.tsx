@@ -214,7 +214,7 @@ const Title = styled.h5<{ bgColor?: string }>`
 
 const Description = styled.p`
   font-size: 1.2rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.6rem;
   color: var(--grey-400);
   overflow: hidden;
   text-overflow: ellipsis;

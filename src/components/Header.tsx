@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import { Book } from 'react-feather';
-import NavUtils from './NavItems';
+import NavItems from './NavItems';
 import { media } from 'css/variables';
 
 const Header: React.FC = () => {
   return (
     <Container>
       <Content>
-        <LogoContainer>
-          <Book color="var(--color-primary)" />
-          <h3>LinkLib</h3>
-        </LogoContainer>
-        <NavUtils />
+        <Link href="/">
+          <LogoContainer>
+            <Logo />
+            <h3>LinkLib</h3>
+          </LogoContainer>
+        </Link>
+        <NavItems />
       </Content>
     </Container>
   );
@@ -24,10 +27,15 @@ const Container = styled.div`
   background-color: var(--white);
 `;
 
-const LogoContainer = styled.div`
+const LogoContainer = styled.a`
+  cursor: pointer;
   display: grid;
   align-items: center;
   grid-template-columns: 3rem 1fr;
+`;
+
+const Logo = styled(Book)`
+  color: var(--color-primary);
 `;
 
 const Content = styled.div`

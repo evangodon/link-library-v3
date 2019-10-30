@@ -31,6 +31,8 @@ const variables: { [index: string]: string } = {
   __fs_default: '1.6rem',
   __fs_large: '2.4rem',
   __fs_xlarge: '3.6rem',
+
+  __border_radius: '4px',
 };
 
 /* Turn variables into valid css custom properties */

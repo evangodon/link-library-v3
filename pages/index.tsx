@@ -3,12 +3,7 @@ import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import fetch from 'node-fetch';
-import {
-  ModalProvider,
-  LinksProvider,
-  SnackbarProvider,
-  AuthProvider,
-} from 'context/providers';
+import { LinksProvider } from 'context/providers';
 import Header from 'components/Header';
 import SearchBar from 'components/SearchBar';
 import CategorySelect from 'components/CategorySelect';
@@ -33,27 +28,21 @@ type Props = {
 
 const IndexPage: NextPage<Props> = ({ links }) => (
   <>
-    <SnackbarProvider>
-      <AuthProvider>
-        <ModalProvider>
-          <LinksProvider ssrLinks={links}>
-            <Header />
-            <Content data-testid="application">
-              <DesktopOnly>
-                <CategorySelect />
-              </DesktopOnly>
-              <MiddleContainer>
-                <SearchBar />
-                <Links />
-              </MiddleContainer>
-              <AddLinkButton />
-            </Content>
-            <Modal />
-            <Snackbar />
-          </LinksProvider>
-        </ModalProvider>
-      </AuthProvider>
-    </SnackbarProvider>
+    <LinksProvider ssrLinks={links}>
+      <Header />
+      <Content data-testid="application">
+        <DesktopOnly>
+          <CategorySelect />
+        </DesktopOnly>
+        <MiddleContainer>
+          <SearchBar />
+          <Links />
+        </MiddleContainer>
+        <AddLinkButton />
+      </Content>
+      <Modal />
+      <Snackbar />
+    </LinksProvider>
   </>
 );
 
@@ -77,10 +66,13 @@ IndexPage.getInitialProps = async ({ req }) => {
   return { links };
 };
 
-const Content = styled.main`
+export const AppContainer = styled.main`
   padding-top: 5rem;
   margin: 0 auto;
   max-width: var(--app-max-width);
+`;
+
+const Content = styled(AppContainer)`
   display: grid;
   grid-template-columns: 16rem 1fr 15rem;
   width: 100%;

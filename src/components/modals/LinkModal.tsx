@@ -119,7 +119,10 @@ const AddLinkModal: React.FC<Props> = ({ hydratedState }) => {
     event: React.ChangeEvent<{ name?: string; value: unknown }>
   ) {
     const { value } = event.target;
-    setValues({ ...values, category: checkIfCategory(value) });
+    setValues({
+      ...values,
+      category: checkIfCategory(value) ? value : initialState.category,
+    });
   }
 
   async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>) {

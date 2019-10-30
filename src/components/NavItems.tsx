@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Link from 'next/link';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Popover from '@material-ui/core/Popover';
-import { GitHub } from 'react-feather';
 import { useAuthContext } from 'context/index';
 
 const NavItems = () => {
-  const { user, loginWithGitHub, logout } = useAuthContext();
+  const { user, logout } = useAuthContext();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   function handleMenuOpen(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -30,9 +30,14 @@ const NavItems = () => {
 
   if (!user) {
     return (
-      <GitHubButton onClick={loginWithGitHub}>
-        <GitHub /> Login
-      </GitHubButton>
+      <Container>
+        <Link href="/login">
+          <NavButton>Login</NavButton>
+        </Link>
+        <Link href="/register">
+          <NavButton>Register </NavButton>
+        </Link>
+      </Container>
     );
   }
 
@@ -62,6 +67,11 @@ const NavItems = () => {
 
 const profilePicSize = '4rem';
 
+const Container = styled.div`
+  display: flex;
+  align-items: baseline;
+`;
+
 const ProfilePic = styled.button<{ url: string }>`
   height: ${profilePicSize};
   width: ${profilePicSize};
@@ -74,27 +84,16 @@ const ProfilePic = styled.button<{ url: string }>`
   cursor: pointer;
 `;
 
-const GitHubButton = styled.button`
+const NavButton = styled.a`
   display: flex;
   align-items: center;
-  background-color: var(--color-primary);
   border: 0;
-  color: #fff;
+  color: var(--grey-500);
   border-radius: 4px;
-  padding: 4px 8px;
-  font-size: var(--fs-small);
+  padding: 0.4rem 0.8rem;
+  font-size: var(--fs-medium);
   cursor: pointer;
   transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: var(--grey-600);
-  }
-
-  svg {
-    width: 1.4rem;
-    margin-right: 0.4rem;
-    color: currentColor;
-  }
 `;
 
 const Options = styled.div`

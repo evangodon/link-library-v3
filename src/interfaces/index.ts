@@ -53,6 +53,6 @@ export const verifyUser = (user: any): user is User => {
   return userKeys.every((key) => user.hasOwnProperty(key));
 };
 
-export const checkIfCategory = (str: unknown): Category => {
-  return categories.find((category) => str === category) || categories[3];
+export const checkIfCategory = (str: unknown): str is Category => {
+  return (categories as any).includes(str);
 };

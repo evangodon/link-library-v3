@@ -10,7 +10,7 @@ export const [useModalContext, Provider] = createCtx<{
 /**
  * @todo: Improve toggleModal parameter
  */
-export const ModalProvider: React.FC<{ children: React.ReactElement }> = ({
+export const ModalProvider: React.FC<{ children: React.ReactElement[] }> = ({
   children,
 }) => {
   const [modalOpen, setModalOpen] = React.useState(false);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { createCtx } from './createCtx';
 import { Link, Category } from 'interfaces';
+import { checkIfCategory } from '../interfaces/index';
 
 export const [useLinksContext, Provider] = createCtx<{
   links: readonly Link[];
@@ -25,9 +26,17 @@ export const LinksProvider: React.FC<{
       : query.search
     : null;
 
+  const initialCategory = query.category
+    ? Array.isArray(query.category)
+      ? query.category[0]
+      : query.category
+    : null;
+
   const [links, setLinks] = useState<readonly Link[]>(ssrLinks);
   const [searchQuery, setSearchQuery] = useState<string | null>(initialSearchValue);
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    checkIfCategory(initialCategory) ? initialCategory : null
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
