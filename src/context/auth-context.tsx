@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Router from 'next/router';
 import { createCtx } from './createCtx';
 import { firebase, firebaseAuth } from '@api/firebase';
 import { User, verifyUser } from 'interfaces';
 import { getUserInfo } from '../utils/getUserInfo';
 import { useSnackbarContext } from 'context/index';
-import { cookie } from '../utils/cookies';
+import { cookie } from 'utils/cookies';
 
 type UserState = User | null | 'LOADING';
 
@@ -77,7 +78,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
         if (!user) {
           throw new Error('Failed to authenticate with GitHub');
         }
-
+        Router.push('/');
         setUser(user);
       })
       .catch((error) => console.error(error));

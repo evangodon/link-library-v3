@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Popover from '@material-ui/core/Popover';
 import { useAuthContext } from 'context/index';
 
 const NavItems = () => {
+  const router = useRouter();
   const { user, logout } = useAuthContext();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -31,11 +33,20 @@ const NavItems = () => {
   if (!user) {
     return (
       <Container>
+        <Link href="/">
+          <NavButton aria-current={router.route === '/' ? 'page' : false}>
+            Home
+          </NavButton>
+        </Link>
         <Link href="/login">
-          <NavButton>Login</NavButton>
+          <NavButton aria-current={router.route === '/login' ? 'page' : false}>
+            Login
+          </NavButton>
         </Link>
         <Link href="/register">
-          <NavButton>Register </NavButton>
+          <NavButton aria-current={router.route === '/register' ? 'page' : false}>
+            Register
+          </NavButton>
         </Link>
       </Container>
     );
@@ -70,6 +81,7 @@ const profilePicSize = '4rem';
 const Container = styled.div`
   display: flex;
   align-items: baseline;
+  height: 100%;
 `;
 
 const ProfilePic = styled.button<{ url: string }>`
@@ -89,11 +101,16 @@ const NavButton = styled.a`
   align-items: center;
   border: 0;
   color: var(--grey-500);
-  border-radius: 4px;
-  padding: 0.4rem 0.8rem;
+  padding: 0.4rem 0;
+  margin: 0 0.8rem;
   font-size: var(--fs-medium);
   cursor: pointer;
   transition: background-color 0.2s ease;
+  height: 100%;
+
+  &[aria-current='page'] {
+    border-bottom: 2px solid currentColor;
+  }
 `;
 
 const Options = styled.div`

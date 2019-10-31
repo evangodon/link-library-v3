@@ -207,7 +207,7 @@ const Title = styled.h5<{ bgColor?: string }>`
   .highlight {
     background-color: ${({ bgColor }) =>
       bgColor ? lighten(0.35, bgColor) : 'none'};
-    padding: 2px;
+    padding: 2px 0;
     border-radius: 2px;
   }
 `;

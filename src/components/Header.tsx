@@ -32,6 +32,7 @@ const LogoContainer = styled.a`
   display: grid;
   align-items: center;
   grid-template-columns: 3rem 1fr;
+  height: 100%;
 `;
 
 const Logo = styled(Book)`
