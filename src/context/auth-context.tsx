@@ -15,11 +15,21 @@ export type RegisterParams = {
   password: string;
 }
 
+export type LoginParams = {
+  email: string;
+  password: string;
+}
+
+export type AuthError = {
+  code: string;
+  message: string;
+} | null;
+
 export const [useAuthContext, Provider] = createCtx<{
   user: UserState;
-  login: () => void;
+  login: (loginParams: LoginParams) => Promise<AuthError | void>;
   logout: () => void;
-  register: (registerParams: RegisterParams) => void;
+  register: (registerParams: RegisterParams) => Promise<AuthError | void>;
   loginWithGitHub: () => void;
 }>();
 
@@ -58,7 +68,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
     password,
   }: RegisterParams) {
     try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await auth.createUserWithEmailAndPassword(email, password);
       await auth.currentUser?.updateProfile({
         displayName: username
       })
@@ -66,12 +76,19 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
       Router.push('/');
 
     } catch (error) {
-      console.error(error);
+      throw error;
     }
   }
 
-  function login() {
-    setUser(null);
+  async function login({email, password}: LoginParams) {
+    try {
+      await auth.signInWithEmailAndPassword(email, password)
+
+      Router.push('/');
+
+    } catch(error) {
+      throw error;
+    }
   }
 
   function logout() {
@@ -99,12 +116,10 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
     auth
       .signInWithPopup(provider)
       .then(({ user: firebaseUser }) => {
-        const user = getUserInfo(firebaseUser);
-        if (!user) {
+        if (!firebaseUser) {
           throw new Error('Failed to authenticate with GitHub');
         }
         Router.push('/');
-        setUser(user);
       })
       .catch((error) => console.error(error));
   }

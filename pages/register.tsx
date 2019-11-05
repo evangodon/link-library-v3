@@ -3,9 +3,9 @@ import Header from 'components/Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Content, Form, Separator, FormHeader } from 'pages/login';
+import { Content, Form, Separator, FormHeader, Error } from 'pages/login';
 import GitHubLogin from 'components/GitHubLogin';
-import { useAuthContext, RegisterParams } from 'context/auth-context';
+import { useAuthContext, RegisterParams, AuthError } from 'context/auth-context';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -18,9 +18,6 @@ const useStyles = makeStyles(() =>
   })
 );
 
-/**
- * @todo: Show error messages on submit
- */
 const register = () => {
   const classes = useStyles();
   const { register } = useAuthContext();
@@ -29,17 +26,19 @@ const register = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState<AuthError>(null);
 
   function handleChange(name: keyof RegisterParams) {
     return (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
       setValues({ ...values, [name]: value });
+      setError(null);
     };
   }
 
   function handleRegister(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    register(values);
+    register(values).catch((error) => setError(error));
   }
 
   return (
@@ -48,6 +47,7 @@ const register = () => {
       <Content data-testid="application">
         <Form>
           <FormHeader>Register</FormHeader>
+          {error && <Error>{error.message}</Error>}
           <TextField
             required
             label="Username"
@@ -59,6 +59,7 @@ const register = () => {
             required
             label="Email"
             type="email"
+            error={Boolean(error && error.code === 'auth/invalid-email')}
             margin="normal"
             value={values.email}
             onChange={handleChange('email')}

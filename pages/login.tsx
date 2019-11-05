@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { lighten } from 'polished';
 import Header from 'components/Header';
 import TextField from '@material-ui/core/TextField';
 import { AppContainer } from './index';
 import GitHubLogin from 'components/GitHubLogin';
 import Button from '@material-ui/core/Button';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { scaleIn } from 'css/animations';
+import { useAuthContext, LoginParams, AuthError } from 'context/auth-context';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -19,12 +20,27 @@ const useStyles = makeStyles(() =>
   })
 );
 
-/**
- * @todo: Make layout component for Form
- * @todo: Create github button component
- */
 const login = () => {
   const classes = useStyles();
+  const { login } = useAuthContext();
+  const [values, setValues] = useState<LoginParams>({
+    email: '',
+    password: '',
+  });
+  const [error, setError] = useState<AuthError>(null);
+
+  function handleChange(name: keyof LoginParams) {
+    return (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setValues({ ...values, [name]: value });
+      setError(null);
+    };
+  }
+
+  function handleLogin(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    login(values).catch((error) => setError(error));
+  }
 
   return (
     <>
@@ -32,18 +48,29 @@ const login = () => {
       <Content data-testid="application">
         <Form>
           <FormHeader>Login</FormHeader>
-          <TextField required id="standard-required" label="Email" margin="normal" />
+          {error && <Error>{error.message}</Error>}
           <TextField
             required
-            id="standard-required"
+            label="Email"
+            margin="normal"
+            error={Boolean(error && error.code === 'auth/invalid-email')}
+            type="email"
+            onChange={handleChange('email')}
+          />
+          <TextField
+            required
             label="Password"
             margin="normal"
+            type="password"
             className={classes.lastTextField}
+            onChange={handleChange('password')}
           />
           <Button
             variant="contained"
             color="primary"
             className={classes.submitButton}
+            type="submit"
+            onClick={handleLogin}
           >
             Login
           </Button>
@@ -74,11 +101,17 @@ export const Form = styled.form`
   border-radius: var(--border-radius);
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 3px -2px,
     rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
-  animation: ${scaleIn} 0.2s ease-out;
 
   .MuiInputLabel-asterisk {
     display: none;
   }
+`;
+
+export const Error = styled.span`
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  color: var(--danger-red);
+  background-color: ${(props) => lighten(0.3, props.theme.__danger_red)};
 `;
 
 export const Separator = styled.span`

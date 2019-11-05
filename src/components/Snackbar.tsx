@@ -103,7 +103,7 @@ const Snackbar: React.FC = () => {
         horizontal: 'left',
       }}
       open={snackbarOpen}
-      autoHideDuration={6000}
+      autoHideDuration={4000}
       onClose={handleClose}
       TransitionComponent={GrowTransition}
     >
