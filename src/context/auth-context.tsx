@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import { createCtx } from './createCtx';
-import { firebase, firebaseAuth } from '@api/firebase';
+import { firebase, auth } from '@api/firebase';
 import { User, verifyUser } from 'interfaces';
 import { getUserInfo } from '../utils/getUserInfo';
 import { useSnackbarContext } from 'context/index';
@@ -9,16 +9,24 @@ import { cookie } from 'utils/cookies';
 
 type UserState = User | null | 'LOADING';
 
+export type RegisterParams = {
+  username: string;
+  email: string;
+  password: string;
+}
+
 export const [useAuthContext, Provider] = createCtx<{
   user: UserState;
   login: () => void;
   logout: () => void;
+  register: (registerParams: RegisterParams) => void;
   loginWithGitHub: () => void;
 }>();
 
 /**
  *
- * @todo: Set up firebase admin on server-side
+ * @todo: Finish registration and login
+ * @todo: Remove user loading state and just authenticate server side
  */
 export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
@@ -27,7 +35,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   const { openSnackbar } = useSnackbarContext();
 
   useEffect(() => {
-    const unsubscribe = firebaseAuth.onAuthStateChanged((firebaseUser) => {
+    const unsubscribe = auth.onAuthStateChanged((firebaseUser) => {
       if (firebaseUser && verifyUser(firebaseUser)) {
         const user = getUserInfo(firebaseUser);
         setUser(user);
@@ -44,13 +52,30 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
     return unsubscribe;
   }, []);
 
+  async function register({
+    username,
+    email,
+    password,
+  }: RegisterParams) {
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      await auth.currentUser?.updateProfile({
+        displayName: username
+      })
+
+      Router.push('/');
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function login() {
     setUser(null);
   }
 
   function logout() {
-    firebase
-      .auth()
+    auth
       .signOut()
       .then(() => {
         setUser(null);
@@ -71,7 +96,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   function loginWithGitHub() {
     const provider = new firebase.auth.GithubAuthProvider();
 
-    firebaseAuth
+    auth
       .signInWithPopup(provider)
       .then(({ user: firebaseUser }) => {
         const user = getUserInfo(firebaseUser);
@@ -86,7 +111,7 @@ export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
 
   return (
     <>
-      <Provider value={{ user, login, logout, loginWithGitHub }}>
+      <Provider value={{ user, register, login, logout, loginWithGitHub }}>
         {children}
       </Provider>
     </>

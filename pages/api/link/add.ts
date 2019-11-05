@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
-import { firestore } from '@api/firebase';
+import { db } from '@api/firebase';
 import { Link } from 'interfaces';
 import { withAuth } from '@api/middleware/withAuth';
 
@@ -10,7 +10,7 @@ export default withAuth(async (req: NextApiRequest, res: NextApiResponse) => {
   const { id, ...values } = data;
 
   try {
-    const docRef = await firestore.collection('links').add({
+    const docRef = await db.collection('links').add({
       ...values,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     });

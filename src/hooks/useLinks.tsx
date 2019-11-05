@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useLinksContext } from 'context/index';
-import { firestore } from '@api/firebase';
+import { db } from '@api/firebase';
 
 export const useLinks = () => {
   const { links, setLinks } = useLinksContext();
 
   useEffect(() => {
-    const unsubscribe = firestore
+    const unsubscribe = db
       .collection('links')
       .orderBy('createdAt', 'desc')
       .onSnapshot((snapshot) => {

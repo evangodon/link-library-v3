@@ -4,9 +4,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Popover from '@material-ui/core/Popover';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { useAuthContext } from 'context/index';
+import { lighten } from 'polished';
+
+const useStyles = makeStyles((theme: Theme) => ({
+  avatar: {
+    backgroundColor: lighten(0.1, theme.palette.primary.main),
+    fontSize: '1.65rem',
+  },
+}));
 
 const NavItems = () => {
+  const classes = useStyles();
   const router = useRouter();
   const { user, logout } = useAuthContext();
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -54,7 +65,13 @@ const NavItems = () => {
 
   return (
     <>
-      <ProfilePic url={user.photoURL} onClick={handleMenuOpen} />
+      <AvatarContainer onClick={handleMenuOpen}>
+        {user.photoURL ? (
+          <ProfilePic url={user.photoURL} />
+        ) : (
+          <Avatar className={classes.avatar}>{user.email[0].toUpperCase()}</Avatar>
+        )}
+      </AvatarContainer>
       <Popover
         open={Boolean(anchorEl)}
         anchorEl={anchorEl}
@@ -82,6 +99,10 @@ const Container = styled.div`
   display: flex;
   align-items: baseline;
   height: 100%;
+`;
+
+const AvatarContainer = styled.button`
+  outline: none;
 `;
 
 const ProfilePic = styled.button<{ url: string }>`

@@ -11,7 +11,7 @@ const Header: React.FC = () => {
       <Content>
         <Link href="/">
           <LogoContainer>
-            <Logo />
+            <Book className="Logo" />
             <h3>LinkLib</h3>
           </LogoContainer>
         </Link>
@@ -25,6 +25,10 @@ const Container = styled.div`
   box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.06);
   width: 100%;
   background-color: var(--white);
+
+  .Logo {
+    color: var(--color-primary);
+  }
 `;
 
 const LogoContainer = styled.a`
@@ -33,10 +37,6 @@ const LogoContainer = styled.a`
   align-items: center;
   grid-template-columns: 3rem 1fr;
   height: 100%;
-`;
-
-const Logo = styled(Book)`
-  color: var(--color-primary);
 `;
 
 const Content = styled.div`

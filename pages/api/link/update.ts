@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import firebase from 'firebase/app';
-import { firestore } from '@api/firebase';
+import { db } from '@api/firebase';
 import { Link } from 'interfaces';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     : firebase.firestore.FieldValue.serverTimestamp();
 
   try {
-    await firestore
+    await db
       .collection('links')
       .doc(String(link.id))
       .set(

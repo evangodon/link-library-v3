@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn upgrade @typescript@beta
+  /usr/local/bin/node /usr/local/bin/yarn add @babel/plugin-proposal-optional-chaining -D
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
@@ -14,17 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@typescript: Request "https://registry.yarnpkg.com/@typescript" returned a 405
-      at Request.params.callback [as _callback] (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:66927:18)
-      at Request.self.callback (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:140539:22)
+  Error: https://registry.yarnpkg.com/@firebase/db-types/-/db-types-1.5.0.tgz: Request failed "404 Not Found"
+      at ResponseError.ExtendableBuiltin (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:696:66)
+      at new ResponseError (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:802:124)
+      at Request.<anonymous> (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:66988:16)
       at Request.emit (events.js:203:13)
-      at Request.<anonymous> (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:141511:10)
-      at Request.emit (events.js:203:13)
-      at IncomingMessage.<anonymous> (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:141433:12)
-      at Object.onceWrapper (events.js:291:20)
-      at IncomingMessage.emit (events.js:208:15)
-      at endReadableNT (_stream_readable.js:1168:12)
-      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+      at Request.module.exports.Request.onRequestResponse (/usr/local/share/.config/yarn/global/node_modules/yarn/lib/cli.js:141416:10)
+      at ClientRequest.emit (events.js:208:15)
+      at HTTPParser.parserOnIncomingClient [as onIncoming] (_http_client.js:575:27)
+      at HTTPParser.parserOnHeadersComplete (_http_common.js:116:17)
+      at TLSSocket.socketOnData (_http_client.js:449:22)
+      at TLSSocket.emit (events.js:203:13)
 
 npm manifest: 
   {
@@ -48,13 +48,14 @@ npm manifest:
       "babel-plugin-styled-components": "^1.10.2",
       "clsx": "^1.0.4",
       "dotenv": "^8.1.0",
-      "dotenv-webpack": "^1.7.0",
       "firebase": "^6.6.1",
       "firebase-admin": "^8.6.0",
       "lodash.debounce": "^4.0.8",
+      "logrocket": "^1.0.3",
       "metascraper": "^5.7.4",
       "metascraper-description": "^5.7.4",
       "metascraper-image": "^5.7.4",
+      "metascraper-logo-favicon": "^5.7.6",
       "metascraper-title": "^5.7.4",
       "next": "^9.1.0",
       "node-fetch": "^2.6.0",
@@ -75,7 +76,7 @@ npm manifest:
       "@types/react": "^16.8.15",
       "@types/react-dom": "^16.0.11",
       "jest": "^24.9.0",
-      "typescript": "^3.6.3"
+      "typescript": "^3.7.0-beta"
     },
     "license": "ISC"
   }
@@ -1148,17 +1149,17 @@ Lockfile:
       faye-websocket "0.11.3"
       tslib "1.10.0"
   
-  "@firebase/firestore-types@1.5.0":
+  "@firebase/db-types@1.5.0":
     version "1.5.0"
-    resolved "https://registry.yarnpkg.com/@firebase/firestore-types/-/firestore-types-1.5.0.tgz#f05700220f882773ca01e818bf10b1dc456ee5be"
+    resolved "https://registry.yarnpkg.com/@firebase/db-types/-/db-types-1.5.0.tgz#f05700220f882773ca01e818bf10b1dc456ee5be"
     integrity sha512-VhRHNbEbak+R2iK8e1ir2Lec7eaHMZpGTRy6LMtzATYthlkwNHF9tO8JU8l6d1/kYkI4+DWzX++i3HhTziHEWA==
   
-  "@firebase/firestore@1.5.2":
+  "@firebase/db@1.5.2":
     version "1.5.2"
-    resolved "https://registry.yarnpkg.com/@firebase/firestore/-/firestore-1.5.2.tgz#798c6ef541ee982d473d58d0df440bc0381c5f80"
+    resolved "https://registry.yarnpkg.com/@firebase/db/-/db-1.5.2.tgz#798c6ef541ee982d473d58d0df440bc0381c5f80"
     integrity sha512-CPYLvkGZBKE47oQC9a0q13UMVRj3LvnSbB1nOerktE3CGRHKy44LxDumamN8Kj067hV/80mKK9FdbeUufwO/Rg==
     dependencies:
-      "@firebase/firestore-types" "1.5.0"
+      "@firebase/db-types" "1.5.0"
       "@firebase/logger" "0.1.24"
       "@firebase/util" "0.2.27"
       "@firebase/webchannel-wrapper" "0.2.26"
@@ -1293,9 +1294,9 @@ Lockfile:
       retry-request "^4.0.0"
       teeny-request "^5.2.1"
   
-  "@google-cloud/firestore@^2.0.0":
+  "@google-cloud/db@^2.0.0":
     version "2.4.0"
-    resolved "https://registry.yarnpkg.com/@google-cloud/firestore/-/firestore-2.4.0.tgz#d2f9977cf7e2424eec444f16040d0d07d1ef7268"
+    resolved "https://registry.yarnpkg.com/@google-cloud/db/-/db-2.4.0.tgz#d2f9977cf7e2424eec444f16040d0d07d1ef7268"
     integrity sha512-F6jXdfQAjfzY5svOJpCZeayQeCAdZ3mjpaDTCfv6YEaxfxxyGODHV8ZEuD6CHnY6jGPEdJz/1EOG3ENJhnWhmw==
     dependencies:
       bun "^0.0.12"
@@ -1618,6 +1619,32 @@ Lockfile:
       url-regex "~5.0.0"
       video-extensions "~1.1.0"
   
+  "@metascraper/helpers@^5.7.6":
+    version "5.7.6"
+    resolved "https://registry.yarnpkg.com/@metascraper/helpers/-/helpers-5.7.6.tgz#84007215d3b31525995fd85cf0d28bf6a12bf7bb"
+    integrity sha512-AD2VTQmMWl/KCUXl9h0fP84VacoiTI/8y8CBgErmYZnm+sliKGedQrDZO3JmzNg73Z5z08GQTjME1WHIDiIQDw==
+    dependencies:
+      audio-extensions "0.0.0"
+      chrono-node "~1.3.11"
+      condense-whitespace "~2.0.0"
+      entities "~2.0.0"
+      file-extension "~4.0.5"
+      has-values "~2.0.1"
+      image-extensions "~1.1.0"
+      is-relative-url "~3.0.0"
+      is-uri "~1.2.0"
+      iso-639-3 "~1.2.0"
+      isostring "0.0.1"
+      lodash "~4.17.15"
+      mem "~5.1.1"
+      mime-types "~2.1.24"
+      normalize-url "~4.5.0"
+      smartquotes "~2.3.1"
+      title "~3.4.1"
+      truncate "~2.1.0"
+      url-regex "~5.0.0"
+      video-extensions "~1.1.0"
+  
   "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/@protobufjs/aspromise/-/aspromise-1.1.2.tgz#9b8b0cc663d669a7d8f6f5d0893a14d348f30fbf"
@@ -1675,6 +1702,18 @@ Lockfile:
     version "0.3.2"
     resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
     integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
+  
+  "@sindresorhus/is@^0.14.0":
+    version "0.14.0"
+    resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
+    integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
+  
+  "@szmarczak/http-timer@^1.1.2":
+    version "1.1.2"
+    resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-1.1.2.tgz#b1665e2c461a2cd92f4c1bbf50d5454de0d4b421"
+    integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
+    dependencies:
+      defer-to-connect "^1.0.1"
   
   "@testing-library/dom@^6.1.0":
     version "6.2.0"
@@ -2896,6 +2935,19 @@ Lockfile:
       union-value "^1.0.0"
       unset-value "^1.0.0"
   
+  cacheable-request@^6.0.0:
+    version "6.1.0"
+    resolved "https://registry.yarnpkg.com/cacheable-request/-/cacheable-request-6.1.0.tgz#20ffb8bd162ba4be11e9567d823db651052ca912"
+    integrity sha512-Oj3cAGPCqOZX7Rz64Uny2GYAZNliQSqfbePrgAQ1wKAihYmCUnraBtJtKcGR4xz7wF+LoJC+ssFZvv5BgF9Igg==
+    dependencies:
+      clone-response "^1.0.2"
+      get-stream "^5.1.0"
+      http-cache-semantics "^4.0.0"
+      keyv "^3.0.0"
+      lowercase-keys "^2.0.0"
+      normalize-url "^4.1.0"
+      responselike "^1.0.2"
+  
   caller-callsite@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/caller-callsite/-/caller-callsite-2.0.0.tgz#847e0fce0a223750a9a027c54b33731ad3154134"
@@ -3106,6 +3158,13 @@ Lockfile:
       string-width "^3.1.0"
       strip-ansi "^5.2.0"
       wrap-ansi "^5.1.0"
+  
+  clone-response@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/clone-response/-/clone-response-1.0.2.tgz#d1dc973920314df67fbeb94223b4ee350239e96b"
+    integrity sha1-0dyXOSAxTfZ/vrlCI7TuNQI56Ws=
+    dependencies:
+      mimic-response "^1.0.0"
   
   clone@^1.0.2:
     version "1.0.4"
@@ -3642,6 +3701,13 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
     integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
   
+  decompress-response@^3.3.0:
+    version "3.3.0"
+    resolved "https://registry.yarnpkg.com/decompress-response/-/decompress-response-3.3.0.tgz#80a4dd323748384bfa248083622aedec982adff3"
+    integrity sha1-gKTdMjdIOEv6JICDYirt7Jgq3/M=
+    dependencies:
+      mimic-response "^1.0.0"
+  
   deep-equal@^1.0.1:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/deep-equal/-/deep-equal-1.1.0.tgz#3103cdf8ab6d32cf4a8df7865458f2b8d33f3745"
@@ -3675,6 +3741,11 @@ Lockfile:
     integrity sha1-xlYFHpgX2f8I7YgUd/P+QBnz730=
     dependencies:
       clone "^1.0.2"
+  
+  defer-to-connect@^1.0.1:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/defer-to-connect/-/defer-to-connect-1.0.2.tgz#4bae758a314b034ae33902b5aac25a8dd6a8633e"
+    integrity sha512-k09hcQcTDY+cwgiwa6PYKLm3jlagNzQ+RSvhjzESOGOx+MNOuXkxTfEvPrO1IOQ81tArCFYQgi631clB70RpQw==
   
   define-properties@^1.1.2, define-properties@^1.1.3:
     version "1.1.3"
@@ -3862,29 +3933,15 @@ Lockfile:
     dependencies:
       is-obj "^2.0.0"
   
-  dotenv-defaults@^1.0.2:
-    version "1.0.2"
-    resolved "https://registry.yarnpkg.com/dotenv-defaults/-/dotenv-defaults-1.0.2.tgz#441cf5f067653fca4bbdce9dd3b803f6f84c585d"
-    integrity sha512-iXFvHtXl/hZPiFj++1hBg4lbKwGM+t/GlvELDnRtOFdjXyWP7mubkVr+eZGWG62kdsbulXAef6v/j6kiWc/xGA==
-    dependencies:
-      dotenv "^6.2.0"
-  
-  dotenv-webpack@^1.7.0:
-    version "1.7.0"
-    resolved "https://registry.yarnpkg.com/dotenv-webpack/-/dotenv-webpack-1.7.0.tgz#4384d8c57ee6f405c296278c14a9f9167856d3a1"
-    integrity sha512-wwNtOBW/6gLQSkb8p43y0Wts970A3xtNiG/mpwj9MLUhtPCQG6i+/DSXXoNN7fbPCU/vQ7JjwGmgOeGZSSZnsw==
-    dependencies:
-      dotenv-defaults "^1.0.2"
-  
-  dotenv@^6.2.0:
-    version "6.2.0"
-    resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
-    integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
-  
   dotenv@^8.1.0:
     version "8.1.0"
     resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.1.0.tgz#d811e178652bfb8a1e593c6dd704ec7e90d85ea2"
     integrity sha512-GUE3gqcDCaMltj2++g6bRQ5rBJWtkWTmqmD0fo1RnnMuUqHNCt2oTPeDnS9n6fKYvlhn7AeBkb38lymBtWBQdA==
+  
+  duplexer3@^0.1.4:
+    version "0.1.4"
+    resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
+    integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
   
   duplexify@^3.4.2, duplexify@^3.5.0, duplexify@^3.6.0:
     version "3.7.1"
@@ -4375,7 +4432,7 @@ Lockfile:
       jsonwebtoken "8.1.0"
       node-forge "0.7.4"
     optionalDependencies:
-      "@google-cloud/firestore" "^2.0.0"
+      "@google-cloud/db" "^2.0.0"
       "@google-cloud/storage" "^3.0.2"
   
   firebase@^6.6.1:
@@ -4387,7 +4444,7 @@ Lockfile:
       "@firebase/app-types" "0.4.3"
       "@firebase/auth" "0.12.0"
       "@firebase/database" "0.5.3"
-      "@firebase/firestore" "1.5.2"
+      "@firebase/db" "1.5.2"
       "@firebase/functions" "0.4.17"
       "@firebase/installations" "0.2.6"
       "@firebase/messaging" "0.4.10"
@@ -4556,10 +4613,17 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
     integrity sha1-jpQ9E1jcN1VQVOy+LtsFqhdO3hQ=
   
-  get-stream@^4.0.0:
+  get-stream@^4.0.0, get-stream@^4.1.0:
     version "4.1.0"
     resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-4.1.0.tgz#c1b255575f3dc21d59bfc79cd3d2b46b1c3a54b5"
     integrity sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==
+    dependencies:
+      pump "^3.0.0"
+  
+  get-stream@^5.1.0:
+    version "5.1.0"
+    resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-5.1.0.tgz#01203cdc92597f9b909067c3e656cc1f4d3c4dc9"
+    integrity sha512-EXr1FOzrzTfGeL0gQdeFEvOMm2mzMOglyiOXSTpPC+iAjAKftbr3jpCMWynogwYnM+eSj9sHGc6wjIcDvYiygw==
     dependencies:
       pump "^3.0.0"
   
@@ -4655,6 +4719,23 @@ Lockfile:
     integrity sha512-UfnEARfJKI6pbmC1hfFFm+UAcZxeIwTiEcHfqKe/drMsXD/ilnVjF7zgOGpHXyhuvX6jNJK3S8A0hOQjwtFxEw==
     dependencies:
       node-forge "^0.9.0"
+  
+  got@~9.6.0:
+    version "9.6.0"
+    resolved "https://registry.yarnpkg.com/got/-/got-9.6.0.tgz#edf45e7d67f99545705de1f7bbeeeb121765ed85"
+    integrity sha512-R7eWptXuGYxwijs0eV+v3o6+XH1IqVK8dJOEecQfTmkncw9AV4dcw/Dhxi8MdlqPthxxpZyizMzyg8RTmEsG+Q==
+    dependencies:
+      "@sindresorhus/is" "^0.14.0"
+      "@szmarczak/http-timer" "^1.1.2"
+      cacheable-request "^6.0.0"
+      decompress-response "^3.3.0"
+      duplexer3 "^0.1.4"
+      get-stream "^4.1.0"
+      lowercase-keys "^1.0.1"
+      mimic-response "^1.0.1"
+      p-cancelable "^1.0.0"
+      to-readable-stream "^1.0.0"
+      url-parse-lax "^3.0.0"
   
   graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2:
     version "4.2.0"
@@ -4861,6 +4942,11 @@ Lockfile:
       entities "^1.1.1"
       inherits "^2.0.1"
       readable-stream "^3.1.1"
+  
+  http-cache-semantics@^4.0.0:
+    version "4.0.3"
+    resolved "https://registry.yarnpkg.com/http-cache-semantics/-/http-cache-semantics-4.0.3.tgz#495704773277eeef6e43f9ab2c2c7d259dda25c5"
+    integrity sha512-TcIMG3qeVLgDr1TEd2XvHaTnMPwYQUQMIBLy+5pLSDKYFc7UIqj39w8EGzZkaxoLv/l2K8HaI0t5AVA+YYgUew==
   
   http-errors@1.7.2:
     version "1.7.2"
@@ -5861,6 +5947,11 @@ Lockfile:
     dependencies:
       bignumber.js "^7.0.0"
   
+  json-buffer@3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
+    integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
+  
   json-parse-better-errors@^1.0.1, json-parse-better-errors@^1.0.2:
     version "1.0.2"
     resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
@@ -6021,6 +6112,13 @@ Lockfile:
     dependencies:
       jwa "^1.4.1"
       safe-buffer "^5.0.1"
+  
+  keyv@^3.0.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/keyv/-/keyv-3.1.0.tgz#ecc228486f69991e49e9476485a5be1e8fc5c4d9"
+    integrity sha512-9ykJ/46SN/9KPM/sichzQ7OvXyGDYKGTaDlKMGCAlg2UK8KRy4jb0d8sFc+0Tt0YYnThq8X2RZgCg74RPxgcVA==
+    dependencies:
+      json-buffer "3.0.0"
   
   kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
     version "3.2.2"
@@ -6243,6 +6341,11 @@ Lockfile:
     dependencies:
       chalk "^2.0.1"
   
+  logrocket@^1.0.3:
+    version "1.0.3"
+    resolved "https://registry.yarnpkg.com/logrocket/-/logrocket-1.0.3.tgz#43354e29099c123d5608fcc18799ce53a87931b4"
+    integrity sha512-0N5AhHNE2MTS09J2FIXj1bSVjTdkn0IVrKkO7rwhtXDPpqbQMICZuq25edGnyXJxppQAxBpOOt2bFgIZBlEZ0g==
+  
   long@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
@@ -6259,6 +6362,16 @@ Lockfile:
     integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
     dependencies:
       js-tokens "^3.0.0 || ^4.0.0"
+  
+  lowercase-keys@^1.0.0, lowercase-keys@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-1.0.1.tgz#6f9e30b47084d971a7c820ff15a6c5167b74c26f"
+    integrity sha512-G2Lj61tXDnVFFOi8VZds+SoQjtQC3dgokKdDG2mTm1tx4m50NUHBOZSBwQQHyy0V12A0JTG4icfZQH+xPyh8VA==
+  
+  lowercase-keys@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
+    integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
   
   lru-cache@5.1.1, lru-cache@^5.0.0, lru-cache@^5.1.1:
     version "5.1.1"
@@ -6395,6 +6508,15 @@ Lockfile:
     dependencies:
       "@metascraper/helpers" "^5.7.4"
   
+  metascraper-logo-favicon@^5.7.6:
+    version "5.7.6"
+    resolved "https://registry.yarnpkg.com/metascraper-logo-favicon/-/metascraper-logo-favicon-5.7.6.tgz#061b81496aa2f46f2fe3868a2df6872f09eee70e"
+    integrity sha512-ZyWAHne7BICMEgzIvaW6CW+qm+WGBsCRCDPMCC6nHMT2NeeA5OF7drCyxB0YewatH3kMSoqcVZG4/ZGIV89Zdg==
+    dependencies:
+      "@metascraper/helpers" "^5.7.6"
+      got "~9.6.0"
+      lodash "~4.17.15"
+  
   metascraper-title@^5.7.4:
     version "5.7.4"
     resolved "https://registry.yarnpkg.com/metascraper-title/-/metascraper-title-5.7.4.tgz#1f9f05032c2abab2db9a6634b9f6abec5489c116"
@@ -6489,6 +6611,11 @@ Lockfile:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.0.0.tgz#0913ff0b121db44ef5848242c38bbb35d44cabde"
     integrity sha512-jbex9Yd/3lmICXwYT6gA/j2mNQGU48wCh/VzRd+/Y/PjYQtlg1gLMdZqvu9s/xH7qKvngxRObl56XZR609IMbA==
+  
+  mimic-response@^1.0.0, mimic-response@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
+    integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
   
   mini-css-extract-plugin@0.8.0:
     version "0.8.0"
@@ -6905,6 +7032,11 @@ Lockfile:
       query-string "^4.1.0"
       sort-keys "^1.0.0"
   
+  normalize-url@^4.1.0, normalize-url@~4.5.0:
+    version "4.5.0"
+    resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
+    integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
+  
   normalize-url@~4.3.0:
     version "4.3.0"
     resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.3.0.tgz#9c49e10fc1876aeb76dba88bf1b2b5d9fa57b2ee"
@@ -7127,6 +7259,11 @@ Lockfile:
     dependencies:
       os-homedir "^1.0.0"
       os-tmpdir "^1.0.0"
+  
+  p-cancelable@^1.0.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/p-cancelable/-/p-cancelable-1.1.0.tgz#d078d15a3af409220c886f1d9a0ca2e441ab26cc"
+    integrity sha512-s73XxOZ4zpt1edZYZzvhqFa6uvQc1vwUa0K0BdtIZgQMAJj9IbebH+JkgKZc9h+B05PKHLOTl4ajG1BmNrVZlw==
   
   p-defer@^1.0.0:
     version "1.0.0"
@@ -7822,6 +7959,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
     integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
   
+  prepend-http@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
+    integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
+  
   pretty-format@^24.3.0, pretty-format@^24.8.0, pretty-format@^24.9.0:
     version "24.9.0"
     resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.9.0.tgz#12fac31b37019a4eea3c11aa9a959eb7628aa7c9"
@@ -8375,6 +8517,13 @@ Lockfile:
     integrity sha512-vIpgF6wfuJOZI7KKKSP+HmiKggadPQAdsp5HiC1mvqnfp0gF1vdwgBWZIdrVft9pgqoMFQN+R7BSWZiBxx+BBw==
     dependencies:
       path-parse "^1.0.6"
+  
+  responselike@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/responselike/-/responselike-1.0.2.tgz#918720ef3b631c5642be068f15ade5a46f4ba1e7"
+    integrity sha1-kYcg7ztjHFZCvgaPFa3lpG9Loec=
+    dependencies:
+      lowercase-keys "^1.0.0"
   
   restore-cursor@^2.0.0:
     version "2.0.0"
@@ -9196,6 +9345,11 @@ Lockfile:
     dependencies:
       kind-of "^3.0.2"
   
+  to-readable-stream@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/to-readable-stream/-/to-readable-stream-1.0.0.tgz#ce0aa0c2f3df6adf852efb404a783e77c0475771"
+    integrity sha512-Iq25XBt6zD5npPhlLVXGFN3/gyR2/qODcKNNyTMd4vbm39HUaOiAM4PMq0eMVC/Tkxz+Zjdsc55g9yyz+Yq00Q==
+  
   to-regex-range@^2.1.0:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-2.1.1.tgz#7c80c17b9dfebe599e27367e0d4dd5590141db38"
@@ -9303,10 +9457,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
     integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
   
-  typescript@^3.6.3:
-    version "3.6.3"
-    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.3.tgz#fea942fabb20f7e1ca7164ff626f1a9f3f70b4da"
-    integrity sha512-N7bceJL1CtRQ2RiG0AQME13ksR7DiuQh/QehubYcghzv20tnh+MQnQIuJddTmsbqYj+dztchykemz0zFzlvdQw==
+  typescript@^3.7.0-beta:
+    version "3.7.0-beta"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.7.0-beta.tgz#4ad556e0eee14b90ecc39261001690e16e5eeba9"
+    integrity sha512-4jyCX+IQamrPJxgkABPq9xf+hUN+GWHVxoj+oey1TadCPa4snQl1RKwUba+1dyzYCamwlCxKvZQ3TjyWLhMGBA==
   
   uglify-js@^3.1.4:
     version "3.6.0"
@@ -9409,6 +9563,13 @@ Lockfile:
     version "0.1.0"
     resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
     integrity sha1-2pN/emLiH+wf0Y1Js1wpNQZ6bHI=
+  
+  url-parse-lax@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/url-parse-lax/-/url-parse-lax-3.0.0.tgz#16b5cafc07dbe3676c1b1999177823d6503acb0c"
+    integrity sha1-FrXK/Afb42dsGxmZF3gj1lA6yww=
+    dependencies:
+      prepend-http "^2.0.0"
   
   url-regex@~5.0.0:
     version "5.0.0"

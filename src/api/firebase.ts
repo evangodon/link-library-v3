@@ -12,7 +12,7 @@ const firebaseConfig = !!firebase.apps[0]
   ? firebase.app()
   : firebase.initializeApp(config);
 
-const firestore = firebaseConfig.firestore();
-const firebaseAuth = firebase.auth();
+const db = firebaseConfig.firestore();
+const auth = firebase.auth();
 
-export { firebase, firestore, firebaseAuth };
+export { firebase, db, auth };

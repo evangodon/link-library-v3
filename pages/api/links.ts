@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { firestore } from '@api/firebase';
+import { db } from '@api/firebase';
 
 export default async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const snapshot = await firestore
+    const snapshot = await db
       .collection('links')
       .orderBy('createdAt', 'desc')
       .get();
