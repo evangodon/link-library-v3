@@ -33,11 +33,7 @@ export const [useAuthContext, Provider] = createCtx<{
   loginWithGitHub: () => void;
 }>();
 
-/**
- *
- * @todo: Finish registration and login
- * @todo: Remove user loading state and just authenticate server side
- */
+
 export const AuthProvider: React.FC<{ children: React.ReactElement }> = ({
   children,
 }) => {
