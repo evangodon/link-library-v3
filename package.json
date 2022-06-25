@@ -29,7 +29,7 @@
     "metascraper-logo-favicon": "^5.7.6",
     "metascraper-title": "^5.7.4",
     "next": "^9.1.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "polished": "^3.4.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
